@@ -3,4 +3,4 @@ function availabilityFilter(result, filter) {
     return result.startDate <= filter.startDate && result.endDate >= filter.endDate;
 }
 
-module.exports = availabilityFilter;
+export { availabilityFilter };

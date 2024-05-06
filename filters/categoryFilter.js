@@ -1,5 +1,5 @@
-function categoryFilter(result, filter) {
-    return result.category === filter;
-}
+const categoryFilter = (result, filter) => {
+    // Your implementation
+};
 
-module.exports = categoryFilter;
+export { categoryFilter };
