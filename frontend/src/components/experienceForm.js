@@ -47,7 +47,7 @@ const ExperienceForm = () => {
             type="text"
             onChange={(e) => setName(e.target.value)}
             value={name}
-            classname={emptyFields.includes('name') ? 'error' : ''}
+            className={emptyFields.includes('name') ? 'error' : ''}
             />
 
             <label>Location: </label>
@@ -55,7 +55,7 @@ const ExperienceForm = () => {
             type="text"
             onChange={(e) => setLocation(e.target.value)}
             value={location}
-            classname={emptyFields.includes('location') ? 'error' : ''}
+            className={emptyFields.includes('location') ? 'error' : ''}
             />
 
             <label>Vibes: </label>
@@ -63,7 +63,7 @@ const ExperienceForm = () => {
             type="text"
             onChange={(e) => setVibes(e.target.value)}
             value={vibes}
-            classname={emptyFields.includes('vibes') ? 'error' : ''}
+            className={emptyFields.includes('vibes') ? 'error' : ''}
             />
 
             <button>Add Experience</button>

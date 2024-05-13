@@ -1,5 +1,8 @@
 import { useExperienceContext } from "../hooks/useExperienceContext"
 
+//date fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 const ExperienceDetails = ({ experience }) => {
     const { dispatch } = useExperienceContext()
 
@@ -19,8 +22,8 @@ const ExperienceDetails = ({ experience }) => {
             <h4>{experience.name}</h4>
             <p><strong>Location: </strong>{experience.location}</p>
             <p><strong>Vibes: </strong>{experience.vibes}</p>
-            <p>{experience.createdAt}</p>
-            <span onClick={handleClick}>Delete</span>
+            <p>{formatDistanceToNow(new Date(experience.createdAt), { addSuffix: true })}</p>
+            <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
         </div>
     )
 }
