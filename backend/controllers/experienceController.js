@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 // get all experiences
 const getExperiences = async(req, res) => {
-    const experiences = await Experience.find({}).sort({createdAt: -1})
+    const experiences = await Experience.find({}).sort({ name: 1 })
 
     res.status(200).json(experiences)
 }

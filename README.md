@@ -8,3 +8,6 @@ Instructions:
     on another terminal, cd into frontend, and run
         npm start
     on terminal, to startup the react server
+
+    Using Postman to run the routes and test database functions.
+    Using Atlas for MongoDB database hosting.v
