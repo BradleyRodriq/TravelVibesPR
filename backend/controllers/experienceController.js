@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 // get all experiences
 const getExperiences = async(req, res) => {
-    const experiences = await Experience.find({}).sort({ name: 1 })
+    const experiences = await Experience.find({}).sort({ createdAt: -1 })
 
     res.status(200).json(experiences)
 }
@@ -29,6 +29,25 @@ const getExperience = async(req, res) => {
 const createExperience = async (req, res) => {
     // add doc to db
     const { name, location, vibes } = req.body
+
+    let emptyFields = []
+
+    if(!name) {
+        emptyFields.push('name')
+    }
+
+    if(!location) {
+        emptyFields.push('location')
+    }
+
+    if(!vibes) {
+        emptyFields.push('vibes')
+    }
+
+    if(emptyFields.length > 0) {
+        return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
+    }
+
     try {
         const experience = await Experience.create({ name, location, vibes })
         res.status(200).json(experience)

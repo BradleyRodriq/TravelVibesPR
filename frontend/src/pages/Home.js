@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 // components
 import ExperienceDetails from '../components/experienceDetails'
+import ExperienceForm from '../components/experienceForm'
+import { useExperienceContext } from '../hooks/useExperienceContext'
 
 const Home = () => {
-    const [experiences, setExperiences] = useState(null)
+    const {experiences, dispatch} = useExperienceContext()
 
     useEffect(() => {
         const fetchExperiences = async () => {
@@ -12,11 +14,11 @@ const Home = () => {
             const json = await response.json()
 
             if (response.ok) {
-                setExperiences(json)
+                dispatch({type: 'SET_EXPERIENCES', payload: json})
             }
         }
         fetchExperiences()
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="home">
@@ -25,8 +27,10 @@ const Home = () => {
                     < ExperienceDetails experience={experience} key={experience._id} />
                 ))}
             </div>
+            <ExperienceForm />
         </div>
     )
+
 }
 
 export default Home
