@@ -9,5 +9,5 @@ Instructions:
         npm start
     on terminal, to startup the react server
 
-    Using Postman to run the routes and test database functions.
-    Using Atlas for MongoDB database hosting.v
+    Using Postman to run the routes and test database functions without front end.
+    Using Atlas for MongoDB database hosting.
