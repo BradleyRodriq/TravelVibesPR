@@ -1,14 +1,22 @@
 import { useExperienceContext } from "../hooks/useExperienceContext"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const ExperienceDetails = ({ experience }) => {
     const { dispatch } = useExperienceContext()
+    const { user } = useAuthContext()
 
     const handleClick = async () => {
+        if (!user) {
+            return
+        }
         const response = await fetch('api/experiences/' + experience._id, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
         })
         const json = await response.json()
 

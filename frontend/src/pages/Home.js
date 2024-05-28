@@ -4,20 +4,29 @@ import { useEffect } from 'react'
 import ExperienceDetails from '../components/experienceDetails'
 import ExperienceForm from '../components/experienceForm'
 import { useExperienceContext } from '../hooks/useExperienceContext'
+import { useAuthContext } from '../hooks/useAuthContext'
+
 
 const Home = () => {
     const {experiences, dispatch} = useExperienceContext()
+    const {user} = useAuthContext()
 
     useEffect(() => {
         const fetchExperiences = async () => {
-            const response = await fetch('/api/experiences')
+            const response = await fetch('/api/experiences', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
             const json = await response.json()
 
             if (response.ok) {
                 dispatch({type: 'SET_EXPERIENCES', payload: json})
             }
         }
-        fetchExperiences()
+        if(user) {
+            fetchExperiences()
+        }
     }, [dispatch])
 
     return (

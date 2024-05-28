@@ -6,8 +6,13 @@ const {
     updateExperience,
     deleteExperience
 } = require('../controllers/experienceController')
+const requireAuth = require('../middleware/requireAuth')
+
 
 const router = express.Router()
+
+// require auth for all experience routes
+router.use(requireAuth)
 
 // GET all experiences
 router.get('/', getExperiences)

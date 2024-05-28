@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import { useExperienceContext } from '../hooks/useExperienceContext'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const ExperienceForm = () => {
     const { dispatch } = useExperienceContext()
+    const { user } = useAuthContext()
+
     const [name, setName] = useState('')
     const [location, setLocation] = useState('')
     const [vibes, setVibes] = useState('')
@@ -12,13 +15,18 @@ const ExperienceForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        if (!user) {
+            return setError('You must be logged in to add an experience.')
+        }
+
         const experience = {name, location, vibes}
 
         const response = await fetch('/api/experiences', {
             method: 'POST',
             body: JSON.stringify(experience),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }
         })
         const json = await response.json()
