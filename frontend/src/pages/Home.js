@@ -1,11 +1,10 @@
 import { useEffect } from 'react'
+import { useExperienceContext } from '../hooks/useExperienceContext'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 // components
 import ExperienceDetails from '../components/experienceDetails'
 import ExperienceForm from '../components/experienceForm'
-import { useExperienceContext } from '../hooks/useExperienceContext'
-import { useAuthContext } from '../hooks/useAuthContext'
-
 
 const Home = () => {
     const {experiences, dispatch} = useExperienceContext()
@@ -27,7 +26,7 @@ const Home = () => {
         if(user) {
             fetchExperiences()
         }
-    }, [dispatch])
+    }, [dispatch, user])
 
     return (
         <div className="home">

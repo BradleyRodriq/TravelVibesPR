@@ -3,7 +3,9 @@ const mongoose = require('mongoose')
 
 // get all experiences
 const getExperiences = async(req, res) => {
-    const experiences = await Experience.find({}).sort({ createdAt: -1 })
+    const user_id = req.user._id
+
+    const experiences = await Experience.find({ user_id }).sort({ createdAt: -1 })
 
     res.status(200).json(experiences)
 }
@@ -49,7 +51,8 @@ const createExperience = async (req, res) => {
     }
 
     try {
-        const experience = await Experience.create({ name, location, vibes })
+        const user_id = req.user._id
+        const experience = await Experience.create({ name, location, vibes, user_id })
         res.status(200).json(experience)
     } catch (error) {
         res.status(400).json({error: error.message})
