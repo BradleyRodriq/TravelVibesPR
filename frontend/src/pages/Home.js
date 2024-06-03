@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useExperienceContext } from '../hooks/useExperienceContext'
-import { useAuthContext } from '../hooks/useAuthContext'
 
 // components
 import ExperienceDetails from '../components/experienceDetails'
@@ -8,25 +7,18 @@ import ExperienceForm from '../components/experienceForm'
 
 const Home = () => {
     const {experiences, dispatch} = useExperienceContext()
-    const {user} = useAuthContext()
 
     useEffect(() => {
         const fetchExperiences = async () => {
-            const response = await fetch('/api/experiences', {
-                headers: {
-                    'Authorization': `Bearer ${user.token}`
-                }
-            })
+            const response = await fetch('/api/experiences')
             const json = await response.json()
 
             if (response.ok) {
                 dispatch({type: 'SET_EXPERIENCES', payload: json})
             }
         }
-        if(user) {
-            fetchExperiences()
-        }
-    }, [dispatch, user])
+        fetchExperiences() // Fetch experiences regardless of user login status
+    }, [dispatch])
 
     return (
         <div className="home">

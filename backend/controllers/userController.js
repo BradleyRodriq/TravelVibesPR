@@ -5,89 +5,77 @@ const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' });
 };
 
-// login user
-const loginUser = async (req, res) => {
-    const { email, password } = req.body;
+const loginUser = async(req, res) => {
+    const {email, password} = req.body
 
     try {
-        const user = await User.login(email, password);
+        const user = await User.login(email, password)
 
         // create token
-        const token = createToken(user._id);
-        res.status(200).json({ email, token });
+        const token = createToken(user._id)
+        res.status(200).json({email, token})
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({error: error.message})
     }
-};
+}
 
 // signup user
-const signupUser = async (req, res) => {
-    const { email, password } = req.body;
+const signupUser = async(req, res) => {
+    const {email, password} = req.body
 
     try {
-        const user = await User.signup(email, password);
+        const user = await User.signup(email, password)
 
         // create token
-        const token = createToken(user._id);
-        res.status(200).json({ email, token });
+        const token = createToken(user._id)
+        res.status(200).json({email, token})
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+// Add vibes to user
+const addUserVibes = async (req, res) => {
+    const { user } = req;
+    const { vibesToAdd } = req.body;
+
+    try {
+        user.vibes.push(...vibesToAdd); // Add new vibes to the user's vibes array
+        await user.save();               // Save the updated user document
+
+        res.status(200).json({ user });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
 
-// change user vibes
-const changeVibes = async (user, newVibes) => {
+// Delete vibes from user
+const deleteUserVibes = async (req, res) => {
+    const { user } = req;
+    const { vibesToDelete } = req.body;
+
     try {
-        user.vibes = newVibes;
-        await user.save();
-        return user;
+        user.vibes = user.vibes.filter(vibe => !vibesToDelete.includes(vibe)); // Remove specified vibes from the user's vibes array
+        await user.save();                                                     // Save the updated user document
+
+        res.status(200).json({ user });
     } catch (error) {
-        throw new Error('Failed to change vibes');
+        res.status(400).json({ error: error.message });
     }
 };
 
-// add user vibes
-const addVibes = async (user, vibesToAdd) => {
+// Delete all vibes from user
+const deleteAllUserVibes = async (req, res) => {
+    const { user } = req;
+
     try {
-        user.vibes.push(...vibesToAdd);
-        await user.save();
-        return user;
+        user.vibes = [];   // Clear the user's vibes array
+        await user.save(); // Save the updated user document
+
+        res.status(200).json({ user });
     } catch (error) {
-        throw new Error('Failed to add vibes');
+        res.status(400).json({ error: error.message });
     }
 };
 
-// edit user vibes
-const editVibes = async (user, oldVibe, newVibe) => {
-    const index = user.vibes.indexOf(oldVibe);
-    if (index !== -1) {
-        user.vibes[index] = newVibe;
-        await user.save();
-        return user;
-    }
-    throw new Error('Vibe not found');
-};
-
-// delete user vibes
-const deleteVibes = async (user, vibesToDelete) => {
-    user.vibes = user.vibes.filter(vibe => !vibesToDelete.includes(vibe));
-    await user.save();
-    return user;
-};
-
-// return user vibes to default
-const returnVibesToDefault = async (user) => {
-    user.vibes = [];
-    await user.save();
-    return user;
-};
-
-module.exports = { 
-    loginUser, 
-    signupUser,
-    changeVibes, 
-    addVibes, 
-    editVibes, 
-    deleteVibes, 
-    returnVibesToDefault 
-};
+module.exports = { loginUser, signupUser, addUserVibes, deleteUserVibes, deleteAllUserVibes };

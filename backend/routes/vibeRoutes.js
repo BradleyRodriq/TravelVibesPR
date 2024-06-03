@@ -1,29 +1,14 @@
-const express = require('express')
-
-// user vibe functions
-const { changeVibes, 
-    addVibes, 
-    editVibes, 
-    deleteVibes, 
-    returnVibesToDefault} = require('../controllers/userController')
-const { getVibes, createVibe, getVibe, deleteVibe, updateVibe } = require('../controllers/vibeController')
-
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
+const { getVibes, createVibe, deleteVibe } = require('../controllers/vibeController');
 
 // GET all vibes
-router.get('/', getVibes)
+router.get('/', getVibes);
 
-//GET single vibe
-router.get('/:id', getVibe)
+// POST a vibe
+router.post('/', createVibe);
 
-//POST a vibe
-router.post('/', createVibe)
+// DELETE a vibe
+router.delete('/:id', deleteVibe);
 
-//DELETE a vibe
-router.delete('/:id', deleteVibe)
-
-//UPDATE a vibe
-router.patch('/:id', updateVibe)
-
-
-module.exports = router
+module.exports = router;

@@ -1,33 +1,33 @@
-const express = require('express')
-const {
-    createExperience,
-    getExperience,
-    getExperiences,
-    updateExperience,
-    deleteExperience
-} = require('../controllers/experienceController')
-const requireAuth = require('../middleware/requireAuth')
-
-
-const router = express.Router()
-
-// require auth for all experience routes
-router.use(requireAuth)
+const express = require('express');
+const router = express.Router();
+const { getExperiences, getExperience, createExperience, deleteExperience, updateExperience, addExperienceVibes, deleteExperienceVibes, deleteAllExperienceVibes } = require('../controllers/experienceController');
+const requireAuth = require('../middleware/requireAuth');
 
 // GET all experiences
-router.get('/', getExperiences)
+router.get('/', getExperiences);
 
-//GET single experience
-router.get('/:id', getExperience)
+// GET single experience
+router.get('/:id', getExperience);
 
-//POST an experience
-router.post('/', createExperience)
+// Middleware to require authentication for the following routes
+router.use(requireAuth);
 
-//DELETE an experience
-router.delete('/:id', deleteExperience)
+// POST create an experience
+router.post('/', createExperience);
 
-//UPDATE an experience
-router.patch('/:id', updateExperience)
+// DELETE delete an experience
+router.delete('/:id', deleteExperience);
 
+// PATCH update an experience
+router.patch('/:id', updateExperience);
 
-module.exports = router
+// POST add vibes to an experience
+router.post('/:id/vibes/add', addExperienceVibes);
+
+// DELETE delete vibes from an experience
+router.delete('/:id/vibes/delete', deleteExperienceVibes);
+
+// DELETE delete all vibes from an experience
+router.delete('/:id/vibes/deleteAll', deleteAllExperienceVibes);
+
+module.exports = router;

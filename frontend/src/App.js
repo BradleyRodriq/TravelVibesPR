@@ -1,38 +1,31 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { useAuthContext } from './hooks/useAuthContext'
-
-// pages and components
-import Home from './pages/Home'
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuthContext } from './hooks/useAuthContext';
+import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import VibesForm from './pages/UserVibes';
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar';
 
 function App() {
-  const {user} = useAuthContext()
+  const { user } = useAuthContext();
+  const [redirectedToLogin, setRedirectedToLogin] = useState(false);
+
+  if (!user && !redirectedToLogin) {
+    setRedirectedToLogin(true);
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        <div classname="pages">
+        <div className="pages">
           <Routes>
-            <Route
-              path="/"
-              element={user ? <Home /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/login"
-              element={!user ? <Login /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/signup"
-              element={!user ? <Signup /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/select-vibes"
-              element={user ? <VibesForm /> : <Navigate to="/login" />}
-            />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/select-vibes" element={<VibesForm />} />
           </Routes>
         </div>
       </BrowserRouter>
