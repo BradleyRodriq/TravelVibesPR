@@ -4,6 +4,7 @@ const Vibe = require('../models/vibeModel');
 const getVibes = async (req, res) => {
     try {
         const vibes = await Vibe.find().sort({ createdAt: -1 });
+        res.json(vibes);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
