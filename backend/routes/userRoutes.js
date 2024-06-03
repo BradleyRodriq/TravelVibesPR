@@ -2,6 +2,7 @@ const express = require('express')
 
 // controller functions
 const { signupUser, loginUser } = require('../controllers/userController')
+const User = require('../models/userModel')
 
 const router = express.Router()
 

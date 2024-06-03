@@ -1,14 +1,15 @@
-import { Link } from 'react-router-dom'
-import { useLogout } from '../hooks/useLogout'
-import { useAuthContext } from '../hooks/useAuthContext'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Navbar = () => {
-    const { logout } = useLogout()
-    const { user } = useAuthContext()
+    const { logout } = useLogout();
+    const { user } = useAuthContext();
 
     const handleClick = () => {
-        logout()
-    }
+        logout();
+    };
 
     return (
         <header>
@@ -23,6 +24,7 @@ const Navbar = () => {
                             <button onClick={handleClick}>
                                 Log out
                             </button>
+                            <Link to='/select-vibes'>Select Vibes</Link>
                         </div>
                     )}
                     {!user && (
@@ -34,7 +36,7 @@ const Navbar = () => {
                 </nav>
             </div>
         </header>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Vibe = require('./vibeModel')
 
 const Schema = mongoose.Schema
 
@@ -12,15 +13,18 @@ const experienceSchema = new Schema({
         type: String,
         required: true
     },
-    vibes: {
-        type: String,
+    vibes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Vibe',
         required: true
-    },
+    }],
     user_id: {
         type: String,
         required: true
     }
 }, { timestamps: true })
 
+const Experience = mongoose.model('Experience', experienceSchema)
+
 // export experienceSchema
-module.exports = mongoose.model('Experience', experienceSchema)
+module.exports = Experience

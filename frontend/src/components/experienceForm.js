@@ -19,7 +19,8 @@ const ExperienceForm = () => {
             return setError('You must be logged in to add an experience.')
         }
 
-        const experience = {name, location, vibes}
+        const experience = { name, location, vibes: vibes.split(',').map(vibe => vibe.trim()) };
+
 
         const response = await fetch('/api/experiences', {
             method: 'POST',

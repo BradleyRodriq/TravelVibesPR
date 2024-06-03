@@ -5,6 +5,7 @@ import { useAuthContext } from './hooks/useAuthContext'
 import Home from './pages/Home'
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import VibesForm from './pages/UserVibes';
 import Navbar from './components/Navbar'
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={user ?<Home /> : <Navigate to="/login" />}
+              element={user ? <Home /> : <Navigate to="/login" />}
             />
             <Route
               path="/login"
@@ -27,6 +28,10 @@ function App() {
             <Route
               path="/signup"
               element={!user ? <Signup /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/select-vibes"
+              element={user ? <VibesForm /> : <Navigate to="/login" />}
             />
           </Routes>
         </div>
