@@ -36,18 +36,18 @@ const signupUser = async(req, res) => {
 
 // Add vibes to user
 const addUserVibes = async (req, res) => {
-    const { user } = req;
-    const { vibesToAdd } = req.body;
-
+    const { vibes } = req.body;
+    console.log('Request Body:', req.body);
     try {
-        user.vibes.push(...vibesToAdd); // Add new vibes to the user's vibes array
-        await user.save();               // Save the updated user document
-
-        res.status(200).json({ user });
+        const updatedUser = await User.findByIdAndUpdate(req.user._id, { $push: { vibes: { $each: vibes } } }, { new: true });
+        console.log('Updated User:', updatedUser);
+        res.status(200).json(updatedUser);
     } catch (error) {
+        console.error('Error adding vibes:', error);
         res.status(400).json({ error: error.message });
     }
 };
+
 
 // Delete vibes from user
 const deleteUserVibes = async (req, res) => {

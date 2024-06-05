@@ -1,27 +1,26 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const VibeContext = createContext();
+const VibesContext = createContext();
 
-export const useVibeContext = () => useContext(VibeContext);
+export const useVibesContext = () => useContext(VibesContext);
 
-export const VibeProvider = ({ children }) => {
+export const VibesProvider = ({ children }) => {
     const [vibes, setVibes] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const addVibe = (newVibe) => {
-        setVibes([...vibes, newVibe]);
-    };
-
-    const removeVibe = (vibeToRemove) => {
-        setVibes(vibes.filter((vibe) => vibe !== vibeToRemove));
-    };
-
-    const clearVibes = () => {
-        setVibes([]);
-    };
+    useEffect(() => {
+        setLoading(true);
+        fetch('/api/vibes')
+            .then(response => response.json())
+            .then(data => setVibes(data))
+            .catch(error => setError(error.message))
+            .finally(() => setLoading(false));
+    }, []);
 
     return (
-        <VibeContext.Provider value={{ vibes, addVibe, removeVibe, clearVibes }}>
+        <VibesContext.Provider value={{ vibes, setVibes, loading, error }}>
             {children}
-        </VibeContext.Provider>
+        </VibesContext.Provider>
     );
 };

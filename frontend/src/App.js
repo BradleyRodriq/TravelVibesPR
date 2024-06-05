@@ -4,7 +4,7 @@ import { useAuthContext } from './hooks/useAuthContext';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import VibesForm from './pages/UserVibes';
+import UserVibes from './pages/UserVibes';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/select-vibes" element={<VibesForm />} />
+            <Route path="/select-vibes" element={<UserVibes />} />
           </Routes>
         </div>
       </BrowserRouter>

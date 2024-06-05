@@ -11,7 +11,7 @@ const requireAuth = async (req, res, next) => {
   }
 
   // Extract the token from the Authorization header
-  const token = authorization.split(' ')[1]
+  const token = req.headers.authorization?.split(' ')[1];
 
   try {
      const { _id } = jwt.verify(token, process.env.SECRET)

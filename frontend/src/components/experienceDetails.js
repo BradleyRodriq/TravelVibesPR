@@ -28,10 +28,10 @@ const ExperienceDetails = ({ experience }) => {
     return (
         <div className="experience-details">
             <h4>{experience.name}</h4>
-            <p><strong>Location: </strong>{experience.location}</p>
-            <p><strong>Vibes: </strong>{experience.vibes.map((vibe, index) =>  (
+            <div><strong>Location: </strong>{experience.location}</div>
+            <div><strong>Vibes: </strong>{experience.vibes.map((vibe, index) =>  (
                 <p key={index}>{vibe}</p>
-            ))}</p>
+            ))}</div>
             <p>{formatDistanceToNow(new Date(experience.createdAt), { addSuffix: true })}</p>
             <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
         </div>

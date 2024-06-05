@@ -12,13 +12,13 @@ router.post('/signup', signupUser);
 // Middleware to require authentication for the following routes
 router.use(requireAuth);
 
-// POST route to add vibes to user
-router.post('/vibes/add', addUserVibes);
+// PUT route to add vibes to user
+router.put('/addVibes', addUserVibes);
 
 // DELETE route to delete vibes from user
-router.delete('/vibes/delete', deleteUserVibes);
+router.delete('/deleteVibes', deleteUserVibes);
 
 // DELETE route to delete all vibes from user
-router.delete('/vibes/deleteAll', deleteAllUserVibes);
+router.delete('/resetVibes', deleteAllUserVibes);
 
 module.exports = router;

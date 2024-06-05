@@ -14,11 +14,8 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    vibes: {
-        type: [String],
-        required: false,
-        default: []
-    }
+    vibes:
+        [{ type: Schema.Types.ObjectId, ref: 'Vibe' }]
 })
 
 // static signup method

@@ -48,7 +48,7 @@ const ExperienceForm = () => {
         }
     }
     return (
-        <form classname="create" onSubmit={handleSubmit}>
+        <form className="create" onSubmit={handleSubmit}>
             <h3>Add a new Experience</h3>
 
             <label>Experience name: </label>

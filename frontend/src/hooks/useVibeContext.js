@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { VibeContext } from './vibeContext';
+import { VibesContext } from './vibeContext'; // Assuming this is where VibesContext is exported
 
 const useVibeContext = () => {
-    const { vibes, addVibe, removeVibe, clearVibes } = useContext(VibeContext);
+    const { vibes, setVibes, loading, error } = useContext(VibesContext);
 
-    return { vibes, addVibe, removeVibe, clearVibes };
+    return { vibes, setVibes, loading, error };
 };
 
 export default useVibeContext;
