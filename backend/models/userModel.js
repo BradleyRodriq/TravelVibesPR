@@ -15,7 +15,7 @@ const userSchema = new Schema({
         required: true,
     },
     vibes:
-        [{ type: Schema.Types.ObjectId, ref: 'Vibe' }]
+        [{ type: mongoose.Schema.Types.ObjectId, ref: 'Vibe' }]
 })
 
 // static signup method

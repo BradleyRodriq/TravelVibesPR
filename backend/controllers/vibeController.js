@@ -10,6 +10,16 @@ const getVibes = async (req, res) => {
     }
 };
 
+// GET all vibes
+const getVibesbyId = async (req, res) => {
+    try {
+        const vibes = await Vibe.find().select('_id');
+        res.status(200).json(vibes);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
 // POST a vibe
 const createVibe = async (req, res) => {
     const { name } = req.body;
@@ -36,4 +46,4 @@ const deleteVibe = async (req, res) => {
     }
 };
 
-module.exports = { getVibes, createVibe, deleteVibe };
+module.exports = { getVibes, createVibe, deleteVibe, getVibesbyId };

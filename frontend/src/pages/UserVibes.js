@@ -1,9 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../context/authContext'; // Update the path to your AuthContext
 
 const UserVibes = () => {
     const [vibes, setVibes] = useState([]);
     const [selectedVibes, setSelectedVibes] = useState([]);
+    const { user } = useContext(AuthContext); // Access user from the AuthContext
 
+    const fetchUserVibes = async () => {
+        if (!user) {
+            return; // Return early if user is null
+        }
+
+        try {
+            const response = await fetch(`/api/user/getVibes`, {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch user vibes');
+            }
+
+            const data = await response.json();
+            setVibes(data); // Assuming the response contains an array of vibe IDs
+        } catch (error) {
+            console.error('Error fetching user vibes:', error);
+            setVibes([]); // Set vibes to empty array on error
+        }
+    };
+
+    // Fetch user vibes
+    useEffect(() => {
+        fetchUserVibes();
+    }, [user]);
+
+    // Fetch all available vibes
     useEffect(() => {
         fetch('/api/vibes')
             .then(res => res.json())
@@ -20,36 +52,50 @@ const UserVibes = () => {
         }
     };
 
+    const handleDeleteVibe = async (vibeId) => {
+        const token = user.token; // Access the token from the user object
+
+        try {
+            const response = await fetch(`/api/user/deleteVibe/${vibeId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed response from server.');
+            }
+
+            console.log('Vibe deleted successfully!');
+
+            fetchUserVibes();
+        } catch (error) {
+            console.error('Error deleting vibe:', error);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const tokenString = localStorage.getItem("token");
-        const token = tokenString ? JSON.parse(tokenString) : null;
-
-        console.log("token", token) // Retrieve the token from localStorage
-
-        if (!token) {
-            console.error('No token found, please log in.');
-            return;
-        }
+        const token = user.token; // Access the token from the user object
 
         try {
             const response = await fetch('/api/user/addVibes', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` // Add the token to the request headers
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ vibes: selectedVibes })
             });
 
             if (!response.ok) {
-                const errorData = await response.json(); // Get error details from the response
+                const errorData = await response.json();
                 throw new Error(errorData.error || 'Failed response from server.');
             }
 
             console.log('Vibes added successfully!');
-            // Reset selected vibes after submission
             setSelectedVibes([]);
         } catch (error) {
             console.error('Error adding vibes:', error);
@@ -57,23 +103,35 @@ const UserVibes = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h3>Choose Vibes</h3>
-            {vibes.map(vibe => (
-                <div key={vibe._id}>
-                    <input
-                        type="checkbox"
-                        id={vibe.name}
-                        name={vibe.name}
-                        value={vibe.name}
-                        onChange={handleVibeSelection}
-                        checked={selectedVibes.includes(vibe.name)}
-                    />
-                    <label htmlFor={vibe.name}>{vibe.name}</label>
-                </div>
-            ))}
-            <button type="submit">Add to Profile</button>
-        </form>
+        <div>
+            <h3>Current Vibes</h3>
+            <ul>
+                {vibes.map(vibe => (
+                    <li key={vibe._id}>
+                        {vibe.name}
+                        <button onClick={() => handleDeleteVibe(vibe._id)}>Delete</button>
+                    </li>
+                ))}
+            </ul>
+
+            <form onSubmit={handleSubmit}>
+                <h3>Choose Vibes</h3>
+                {vibes.map(vibe => (
+                    <div key={vibe._id}>
+                        <input
+                            type="checkbox"
+                            id={vibe.name}
+                            name={vibe.name}
+                            value={vibe._id}
+                            onChange={handleVibeSelection}
+                            checked={selectedVibes.includes(vibe._id)}
+                        />
+                        <label htmlFor={vibe.name}>{vibe.name}</label>
+                    </div>
+                ))}
+                <button type="submit">Add to Profile</button>
+            </form>
+        </div>
     );
 };
 

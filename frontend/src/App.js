@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import UserVibes from './pages/UserVibes';
 import Navbar from './components/Navbar';
+import VibesForm from './pages/userVibesForm';
 
 function App() {
   const { user } = useAuthContext();
@@ -26,6 +27,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/select-vibes" element={<UserVibes />} />
+            <Route path="/select-vibes/form" element={<VibesForm />} />
           </Routes>
         </div>
       </BrowserRouter>

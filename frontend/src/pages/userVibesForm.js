@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../context/authContext';
 
 const VibeForm = () => {
     const [vibes, setVibes] = useState([]);
-    const [selectedVibe, setSelectedVibe] = useState('');
+    const [selectedVibes, setSelectedVibes] = useState('');
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         setLoading(true);
-        const token = localStorage.getItem('token');
-        console.log('Token:', token);
+
+
         fetch('/api/vibes')
             .then(response => response.json())
             .then(data => setVibes(data))
@@ -17,8 +19,10 @@ const VibeForm = () => {
             .finally(() => setLoading(false));
     }, []);
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const token = user.token;
         try {
             const token = localStorage.getItem('token'); // Assuming you store the token in localStorage
             const response = await fetch('/api/user/addVibes', {
@@ -46,8 +50,8 @@ const VibeForm = () => {
         <form onSubmit={handleSubmit}>
             <h3>Add Vibe</h3>
             <select
-                value={selectedVibe}
-                onChange={(e) => setSelectedVibe(e.target.value)}
+                value={selectedVibes}
+                onChange={(e) => setSelectedVibes(e.target.value)}
             >
                 <option value="" disabled>Select Vibe</option>
                 {vibes.map(vibe => (
