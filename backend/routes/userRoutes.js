@@ -24,6 +24,6 @@ router.delete('/deleteVibes', deleteUserVibes);
 router.delete('/resetVibes', deleteAllUserVibes);
 
 // GET route to get all vibes of a user
-router.get('/getvibes', getUserVibes);
+router.get('/vibes', getUserVibes);
 
 module.exports = router;

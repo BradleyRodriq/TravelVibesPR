@@ -39,50 +39,55 @@ const signupUser = async(req, res) => {
 // Add vibes to user
 const addUserVibes = async (req, res) => {
     const { vibes } = req.body;
-    console.log('Request Body:', req.body);
-
-    if (!Array.isArray(vibes)) {
-        return res.status(400).json({ error: 'Vibes must be an array of strings.' });
-    }
+    const userId = req.user._id; // Assuming req.user contains the authenticated user's information
 
     try {
-        // Fetch the vibe documents based on the provided vibe names or other identifiers
-        const vibeDocs = await Vibe.find({ name: { $in: vibes } }); // Adjust according to your Vibe schema
-        const vibeObjectIds = vibeDocs.map(vibe => vibe._id);
-
-        const updatedUser = await User.findByIdAndUpdate(
-            req.user._id,
-            { $push: { vibes: { $each: vibeObjectIds } } },
-            { new: true }
-        );
-
-        if (!updatedUser) {
-            return res.status(404).json({ error: 'User not found.' });
+        // Validate vibes array
+        if (!Array.isArray(vibes) || vibes.length === 0) {
+            return res.status(400).json({ error: 'Invalid vibes data.' });
         }
 
-        console.log('Updated User:', updatedUser);
-        res.status(200).json(updatedUser);
+        // Check if all provided vibes exist
+        const foundVibes = await Vibe.find({ _id: { $in: vibes } });
+        if (foundVibes.length !== vibes.length) {
+            return res.status(404).json({ error: 'Some vibes were not found.' });
+        }
+
+        // Add vibes to the user's vibes array
+        const user = await User.findById(userId);
+        user.vibes = [...new Set([...user.vibes, ...vibes])];
+        await user.save();
+
+        res.status(200).json({ vibes: user.vibes });
     } catch (error) {
-        console.error('Error adding vibes:', error);
-        res.status(400).json({ error: error.message });
+        res.status(500).json({ error: 'An error occurred while adding vibes.' });
     }
 };
-
 
 // Delete vibes from user
 const deleteUserVibes = async (req, res) => {
     const { user } = req;
-    const { vibesToDelete } = req.body;
+    const { vibeId } = req.params;
+
+    // Check if vibeId is provided and is a valid ObjectId
+    if (!vibeId || !mongoose.Types.ObjectId.isValid(vibeId)) {
+        return res.status(400).json({ error: 'Invalid or missing vibeId' });
+    }
 
     try {
-        user.vibes = user.vibes.filter(vibe => !vibesToDelete.includes(vibe)); // Remove specified vibes from the user's vibes array
-        await user.save();                                                     // Save the updated user document
+        const vibeToDeleteObjectId = mongoose.Types.ObjectId.createFromHexString(vibeId);
+
+        user.vibes = user.vibes.filter(vibe => !vibe.equals(vibeToDeleteObjectId));
+        await user.save();
 
         res.status(200).json({ user });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
+
+
+
 
 // Delete all vibes from user
 const deleteAllUserVibes = async (req, res) => {
@@ -101,7 +106,7 @@ const deleteAllUserVibes = async (req, res) => {
 // Get all vibes for a user
 const getUserVibes = async (req, res) => {
     try {
-        const user = await User.findById(req.params.userId);
+        const user = await User.findById(req.user._id).populate('vibes'); // Populate vibes if necessary
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
