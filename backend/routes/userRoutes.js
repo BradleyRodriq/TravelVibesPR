@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { loginUser, signupUser, addUserVibes, deleteUserVibes, deleteAllUserVibes, getUserVibes } = require('../controllers/userController');
+const { loginUser, signupUser, addUserVibes, deleteUserVibe, deleteAllUserVibes, getUserVibes } = require('../controllers/userController');
 const requireAuth = require('../middleware/requireAuth');
-const { getDefaultResultOrder } = require('dns');
-const { getUnixTime } = require('date-fns');
 
 // POST route for user login
 router.post('/login', loginUser);
@@ -18,7 +16,7 @@ router.use(requireAuth);
 router.put('/addVibes', addUserVibes);
 
 // DELETE route to delete vibes from user
-router.delete('/deleteVibes', deleteUserVibes);
+router.delete('/deleteVibe/:vibeId', deleteUserVibe);
 
 // DELETE route to delete all vibes from user
 router.delete('/resetVibes', deleteAllUserVibes);
