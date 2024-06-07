@@ -120,6 +120,8 @@ const UserVibes = () => {
 
             console.log('Vibes added successfully!');
             setSelectedVibes([]);
+
+            fetchUserVibes(); // Refresh user vibes
         } catch (error) {
             console.error('Error adding vibes:', error);
         }
