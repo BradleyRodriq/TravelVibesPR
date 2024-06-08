@@ -25,6 +25,7 @@ const Navbar = () => {
                                 Log out
                             </button>
                             <Link to='/select-vibes'>Select Vibes</Link>
+                            <Link to='/add-experience'>Add Experience</Link>
                         </div>
                     )}
                     {!user && (

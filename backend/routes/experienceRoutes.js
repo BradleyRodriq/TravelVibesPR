@@ -22,12 +22,12 @@ router.delete('/:id', deleteExperience);
 router.patch('/:id', updateExperience);
 
 // POST add vibes to an experience
-router.post('/:id/vibes/add', addExperienceVibes);
+router.post('/:id/vibes', addExperienceVibes);
 
 // DELETE delete vibes from an experience
-router.delete('/:id/vibes/delete', deleteExperienceVibes);
+router.delete('/:id/vibes', deleteExperienceVibes);
 
 // DELETE delete all vibes from an experience
-router.delete('/:id/vibes/deleteAll', deleteAllExperienceVibes);
+router.delete('/:id/vibes', deleteAllExperienceVibes);
 
 module.exports = router;

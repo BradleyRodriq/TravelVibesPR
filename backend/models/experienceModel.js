@@ -1,8 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const Schema = mongoose.Schema
-
-// experience objects
 const experienceSchema = new Schema({
     name: {
         type: String,
@@ -12,11 +10,10 @@ const experienceSchema = new Schema({
         type: String,
         required: true
     },
-    vibes: {
-        type: [String],
-        required: true
-    }
-}, { timestamps: true })
+    vibes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Vibe'
+    }]
+}, { timestamps: true });
 
-// export experienceSchema
-module.exports = mongoose.model('Experience', experienceSchema)
+module.exports = mongoose.model('Experience', experienceSchema);
