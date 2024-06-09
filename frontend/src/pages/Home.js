@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import ExperienceDetails from '../components/experienceDetails'; // Update the path to your ExperienceDetails component
-import { AuthContext } from '../context/authContext'; // Update the path to your AuthContext
+import ExperienceDetails from '../components/experienceDetails';
+import { AuthContext } from '../context/authContext';
 
 const Home = () => {
+    const [reload, setReload] = useState(false); // Add a state to trigger a re-fetch of experiences
     const [experiences, setExperiences] = useState([]);
     const { user } = useContext(AuthContext); // Access user from the AuthContext
 
@@ -29,6 +30,14 @@ const Home = () => {
         }
     };
 
+    const handleDelete = async () => {
+        setReload(prevState => !prevState); // Toggle reload state to trigger re-fetch
+    };
+
+    useEffect(() => {
+        fetchExperiences();
+    }, [reload]); // Fetch experiences whenever the reload state changes
+
     useEffect(() => {
         fetchExperiences();
     }, [user]); // Fetch experiences whenever the user changes
@@ -37,7 +46,12 @@ const Home = () => {
         <div className="home">
             <div className="experiences">
                 {experiences && experiences.map((experience) => (
-                    <ExperienceDetails experience={experience} key={experience._id} />
+                    <ExperienceDetails
+                        experience={experience}
+                        vibes={experience.vibes}
+                        key={experience._id}
+                        onDelete={handleDelete}
+                    />
                 ))}
             </div>
         </div>
