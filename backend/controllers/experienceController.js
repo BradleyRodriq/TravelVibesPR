@@ -4,31 +4,12 @@ const mongoose = require('mongoose');
 // get all experiences
 const getExperiences = async (req, res) => {
     try {
-        let experiences;
-        if (req.user) {
-            const user = req.user;
-            experiences = await Experience.aggregate([
-                {
-                    $addFields: {
-                        vibeMatches: {
-                            $size: { $setIntersection: [ "$vibes", user.vibes ] }
-                        }
-                    }
-                },
-                {
-                    $sort: { vibeMatches: -1, createdAt: -1 }
-                }
-            ]);
-        } else {
-            experiences = await Experience.find().sort({ createdAt: -1 });
-        }
+        const experiences = await Experience.find().sort({ createdAt: -1 });
         res.status(200).json(experiences);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
-
-
 
 // get a single experience
 const getExperience = async (req, res) => {

@@ -11,12 +11,17 @@ const getVibes = async (req, res) => {
 };
 
 // GET all vibes
-const getVibesbyId = async (req, res) => {
+const getVibebyId = async (req, res) => {
     try {
-        const vibes = await Vibe.find().select('_id');
-        res.status(200).json(vibes);
+        const { vibeId } = req.params;
+        const vibe = await Vibe.findById(vibeId);
+        if (!vibe) {
+            return res.status(404).json({ error: 'Vibe not found' });
+        }
+        res.json(vibe.name);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        console.error('Failed to fetch vibe:', error);
+        res.status(500).json({ error: 'Failed to fetch vibe' });
     }
 };
 
@@ -46,4 +51,4 @@ const deleteVibe = async (req, res) => {
     }
 };
 
-module.exports = { getVibes, createVibe, deleteVibe, getVibesbyId };
+module.exports = { getVibes, createVibe, deleteVibe, getVibebyId };
