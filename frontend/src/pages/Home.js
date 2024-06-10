@@ -2,45 +2,74 @@ import React, { useState, useEffect, useContext } from 'react';
 import ExperienceDetails from '../components/experienceDetails';
 import { AuthContext } from '../context/authContext';
 
+const matchVibes = (userVibes, experienceVibes) => {
+    return experienceVibes.some(experienceVibe => userVibes.includes(experienceVibe));
+};
+
 const Home = () => {
-    const [reload, setReload] = useState(false); // Add a state to trigger a re-fetch of experiences
+    const [reload, setReload] = useState(false);
     const [experiences, setExperiences] = useState([]);
-    const { user } = useContext(AuthContext); // Access user from the AuthContext
+    const { user, loading } = useContext(AuthContext);
 
     const fetchExperiences = async () => {
         try {
             let url = '/api/experiences';
-            const headers = {};
+            let userVibes = [];
 
-            if (user) {
-                headers['Authorization'] = `Bearer ${user.token}`;
+            // Get user vibes from local storage
+            const storedUserVibes = localStorage.getItem('userVibes');
+            if (storedUserVibes) {
+                userVibes = JSON.parse(storedUserVibes);
             }
 
-            const response = await fetch(url, { headers });
+            // Prepare URL with user vibe IDs as query parameters
+            if (userVibes) {
+                url += `?vibes=${userVibes.join(',')}`;
+            } else {
+                console.log('No valid user vibes found or user vibes array is empty.');
+            }
 
-            if (!response.ok) {
+            const headers = {};
+
+            const experiencesResponse = await fetch(url, { headers });
+
+            if (!experiencesResponse.ok) {
                 throw new Error('Failed to fetch experiences');
             }
 
-            const data = await response.json();
-            setExperiences(data); // Assuming the response is an array of experiences
+            const data = await experiencesResponse.json();
+
+            // Filter experiences based on user vibes
+            const filteredExperiences = data.filter(experience =>
+                matchVibes(userVibes, experience.vibes)
+            );
+
+            setExperiences(filteredExperiences);
         } catch (error) {
             console.error('Error fetching experiences:', error);
-            setExperiences([]); // Set experiences to an empty array on error
+            setExperiences([]);
         }
     };
 
     const handleDelete = async () => {
-        setReload(prevState => !prevState); // Toggle reload state to trigger re-fetch
+        setReload(prevState => !prevState);
     };
 
     useEffect(() => {
-        fetchExperiences();
-    }, [reload]); // Fetch experiences whenever the reload state changes
+        if (!loading) {
+            fetchExperiences();
+        }
+    }, [user, loading]);
 
     useEffect(() => {
-        fetchExperiences();
-    }, [user]); // Fetch experiences whenever the user changes
+        if (!loading) {
+            fetchExperiences();
+        }
+    }, [reload, loading]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="home">

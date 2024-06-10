@@ -8,6 +8,7 @@ export const useLogout = () => {
     const logout = async () => {
         // remove the user from local storage
         localStorage.removeItem('user')
+        localStorage.removeItem('userVibes')
 
         // logout action
         dispatch({type: 'LOGOUT'})

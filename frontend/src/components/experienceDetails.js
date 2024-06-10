@@ -17,6 +17,7 @@ const getVibeName = async (vibeId) => {
         return 'Unknown Vibe';
     }
 };
+
 const ExperienceDetails = ({ experience, vibes, onDelete }) => {
     const { dispatch } = useExperienceContext();
     const { user } = useAuthContext();
