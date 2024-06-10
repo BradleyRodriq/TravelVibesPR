@@ -87,7 +87,7 @@ header a:hover {
 /* experience */
 .experiences {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 2fr 2fr;
   transition: grid-template-columns 0.3s ease;
 }
 

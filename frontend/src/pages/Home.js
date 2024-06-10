@@ -72,7 +72,7 @@ const Home = () => {
     }
 
     return (
-        <div className="home">
+        <div>
             <div className="experiences">
                 {experiences && experiences.map((experience) => (
                     <ExperienceDetails
