@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../context/authContext'; // Update the path to your AuthContext
+import { AuthContext } from '../context/authContext';
+import '../styles/experienceManager.css';
 
 const CreateExperience = () => {
     const [name, setName] = useState('');
@@ -73,10 +74,10 @@ const CreateExperience = () => {
     };
 
     return (
-        <div>
+        <div className="create-experience-container">
             <h3>Create Experience</h3>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form className="create-experience-form" onSubmit={handleSubmit}>
+                <div className="form-group">
                     <label htmlFor="name">Name:</label>
                     <input
                         type="text"
@@ -86,7 +87,7 @@ const CreateExperience = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="location">Location:</label>
                     <input
                         type="text"
@@ -97,20 +98,22 @@ const CreateExperience = () => {
                     />
                 </div>
                 <h3>Choose Vibes</h3>
-                {availableVibes.map(vibe => (
-                    <div key={vibe._id}>
-                        <input
-                            type="checkbox"
-                            id={vibe.name}
-                            name={vibe.name}
-                            value={vibe._id}
-                            onChange={handleVibeSelection}
-                            checked={selectedVibes.includes(vibe._id)}
-                        />
-                        <label htmlFor={vibe.name}>{vibe.name}</label>
-                    </div>
-                ))}
-                <button type="submit">Create Experience</button>
+                <div className="vibes-container">
+                    {availableVibes.map(vibe => (
+                        <div key={vibe._id} className="vibe-item">
+                            <input
+                                type="checkbox"
+                                id={vibe.name}
+                                name={vibe.name}
+                                value={vibe._id}
+                                onChange={handleVibeSelection}
+                                checked={selectedVibes.includes(vibe._id)}
+                            />
+                            <label htmlFor={vibe.name}>{vibe.name}</label>
+                        </div>
+                    ))}
+                </div>
+                <button className="submit-button" type="submit">Create Experience</button>
             </form>
         </div>
     );

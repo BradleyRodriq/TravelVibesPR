@@ -10,9 +10,11 @@ body {
   background: #f1f1f1;
   margin: 0;
   font-family: "Poppins";
+  transition: background 0.3s ease;
 }
 header {
   background: #fff;
+  transition: background 0.3s ease;
 }
 header .container {
   max-width: 1400px;
@@ -25,11 +27,16 @@ header .container {
 header a {
   color: var(--primary);
   text-decoration: none;
+  transition: color 0.3s ease;
 }
-.pages{
+header a:hover {
+  color: darken(var(--primary), 20%);
+}
+.pages {
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
+  transition: padding 0.3s ease;
 }
 
 /* homepage */
@@ -37,6 +44,7 @@ header a {
   display: grid;
   grid-template-columns: 2fr 1.5fr;
   gap: 100px;
+  transition: gap 0.3s ease;
 }
 .experience-details {
   background: #fff;
@@ -45,6 +53,11 @@ header a {
   padding: 20px 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.experience-details:hover {
+  transform: translateY(-10px);
+  box-shadow: 2px 4px 15px rgba(0,0,0,0.1);
 }
 .experience-details h4 {
   margin: 0 0 10px 0;
@@ -65,8 +78,18 @@ header a {
   padding: 6px;
   border-radius: 50%;
   color: #333;
+  transition: background 0.3s ease;
+}
+.experience-details span:hover {
+  background: darken(#ff8585, 10%);
 }
 
+/* experience */
+.experiences {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  transition: grid-template-columns 0.3s ease;
+}
 
 /* new experience form */
 label, input {
@@ -81,6 +104,11 @@ input {
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 5px rgba(133, 49, 149, 0.5);
 }
 form button {
   background: var(--primary);
@@ -90,6 +118,11 @@ form button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+form button:hover {
+  background: darken(var(--primary), 10%);
+  transform: scale(1.05);
 }
 div.error {
   padding: 10px;
@@ -100,9 +133,11 @@ div.error {
   margin-top: 20px;
   margin-right: 160px;
   padding: 4px;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 input.error {
   border: 1px solid var(--error);
+  transition: border-color 0.3s ease;
 }
 
 /* navbar */
@@ -112,6 +147,10 @@ nav {
 }
 nav a {
   margin-left: 10px;
+  transition: color 0.3s ease;
+}
+nav a:hover {
+  color: darken(var(--primary), 20%);
 }
 nav button {
   background: #fff;
@@ -123,23 +162,25 @@ nav button {
   cursor: pointer;
   font-size: 1em;
   margin-left: 10px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+nav button:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: scale(1.05);
 }
 
 /* auth forms */
-form.signup {
+form.signup, form.login {
   max-width: 400px;
   border: 2px solid var(--primary);
   margin: 40px auto;
   padding: 20px;
   background: #fff;
   border-radius: 4px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
-form.login {
-  max-width: 400px;
-  border: 2px solid var(--primary);
-  margin: 40px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 4px;
+form.signup:hover, form.login:hover {
+  border-color: darken(var(--primary), 10%);
+  box-shadow: 0 0 10px rgba(133, 49, 149, 0.2);
 }

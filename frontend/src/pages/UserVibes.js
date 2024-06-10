@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/authContext'; // Update the path to your AuthContext
+import '../styles/userVibes.css';
 
 const UserVibes = () => {
     const [userVibes, setUserVibes] = useState([]);
@@ -128,33 +129,35 @@ const UserVibes = () => {
     };
 
     return (
-        <div>
+        <div className="user-vibes-container">
             <h3>Current Vibes</h3>
-            <ul>
-            {userVibes.map(vibe => (
-                <li key={vibe._id}>
-                    {vibe.name}
-                    <button onClick={() => handleDeleteVibe(vibe._id)}>Delete</button>
-                </li>
-            ))}
+            <ul className="vibes-list">
+                {userVibes.map(vibe => (
+                    <li key={vibe._id} className="vibe-item">
+                        {vibe.name}
+                        <button className="delete-button" onClick={() => handleDeleteVibe(vibe._id)}>Delete</button>
+                    </li>
+                ))}
             </ul>
 
-            <form onSubmit={handleSubmit}>
+            <form className="vibes-form" onSubmit={handleSubmit}>
                 <h3>Choose Vibes</h3>
-                {availableVibes.map(vibe => (
-                    <div key={vibe._id}>
-                        <input
-                            type="checkbox"
-                            id={vibe.name}
-                            name={vibe.name}
-                            value={vibe._id}
-                            onChange={handleVibeSelection}
-                            checked={selectedVibes.includes(vibe._id)}
-                        />
-                        <label htmlFor={vibe.name}>{vibe.name}</label>
-                    </div>
-                ))}
-                <button type="submit">Add to Profile</button>
+                <div className="vibes-container">
+                    {availableVibes.map(vibe => (
+                        <div key={vibe._id} className="vibe-item">
+                            <input
+                                type="checkbox"
+                                id={vibe.name}
+                                name={vibe.name}
+                                value={vibe._id}
+                                onChange={handleVibeSelection}
+                                checked={selectedVibes.includes(vibe._id)}
+                            />
+                            <label htmlFor={vibe.name}>{vibe.name}</label>
+                        </div>
+                    ))}
+                </div>
+                <button className="submit-button" type="submit">Add to Profile</button>
             </form>
         </div>
     );
