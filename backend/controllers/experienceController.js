@@ -1,5 +1,6 @@
 const Experience = require('../models/experienceModel');
 const mongoose = require('mongoose');
+const axios = require('axios');
 
 // get all experiences
 const getExperiences = async (req, res) => {
@@ -179,6 +180,67 @@ const deleteAllExperienceVibes = async (req, res) => {
     }
 };
 
+// Fetch and create experiences from Google Places API
+const fetchAndCreateExperiences = async (req, res) => {
+    const apiKey = process.env.GOOGLE_API_KEY || 'AIzaSyBujBsbZxD36wyEQZILa_ky0y15X_lyuQM';
+    const location = '18.2208,-66.5901'; // Latitude and longitude for PR
+    const radius = 50000; // 50 km
+    const types = [];
+
+    const endpoint = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
+    const filteredPlaces = [];
+
+    async function fetchPlaces(pageToken = '') {
+        try {
+            const params = {
+                key: apiKey,
+                location: location,
+                radius: radius,
+                type: types.join('|'),
+                pagetoken: pageToken
+            };
+
+            const response = await axios.get(endpoint, { params });
+            const places = response.data.results;
+
+            // Filter places with a rating of more than 3 stars
+            const validPlaces = places
+                .filter(place => place.rating > 3)
+                .map(place => ({
+                    name: place.name,
+                    location: `${place.address_components.long_name}`
+                }));
+
+            filteredPlaces.push(...validPlaces);
+
+            // Check if there is a next page token
+            if (response.data.next_page_token) {
+                // Delay for a short time to handle the next_page_token propagation
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                await fetchPlaces(response.data.next_page_token);
+            }
+        } catch (error) {
+            console.error('Error fetching nearby places:', error);
+            throw error;
+        }
+    }
+
+    try {
+        await fetchPlaces();
+
+        // Create experience objects
+        const createdExperiences = [];
+        for (const place of filteredPlaces) {
+            const experience = await createExperience({ name: place.name, location: place.location, vibes: [] });
+            createdExperiences.push(experience);
+        }
+
+        res.status(200).json(createdExperiences);
+    } catch (error) {
+        res.status(500).send('Server Error');
+    }
+};
+
 module.exports = {
     addExperienceVibes,
     deleteExperienceVibes,
@@ -187,5 +249,6 @@ module.exports = {
     getExperience,
     getExperiences,
     deleteExperience,
-    updateExperience
+    updateExperience,
+    fetchAndCreateExperiences
 };
