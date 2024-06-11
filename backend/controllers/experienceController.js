@@ -182,9 +182,9 @@ const deleteAllExperienceVibes = async (req, res) => {
 
 // Fetch and create experiences from Google Places API
 const fetchAndCreateExperiences = async (req, res) => {
-    const apiKey = process.env.GOOGLE_API_KEY || 'AIzaSyBujBsbZxD36wyEQZILa_ky0y15X_lyuQM';
+    const apiKey = process.env.GOOGLE_PLACES_API_KEY;
     const location = '18.2208,-66.5901'; // Latitude and longitude for PR
-    const radius = 50000; // 50 km
+    const radius = 1000; // 1 km
     const types = [];
 
     const endpoint = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';

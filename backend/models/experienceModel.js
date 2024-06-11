@@ -14,7 +14,7 @@ const experienceSchema = new Schema({
     },
     vibes: {
         type: [String],
-        required: true
+        required: false
     }
 }, { timestamps: true })
 

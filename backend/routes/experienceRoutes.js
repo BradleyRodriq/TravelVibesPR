@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getExperiences, getExperience, createExperience, deleteExperience, updateExperience, addExperienceVibes, deleteExperienceVibes, deleteAllExperienceVibes } = require('../controllers/experienceController');
+const { getExperiences, getExperience, createExperience, deleteExperience, updateExperience, addExperienceVibes, deleteExperienceVibes, deleteAllExperienceVibes, fetchAndCreateExperiences} = require('../controllers/experienceController');
 const requireAuth = require('../middleware/requireAuth');
 
 // GET all experiences
@@ -29,5 +29,8 @@ router.delete('/:id/vibes/delete', deleteExperienceVibes);
 
 // DELETE delete all vibes from an experience
 router.delete('/:id/vibes/deleteAll', deleteAllExperienceVibes);
+
+// Fetch and create places with google places API
+router.get('/googlefetch', fetchAndCreateExperiences);
 
 module.exports = router;
