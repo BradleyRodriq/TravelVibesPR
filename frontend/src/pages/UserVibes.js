@@ -27,6 +27,9 @@ const UserVibes = () => {
 
             const data = await response.json();
             setUserVibes(data.vibes); // Assuming the response contains a 'vibes' array
+
+            const vibeIds = data.vibes.map(vibe => vibe._id);
+            localStorage.setItem('userVibes', JSON.stringify(vibeIds));
         } catch (error) {
             console.error('Error fetching user vibes:', error);
             setUserVibes([]); // Set userVibes to empty array on error
@@ -87,6 +90,10 @@ const UserVibes = () => {
 
             console.log('Vibe deleted successfully!');
             fetchUserVibes(); // Refresh user vibes
+
+            const updatedVibes = userVibes.filter(vibe => vibe._id !== vibeId);
+            const vibeIds = updatedVibes.map(vibe => vibe._id);
+            localStorage.setItem('userVibes', JSON.stringify(vibeIds));
         } catch (error) {
             console.error('Error deleting vibe:', error);
         }
@@ -123,6 +130,9 @@ const UserVibes = () => {
             setSelectedVibes([]);
 
             fetchUserVibes(); // Refresh user vibes
+
+            const vibeIds = updatedUser.vibes.map(vibe => vibe._id);
+            localStorage.setItem('userVibes', JSON.stringify(vibeIds));
         } catch (error) {
             console.error('Error adding vibes:', error);
         }
