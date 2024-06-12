@@ -10,7 +10,7 @@ const experienceSchema = new Schema({
     },
     location: {
         type: String,
-        required: true
+        required: false
     },
     vibes: {
         type: [String],

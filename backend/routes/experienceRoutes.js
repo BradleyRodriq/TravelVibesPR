@@ -30,7 +30,4 @@ router.delete('/:id/vibes/delete', deleteExperienceVibes);
 // DELETE delete all vibes from an experience
 router.delete('/:id/vibes/deleteAll', deleteAllExperienceVibes);
 
-// Fetch and create places with google places API
-router.get('/googlefetch', fetchAndCreateExperiences);
-
 module.exports = router;

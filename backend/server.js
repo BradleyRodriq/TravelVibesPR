@@ -5,6 +5,7 @@ const experiencesRoute = require('./routes/experienceRoutes')
 const mongoose = require('mongoose')
 const userRoute = require('./routes/userRoutes')
 const vibesRoute = require ('./routes/vibeRoutes')
+const googleRoutes = require('./routes/googleRoutes')
 
 // express app create
 const app = express()
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 app.use('/api/experiences', experiencesRoute)
 app.use('/api/user', userRoute)
 app.use('/api/vibes', vibesRoute)
+app.use('/api/googlefetch', googleRoutes)
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
