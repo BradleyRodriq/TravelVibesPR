@@ -1,5 +1,7 @@
 const Experience = require('../models/experienceModel');
+const Vibe = require('../models/vibeModel');
 const axios = require('axios');
+const nlp = require('compromise');
 
 const fetchAndCreateExperiences = async (req, res) => {
     const apiKey = process.env.GOOGLE_PLACES_API_KEY;
@@ -30,7 +32,8 @@ const fetchAndCreateExperiences = async (req, res) => {
                 .filter(place => place.rating > 3)
                 .map(place => ({
                     name: place.name,
-                    location: place.vicinity // Use place.vicinity or another suitable property for location
+                    location: place.vicinity, // Use place.vicinity or another suitable property for location
+                    keywords: extractKeywords(place.name)
                 }));
 
             filteredPlaces.push(...validPlaces);
@@ -60,17 +63,42 @@ const fetchAndCreateExperiences = async (req, res) => {
     }
 };
 
+const extractKeywords = (text) => {
+    const doc = nlp(text);
+    const nouns = doc.nouns().out('array');
+    return nouns;
+};
+
 const createFetchedExperiences = async (places) => {
     try {
         const createdExperiences = [];
         for (const place of places) {
-            const experience = new Experience({ name: place.name, location: place.location, vibes: [] });
+            const vibeIds = await getVibeIds(place.keywords);
+            const experience = new Experience({ name: place.name, location: place.location, vibes: vibeIds });
             await experience.save();
             createdExperiences.push(experience);
         }
         return createdExperiences;
     } catch (error) {
         console.error('Error creating experiences:', error);
+        throw error;
+    }
+};
+
+const getVibeIds = async (keywords) => {
+    try {
+        const vibeIds = [];
+        for (const keyword of keywords) {
+            let vibe = await Vibe.findOne({ name: keyword });
+            if (!vibe) {
+                vibe = new Vibe({ name: keyword });
+                await vibe.save();
+            }
+            vibeIds.push(vibe._id);
+        }
+        return vibeIds;
+    } catch (error) {
+        console.error('Error fetching or creating vibes:', error);
         throw error;
     }
 };
