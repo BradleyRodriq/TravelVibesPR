@@ -79,6 +79,7 @@ const UserVibes = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
+            localStorage.setItem('userVibes', JSON.stringify(json.vibes));
 
             if (!response.ok) {
                 const errorData = await response.json();
