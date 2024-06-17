@@ -6,13 +6,17 @@
   --primary: #853195;
   --error: #e7195a;
 }
+.App {
+  background-color: #8d758f;
+}
+
 body {
   margin: 0;
   font-family: "Poppins";
   transition: background 0.3s ease;
 }
 header {
-  background: #fdfdfd;
+  background: #ffe9fd;
   transition: background 0.3s ease;
 }
 header .container {
@@ -40,12 +44,12 @@ header a:hover {
 
 /* homepage */
 .experience-details {
-  background: #fff;
+  background: #ffe9fd;
   border-radius: 30px;
   margin: 10px 40px;
   padding: 10px 10px;
   position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 2px 2px 5px rgba(245, 242, 242, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .experience-details:hover {
@@ -81,6 +85,7 @@ header a:hover {
 .experiences {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin: auto;
   transition: grid-template-columns 0.3s ease;
   margin-left: auto;
 }
@@ -147,7 +152,7 @@ nav a:hover {
   color: darken(var(--primary), 20%);
 }
 nav button {
-  background: #fff;
+  background: #ffe9fd;
   color: var(--primary);
   border: 2px solid var(--primary);
   padding: 6px 10px;

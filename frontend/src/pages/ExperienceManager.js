@@ -5,6 +5,7 @@ import '../styles/experienceManager.css';
 const CreateExperience = () => {
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
+    const [pictureUrl, setPictureUrl] = useState('');
     const [availableVibes, setAvailableVibes] = useState([]);
     const [selectedVibes, setSelectedVibes] = useState([]);
     const { user } = useContext(AuthContext); // Access user from the AuthContext
@@ -51,7 +52,7 @@ const CreateExperience = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ name, location, vibes: selectedVibes })
+                body: JSON.stringify({ name, location, pictureUrl, vibes: selectedVibes })
             });
 
             if (!response.ok) {
@@ -65,6 +66,7 @@ const CreateExperience = () => {
             // Clear the form
             setName('');
             setLocation('');
+            setPictureUrl('');
             setSelectedVibes([]);
 
             console.log('Experience created successfully!');
@@ -94,6 +96,16 @@ const CreateExperience = () => {
                         id="location"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="pictureUrl">Picture URL:</label>
+                    <input
+                        type="text"
+                        id="pictureUrl"
+                        value={pictureUrl}
+                        onChange={(e) => setPictureUrl(e.target.value)}
                         required
                     />
                 </div>

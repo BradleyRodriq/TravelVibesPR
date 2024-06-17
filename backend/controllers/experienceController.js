@@ -32,7 +32,7 @@ const getExperience = async (req, res) => {
 
 // create a single experience
 const createExperience = async (req, res) => {
-    const { name, location, vibes } = req.body;
+    const { name, location, vibes, pictureUrl } = req.body;
 
     let emptyFields = [];
 
@@ -44,6 +44,9 @@ const createExperience = async (req, res) => {
         emptyFields.push('location');
     }
 
+    if (!pictureUrl) {
+        emptyFields.push('pictureUrl');
+    }
     if (!vibes) {
         emptyFields.push('vibes');
     }
