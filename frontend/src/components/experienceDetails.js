@@ -52,22 +52,33 @@ const ExperienceDetails = ({ experience, vibes, onDelete }) => {
         }
     };
 
+    const municipalities = [
+        'Adjuntas', 'Aguada', 'Aguadilla', 'Aguas Buenas', 'Aibonito', 'Añasco', 'Arecibo',
+        'Arroyo', 'Barceloneta', 'Barranquitas', 'Bayamón', 'Cabo Rojo', 'Caguas', 'Camuy',
+        'Canóvanas', 'Carolina', 'Cataño', 'Cayey', 'Ceiba', 'Ciales', 'Cidra', 'Coamo',
+        'Comerío', 'Corozal', 'Culebra', 'Dorado', 'Fajardo', 'Florida', 'Guánica', 'Guayama',
+        'Guayanilla', 'Guaynabo', 'Gurabo', 'Hatillo', 'Hormigueros', 'Humacao', 'Isabela',
+        'Jayuya', 'Juana Díaz', 'Juncos', 'Lajas', 'Lares', 'Las Marías', 'Las Piedras',
+        'Loíza', 'Luquillo', 'Manatí', 'Maricao', 'Maunabo', 'Mayagüez', 'Moca', 'Morovis',
+        'Naguabo', 'Naranjito', 'Orocovis', 'Patillas', 'Peñuelas', 'Ponce', 'Quebradillas',
+        'Rincón', 'Río Grande', 'Sabana Grande', 'Salinas', 'San Germán', 'San Juan', 'San Lorenzo',
+        'San Sebastián', 'Santa Isabel', 'Toa Alta', 'Toa Baja', 'Trujillo Alto', 'Utuado', 'Vega Alta',
+        'Vega Baja', 'Vieques', 'Villalba', 'Yabucoa', 'Yauco'
+    ];
+
+    const municipality = municipalities.find(municipality => experience.location.includes(municipality));
+
     return (
-        <div className="experience-details">
-            <h4>{experience.name}</h4>
-            <div><strong>Location: </strong>{experience.location}</div>
-            <div>
-                <strong>Vibes: </strong>
-                {Array.isArray(vibeNames) && vibeNames.length > 0 ? (
-                    vibeNames.map((vibeName, index) => (
-                        <div key={index}>{vibeName}</div>
-                    ))
-                ) : (
-                    <div>Loading vibes...</div>
-                )}
+        <div className="experience-details" style={{ width: '300px', border: '1px solid #ccc', borderRadius: '5px', overflow: 'hidden' }}>
+            <h4 style={{ padding: '10px', margin: '0' }}>{experience.name}</h4>
+            <img src={experience.pictureUrl} alt={experience.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+            <div style={{ padding: '10px' }}>
+                <div><strong>Location: </strong>{municipality || experience.location}</div>
+                <div>
+                    <strong>Vibes: </strong>
+                    <div>{vibeNames.join(' | ')}</div>
+                </div>
             </div>
-            <p>{formatDistanceToNow(new Date(experience.createdAt), { addSuffix: true })}</p>
-            <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
         </div>
     );
 };

@@ -7,13 +7,12 @@
   --error: #e7195a;
 }
 body {
-  background: #f1f1f1;
   margin: 0;
   font-family: "Poppins";
   transition: background 0.3s ease;
 }
 header {
-  background: #fff;
+  background: #fdfdfd;
   transition: background 0.3s ease;
 }
 header .container {
@@ -33,24 +32,18 @@ header a:hover {
   color: darken(var(--primary), 20%);
 }
 .pages {
-  max-width: 1400px;
-  padding: 20px;
-  margin: 0 auto;
+  max-width: 1800px;
+  padding: 10px;
+  margin: auto;
   transition: padding 0.3s ease;
 }
 
 /* homepage */
-.home {
-  display: grid;
-  grid-template-columns: 2fr 1.5fr;
-  gap: 100px;
-  transition: gap 0.3s ease;
-}
 .experience-details {
   background: #fff;
   border-radius: 30px;
   margin: 10px 40px;
-  padding: 20px 20px;
+  padding: 10px 10px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -87,8 +80,9 @@ header a:hover {
 /* experience */
 .experiences {
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   transition: grid-template-columns 0.3s ease;
+  margin-left: auto;
 }
 
 /* new experience form */

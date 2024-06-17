@@ -10,7 +10,7 @@ const Home = () => {
     const [reload, setReload] = useState(false);
     const [experiences, setExperiences] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [experiencesPerPage] = useState(6); // Number of experiences per page
+    const [experiencesPerPage] = useState(12); // Number of experiences per page
     const { user, loading } = useContext(AuthContext);
 
     const fetchExperiences = async () => {
