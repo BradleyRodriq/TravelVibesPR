@@ -5,7 +5,7 @@ import '../styles/userVibes.css';
 const UserVibes = () => {
     const [userVibes, setUserVibes] = useState([]);
     const [availableVibes, setAvailableVibes] = useState([]);
-    const [selectedVibes, setSelectedVibes] = useState([]);
+    const [selectedVibesToAdd, setSelectedVibesToAdd] = useState([]);
     const { user } = useContext(AuthContext); // Access user from the AuthContext
 
     const fetchUserVibes = async () => {
@@ -63,14 +63,22 @@ const UserVibes = () => {
         fetchAvailableVibes();
     }, []);
 
-    const handleVibeSelection = (e) => {
-        const vibeId = e.target.value;
-        if (e.target.checked) {
-            setSelectedVibes([...selectedVibes, vibeId]);
-        } else {
-            setSelectedVibes(selectedVibes.filter(vibe => vibe !== vibeId));
+    const handleVibeSelection = (vibeId) => {
+        // Check if the vibe is already in localStorage userVibes
+        const storedVibes = JSON.parse(localStorage.getItem('userVibes')) || [];
+        if (storedVibes.includes(vibeId)) {
+            return; // Return early if the vibe is already in userVibes
         }
+
+        // If not in userVibes, check if the vibe is already selected
+        if (selectedVibesToAdd.includes(vibeId)) {
+            return; // Return early if the vibe is already selected
+        }
+
+        // Add the vibe to selectedVibesToAdd
+        setSelectedVibesToAdd([...selectedVibesToAdd, vibeId]);
     };
+
 
     const handleDeleteVibe = async (vibeId) => {
         const token = user.token; // Access the token from the user object
@@ -103,17 +111,17 @@ const UserVibes = () => {
         e.preventDefault();
         const token = user.token;
 
-        console.log('Selected Vibes:', selectedVibes);
+        console.log('Selected Vibes:', selectedVibesToAdd);
 
         try {
-            // Assuming selectedVibes contains vibe names, not IDs
+            // Assuming selectedVibesToAdd contains vibe IDs
             const response = await fetch('/api/user/addVibes', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ vibes: selectedVibes })
+                body: JSON.stringify({ vibes: selectedVibesToAdd })
             });
 
             if (!response.ok) {
@@ -127,7 +135,7 @@ const UserVibes = () => {
             setUserVibes(updatedUser.vibes); // Update userVibes with the server response
 
             console.log('Vibes added successfully!');
-            setSelectedVibes([]);
+            setSelectedVibesToAdd([]);
 
             fetchUserVibes(); // Refresh user vibes
 
@@ -155,19 +163,15 @@ const UserVibes = () => {
                 <div className="vibes-container">
                     {availableVibes.map(vibe => (
                         <div key={vibe._id} className="vibe-item">
-                            <input
-                                type="checkbox"
-                                id={vibe.name}
-                                name={vibe.name}
-                                value={vibe._id}
-                                onChange={handleVibeSelection}
-                                checked={selectedVibes.includes(vibe._id)}
-                            />
-                            <label htmlFor={vibe.name}>{vibe.name}</label>
+                            <button
+                                className={`vibe-button ${selectedVibesToAdd.includes(vibe._id) ? 'selected' : ''}`}
+                                onClick={() => handleVibeSelection(vibe._id)}
+                            >
+                                {vibe.name}
+                            </button>
                         </div>
                     ))}
                 </div>
-                <button className="submit-button" type="submit">Add to Profile</button>
             </form>
         </div>
     );
