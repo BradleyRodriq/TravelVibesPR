@@ -78,14 +78,39 @@ const fetchAndCreateExperiences = async (req, res) => {
     }
 
     const determineVibesFromReviews = (reviews) => {
-        // Define your predefined keywords
-        const keywords = ['relaxing',
-                          'exciting',
-                          'scenic',
-                          'historic',
-                          'adventurous',
-                          'romantic',
-                          'family-friendly'];
+        // Define your predefined keywords with references
+        const keywordMappings = {
+            'relaxing': ['relax', 'calm', 'peaceful', 'tranquil', 'soothing', 'serene', 'mellow', 'restful'],
+            'exciting': ['thrilling', 'adrenaline', 'exciting', 'exhilarating', 'stimulating', 'electrifying', 'energetic', 'dynamic'],
+            'scenic': ['beautiful', 'picturesque', 'scenic', 'breathtaking', 'stunning', 'gorgeous', 'panoramic', 'majestic'],
+            'historic': ['ancient', 'traditional', 'historic', 'nostalgic', 'time-honored', 'vintage', 'classic', 'antique'],
+            'adventurous': ['daring', 'exploratory', 'adventurous', 'bold', 'courageous', 'intrepid', 'dashing', 'enterprising'],
+            'romantic': ['love', 'passionate', 'romantic', 'intimate', 'amorous', 'tender', 'affectionate', 'heartfelt'],
+            'family-friendly': ['kids', 'children', 'family-friendly', 'child-friendly', 'kid-friendly', 'youthful', 'juvenile', 'wholesome'],
+            'uplifting': ['uplifting', 'inspiring', 'motivating', 'encouraging', 'heartening', 'stimulating', 'energizing', 'invigorating'],
+            'peaceful': ['peaceful', 'calm', 'serene', 'tranquil', 'placid', 'quiet', 'undisturbed', 'still'],
+            'thrilling': ['thrilling', 'exciting', 'exhilarating', 'exciting', 'stimulating', 'rousing', 'gripping', 'electrifying'],
+            'refreshing': ['refreshing', 'revitalizing', 'rejuvenating', 'invigorating', 'restorative', 'energizing', 'bracing', 'stimulating'],
+            'magical': ['magical', 'enchanted', 'mystical', 'charming', 'spellbinding', 'otherworldly', 'bewitching', 'captivating'],
+            'inspiring': ['inspiring', 'motivating', 'stimulating', 'uplifting', 'encouraging', 'moving', 'touching', 'heartening'],
+            'awe-inspiring': ['awe-inspiring', 'breathtaking', 'magnificent', 'awe-striking', 'impressive', 'spectacular', 'stunning', 'grand'],
+            'enchanting': ['enchanting', 'charming', 'captivating', 'entrancing', 'fascinating', 'delightful', 'spellbinding', 'magical'],
+            'invigorating': ['invigorating', 'energizing', 'refreshing', 'bracing', 'stimulating', 'reviving', 'restorative', 'vitalizing'],
+            'serene': ['serene', 'calm', 'peaceful', 'tranquil', 'placid', 'undisturbed', 'quiet', 'still'],
+            'charming': ['charming', 'delightful', 'captivating', 'enchanting', 'appealing', 'endearing', 'lovely', 'attractive'],
+            'captivating': ['captivating', 'engaging', 'fascinating', 'absorbing', 'compelling', 'entrancing', 'riveting', 'gripping'],
+            'tranquil': ['tranquil', 'calm', 'peaceful', 'serene', 'placid', 'quiet', 'undisturbed', 'still'],
+            'breathtaking': ['breathtaking', 'stunning', 'awe-inspiring', 'amazing', 'astonishing', 'impressive', 'spectacular', 'dazzling'],
+            'nature': ['nature', 'natural', 'outdoors', 'environment', 'wilderness', 'scenery', 'landscape', 'flora'],
+            'hiking': ['hiking', 'trekking', 'walking', 'rambling', 'tramping', 'hike', 'trek', 'walk'],
+            'eco-tourism': ['eco-tourism', 'ecological', 'green', 'sustainable', 'environmentally-friendly', 'conservation', 'ecology', 'natural']
+        };
+
+        // Flatten the keyword mappings
+        const keywords = Object.keys(keywordMappings).reduce((acc, key) => {
+            acc.push(key, ...keywordMappings[key]);
+            return acc;
+        }, []);
 
         // Split reviews into words and convert to lowercase
         const words = reviews.toLowerCase().split(/\s+/);
@@ -93,8 +118,9 @@ const fetchAndCreateExperiences = async (req, res) => {
         // Find matching keywords in the words array
         const matchedKeywords = keywords.filter(keyword => words.includes(keyword));
 
-        return matchedKeywords;
+        return [...new Set(matchedKeywords)]; // Remove duplicates and return array
     };
+
 
     try {
         await fetchPlaces();
@@ -126,9 +152,12 @@ const createFetchedExperiences = async (filteredPlaces) => {
 
 const getVibeIds = async (keywords) => {
     try {
+        // Fetch all existing vibes
+        const existingVibes = await Vibe.find();
+
         const vibeIds = [];
         for (const keyword of keywords) {
-            let vibe = await Vibe.findOne({ name: keyword });
+            let vibe = existingVibes.find(vibe => vibe.name === keyword);
             if (!vibe) {
                 vibe = new Vibe({ name: keyword });
                 await vibe.save();
@@ -141,5 +170,6 @@ const getVibeIds = async (keywords) => {
         throw error;
     }
 };
+
 
 module.exports = { fetchAndCreateExperiences, createFetchedExperiences };
