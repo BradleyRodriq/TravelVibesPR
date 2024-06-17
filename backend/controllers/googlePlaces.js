@@ -1,10 +1,6 @@
 const Experience = require('../models/experienceModel');
 const Vibe = require('../models/vibeModel');
 const axios = require('axios');
-const nlp = require('compromise');
-const Sentiment = require('sentiment');
-
-const sentiment = new Sentiment();
 
 const fetchAndCreateExperiences = async (req, res) => {
     const apiKey = process.env.GOOGLE_PLACES_API_KEY;
@@ -15,14 +11,14 @@ const fetchAndCreateExperiences = async (req, res) => {
     const API_ENDPOINT = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
     const PLACE_DETAILS_ENDPOINT = 'https://maps.googleapis.com/maps/api/place/details/json';
 
-    const filteredPlaces = [];
+    const filteredPlaces = []; // Define the array to store filtered places
 
     async function fetchPlaces(pageToken = '') {
         try {
             const params = {
                 key: apiKey,
-                location: location,
-                radius: radius,
+                location,
+                radius,
                 type: types.join('|'),
                 pagetoken: pageToken
             };
@@ -31,23 +27,28 @@ const fetchAndCreateExperiences = async (req, res) => {
             const places = response.data.results;
             console.log('Fetched places:', places);
 
-            // Filter places with a rating of more than 3 stars and more than 5 reviews
-            const validPlaces = places.filter(place => place.rating > 3 && place.user_ratings_total > 5);
+            // Filter places with a rating of 3 stars or more
+            const validPlaces = places.filter(place => place.rating >= 3);
 
             // Fetch details for each valid place to get reviews
             for (const place of validPlaces) {
                 const details = await fetchPlaceDetails(place.place_id);
-                const keywords = extractKeywordsFromDetails(place.name, details.reviews);
-                const vibes = determineVibesFromReviews(details.reviews);
-                filteredPlaces.push({
-                    name: place.name,
-                    location: place.vicinity, // Use place.vicinity or another suitable property for location
-                    keywords: keywords,
-                    vibes: vibes
-                });
+                if (details.reviews && details.reviews.length > 0) { // Check if reviews exist
+                    const combinedReviews = details.reviews.map(review => review.text).join(' ');
+                    const vibes = determineVibesFromReviews(combinedReviews);
+
+                    if (vibes.length > 0) { // Only add place if there are matching vibes
+                        filteredPlaces.push({
+                            name: place.name,
+                            location: place.vicinity || details.formatted_address, // Use place.vicinity or another suitable property for location
+                            vibes
+                        });
+                    }
+                }
             }
 
             console.log('Filtered places:', filteredPlaces);
+            console.log('Valid places:', validPlaces.length);
 
             // Check if there is a next page token
             if (response.data.next_page_token) {
@@ -66,7 +67,7 @@ const fetchAndCreateExperiences = async (req, res) => {
             const params = {
                 key: apiKey,
                 place_id: placeId,
-                fields: 'name,rating,user_ratings_total,reviews'
+                fields: 'name,rating,user_ratings_total,reviews,formatted_address',
             };
             const response = await axios.get(PLACE_DETAILS_ENDPOINT, { params });
             return response.data.result;
@@ -76,44 +77,23 @@ const fetchAndCreateExperiences = async (req, res) => {
         }
     }
 
-    const extractKeywordsFromDetails = (placeName, reviews) => {
-        const nameKeywords = extractKeywords(placeName);
-        const reviewText = reviews.map(review => review.text).join(' ');
-        const reviewKeywords = extractKeywords(reviewText);
-        return Array.from(new Set([...nameKeywords, ...reviewKeywords])); // Combine and deduplicate keywords
-    };
-
-    const extractKeywords = (text) => {
-        const doc = nlp(text);
-        const nouns = doc.nouns().out('array');
-        return nouns;
-    };
-
     const determineVibesFromReviews = (reviews) => {
-        const vibes = new Set();
+        // Define your predefined keywords
+        const keywords = ['relaxing',
+                          'exciting',
+                          'scenic',
+                          'historic',
+                          'adventurous',
+                          'romantic',
+                          'family-friendly'];
 
-        reviews.forEach(review => {
-            const result = sentiment.analyze(review.text);
-            if (result.score > 0) {
-                vibes.add('positive');
-            } else if (result.score < 0) {
-                vibes.add('negative');
-            } else {
-                vibes.add('neutral');
-            }
+        // Split reviews into words and convert to lowercase
+        const words = reviews.toLowerCase().split(/\s+/);
 
-            // Example logic to add specific vibes based on keywords
-            const reviewKeywords = extractKeywords(review.text);
-            if (reviewKeywords.includes('family')) {
-                vibes.add('family-friendly');
-            }
-            if (reviewKeywords.includes('adventure') || reviewKeywords.includes('exciting')) {
-                vibes.add('adventurous');
-            }
-            // Add other vibes here...
-        });
+        // Find matching keywords in the words array
+        const matchedKeywords = keywords.filter(keyword => words.includes(keyword));
 
-        return Array.from(vibes);
+        return matchedKeywords;
     };
 
     try {
@@ -128,10 +108,10 @@ const fetchAndCreateExperiences = async (req, res) => {
     }
 };
 
-const createFetchedExperiences = async (places) => {
+const createFetchedExperiences = async (filteredPlaces) => {
     try {
         const createdExperiences = [];
-        for (const place of places) {
+        for (const place of filteredPlaces) {
             const vibeIds = await getVibeIds(place.vibes);
             const experience = new Experience({ name: place.name, location: place.location, vibes: vibeIds });
             await experience.save();
