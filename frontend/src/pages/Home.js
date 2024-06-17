@@ -25,10 +25,8 @@ const Home = () => {
             }
 
             // Prepare URL with user vibe IDs as query parameters
-            if (userVibes) {
+            if (userVibes.length > 0) {
                 url += `?vibes=${userVibes.join(',')}`;
-            } else {
-                console.log('No valid user vibes found or user vibes array is empty.');
             }
 
             const headers = {};
@@ -41,10 +39,10 @@ const Home = () => {
 
             const data = await experiencesResponse.json();
 
-            // Filter experiences based on user vibes
-            const filteredExperiences = data.filter(experience =>
+            // Filter experiences based on user vibes if user vibes are present
+            const filteredExperiences = userVibes.length > 0 ? data.filter(experience =>
                 matchVibes(userVibes, experience.vibes)
-            );
+            ) : data;
 
             setExperiences(filteredExperiences);
         } catch (error) {
@@ -52,6 +50,7 @@ const Home = () => {
             setExperiences([]);
         }
     };
+
 
     const handleDelete = async () => {
         setReload(prevState => !prevState);
