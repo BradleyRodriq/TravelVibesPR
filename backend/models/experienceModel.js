@@ -26,6 +26,10 @@ const experienceSchema = new Schema({
             type: [Number],
             required: false
         }
+    },
+    pictureUrl: {
+        type: String,
+        required: false
     }
 }, { timestamps: true });
 
