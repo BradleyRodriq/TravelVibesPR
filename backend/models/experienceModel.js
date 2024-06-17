@@ -15,6 +15,12 @@ const experienceSchema = new Schema({
     vibes: {
         type: [String],
         required: false
+    },
+    geolocation: {
+        coordinates: {
+            type: [Number],
+            required: true
+        }
     }
 }, { timestamps: true })
 
