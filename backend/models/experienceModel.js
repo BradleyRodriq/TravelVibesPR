@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 // experience objects
 const experienceSchema = new Schema({
@@ -17,12 +17,20 @@ const experienceSchema = new Schema({
         required: false
     },
     geolocation: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            default: 'Point'
+        },
         coordinates: {
             type: [Number],
-            required: true
+            required: false
         }
     }
-}, { timestamps: true })
+}, { timestamps: true });
+
+// Index for geolocation
+experienceSchema.index({ geolocation: '2dsphere' });
 
 // export experienceSchema
-module.exports = mongoose.model('Experience', experienceSchema)
+module.exports = mongoose.model('Experience', experienceSchema);

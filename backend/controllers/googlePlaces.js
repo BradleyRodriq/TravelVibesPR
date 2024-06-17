@@ -5,7 +5,7 @@ const axios = require('axios');
 const fetchAndCreateExperiences = async (req, res) => {
     const apiKey = process.env.GOOGLE_PLACES_API_KEY;
     const location = '18.2208,-66.5901'; // Latitude and longitude for PR
-    const radius = 900000; // 900 km
+    const radius = 1000000; // 1000 km
     const types = ['tourist_attraction']; // Only tourist attractions
 
     const API_ENDPOINT = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
@@ -92,21 +92,20 @@ const fetchAndCreateExperiences = async (req, res) => {
             'eco-tourism': ['eco-tourism', 'ecological', 'green', 'sustainable', 'environmentally-friendly', 'conservation', 'ecology', 'natural']
         };
 
-        // Flatten the keyword mappings
-        const keywords = Object.keys(keywordMappings).reduce((acc, key) => {
-            acc.push(key, ...keywordMappings[key]);
-            return acc;
-        }, []);
+        // Get all keywords
+        const keywords = Object.keys(keywordMappings);
 
         // Split reviews into words and convert to lowercase
         const words = reviews.toLowerCase().split(/\s+/);
 
         // Find matching keywords in the words array
-        const matchedKeywords = keywords.filter(keyword => words.includes(keyword));
+        const matchedKeywords = keywords.filter(keyword => {
+            // If the keyword is found in the reviews, return true
+            return words.includes(keyword) || (Array.isArray(keywordMappings[keyword]) && keywordMappings[keyword].some(subKeyword => words.includes(subKeyword)));
+        });
 
         return [...new Set(matchedKeywords)]; // Remove duplicates and return array
     };
-
 
     try {
         await fetchPlaces();
@@ -126,7 +125,15 @@ const createFetchedExperiences = async (filteredPlaces) => {
         for (const place of filteredPlaces) {
             const vibeIds = await getVibeIds(place.vibes);
             const { name, location, geolocation } = place;
-            const experience = new Experience({ name, location, geolocation, vibes: vibeIds });
+
+            // Extract lat and lng from geolocation
+            const { lat, lng } = geolocation;
+            const experience = new Experience({
+                name,
+                location,
+                geolocation: { type: 'Point', coordinates: [lng, lat] }, // Note: lng first, then lat
+                vibes: vibeIds
+            });
             await experience.save();
             createdExperiences.push(experience);
         }
@@ -136,6 +143,7 @@ const createFetchedExperiences = async (filteredPlaces) => {
         throw error;
     }
 };
+
 
 const getVibeIds = async (keywords) => {
     try {
