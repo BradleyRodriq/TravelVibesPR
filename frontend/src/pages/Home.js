@@ -9,6 +9,8 @@ const matchVibes = (userVibes, experienceVibes) => {
 const Home = () => {
     const [reload, setReload] = useState(false);
     const [experiences, setExperiences] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [experiencesPerPage] = useState(6); // Number of experiences per page
     const { user, loading } = useContext(AuthContext);
 
     const fetchExperiences = async () => {
@@ -67,6 +69,14 @@ const Home = () => {
         }
     }, [reload, loading]);
 
+    // Get current experiences for the current page
+    const indexOfLastExperience = currentPage * experiencesPerPage;
+    const indexOfFirstExperience = indexOfLastExperience - experiencesPerPage;
+    const currentExperiences = experiences.slice(indexOfFirstExperience, indexOfLastExperience);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -74,7 +84,7 @@ const Home = () => {
     return (
         <div>
             <div className="experiences">
-                {experiences && experiences.map((experience) => (
+                {currentExperiences && currentExperiences.map((experience) => (
                     <ExperienceDetails
                         experience={experience}
                         vibes={experience.vibes}
@@ -83,6 +93,18 @@ const Home = () => {
                     />
                 ))}
             </div>
+            <div className="pagination">
+                {Array.from({ length: Math.ceil(experiences.length / experiencesPerPage) }, (_, index) => (
+                    <button
+                        key={index + 1}
+                        onClick={() => paginate(index + 1)}
+                        className={currentPage === index + 1 ? "active" : ""}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+            </div>
+
         </div>
     );
 };
