@@ -78,7 +78,6 @@ const ExperienceDetails = ({ experience, vibes, onDelete }) => {
                     <strong>Vibes: </strong>
                     <div>{vibeNames.join(' | ')}</div>
                 </div>
-                <p>{formatDistanceToNow(new Date(experience.createdAt), { addSuffix: true })}</p>
             </div>
         </div>
     );
