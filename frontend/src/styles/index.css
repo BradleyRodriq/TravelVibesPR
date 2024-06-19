@@ -6,8 +6,18 @@
   --primary: #853195;
   --error: #e7195a;
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}
+
 .App {
-  background-color: #8d758f;
+  background: url("https://getwallpapers.com/wallpaper/full/2/1/8/310272.jpg");
+  background-size: cover;
+  min-height: 100vh;
 }
 
 body {
@@ -182,4 +192,41 @@ form.signup, form.login {
 form.signup:hover, form.login:hover {
   border-color: darken(var(--primary), 10%);
   box-shadow: 0 0 10px rgba(133, 49, 149, 0.2);
+}
+
+/* pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.pagination button {
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+.pagination button:hover {
+  background-color: #d4d4d4;
+}
+
+.pagination button.active {
+  background-color: #8d758f;
+  color: white;
+}
+
+.pagination button:active {
+  background-color: #6c576f;
+  transform: scale(0.95);
+}
+
+.pagination button:focus {
+  outline: none;
 }

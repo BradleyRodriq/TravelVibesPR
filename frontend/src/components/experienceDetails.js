@@ -69,7 +69,7 @@ const ExperienceDetails = ({ experience, vibes, onDelete }) => {
     const municipality = municipalities.find(municipality => experience.location.includes(municipality));
 
     return (
-        <div className="experience-details" style={{ width: '300px', borderRadius: '3px', overflow: 'hidden' }}>
+        <div className="experience-details" style={{ width: '300px', borderRadius: '10px', overflow: 'hidden' }}>
             <h4 style={{ padding: '10px', margin: '0' }}>{experience.name}</h4>
             <img src={experience.pictureUrl} alt={experience.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
             <div style={{ padding: '10px' }}>

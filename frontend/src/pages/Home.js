@@ -82,6 +82,17 @@ const Home = () => {
 
     return (
         <div>
+            <div className="pagination">
+                {Array.from({ length: Math.ceil(experiences.length / experiencesPerPage) }, (_, index) => (
+                    <button
+                        key={index + 1}
+                        onClick={() => paginate(index + 1)}
+                        className={currentPage === index + 1 ? "active" : ""}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+            </div>
             <div className="experiences">
                 {currentExperiences && currentExperiences.map((experience) => (
                     <ExperienceDetails

@@ -20,7 +20,7 @@ const experienceSchema = new Schema({
         type: {
             type: String,
             enum: ['Point'],
-            default: 'Point'
+            default: 'Point',
         },
         coordinates: {
             type: [Number],
