@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 import UserVibes from './pages/UserVibes';
 import Navbar from './components/Navbar';
 import CreateExperience from './pages/ExperienceManager';
+import ExperienceDetailsPage from './pages/ExperienceDetailsPage';
 
 function App() {
   const { user } = useAuthContext();
@@ -28,6 +29,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/select-vibes" element={<UserVibes />} />
             <Route path="/add-experience" element={<CreateExperience />} />
+            <Route path="/experience/:id" element={<ExperienceDetailsPage />} />
           </Routes>
         </div>
       </BrowserRouter>

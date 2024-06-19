@@ -1,0 +1,62 @@
+.experience-detail-container {
+    display: flex;
+    justify-content: flex-start; /* Stick to the left */
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f0f0f0; /* Light grey background */
+    padding: 20px; /* Add padding */
+}
+
+.experience-detail {
+    width: 80%;
+    max-width: 400px;
+    background: #ffe9fd;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.experience-detail img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.experience-detail h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.experience-detail p,
+.experience-detail ul {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.experience-detail ul {
+    padding-left: 20px;
+}

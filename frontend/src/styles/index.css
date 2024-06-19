@@ -15,7 +15,7 @@ html, body {
 }
 
 .App {
-  background: url("https://getwallpapers.com/wallpaper/full/2/1/8/310272.jpg");
+  background: #6c576f;
   background-size: cover;
   min-height: 100vh;
 }
@@ -91,6 +91,9 @@ header a:hover {
   background: darken(#ff8585, 10%);
 }
 
+.experience-link {
+  width: 0;
+}
 /* experience */
 .experiences {
   display: grid;

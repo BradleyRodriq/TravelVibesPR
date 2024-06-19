@@ -51,4 +51,15 @@ const deleteVibe = async (req, res) => {
     }
 };
 
-module.exports = { getVibes, createVibe, deleteVibe, getVibebyId };
+const batchFetchVibes = async (req, res) => {
+    const { vibeIds } = req.body;
+    try {
+        const vibes = await Vibe.find({ _id: { $in: vibeIds } });
+        const vibeNames = vibes.map(vibe => vibe.name);
+        res.json(vibeNames);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch vibes' });
+    }
+};
+
+module.exports = { getVibes, createVibe, deleteVibe, getVibebyId, batchFetchVibes };
