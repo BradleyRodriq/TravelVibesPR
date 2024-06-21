@@ -42,8 +42,14 @@ const fetchAndCreateExperiences = async (req, res) => {
                             name: place.name,
                             location: place.vicinity || details.formatted_address,
                             geolocation: place.geometry.location,
-                            vibes,
-                            pictureUrl
+                            vibes: vibes,
+                            rating: details.rating,
+                            reviews: details.reviews.map(review => ({
+                                type: review.relative_time_description,
+                                reviewer: review.author_name,
+                                rating: review.rating,
+                                text: review.text
+                            }))
                         });
                     }
                 }
