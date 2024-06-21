@@ -78,15 +78,36 @@ const ExperienceDetailsPage = () => {
         fetchExperience();
     }, [id]);
 
-    const renderHearts = (rating) => {
-        const hearts = [];
-        for (let i = 1; i <= 5; i++) {
-            hearts.push(
-                <span key={i} className={`heart ${i <= rating ? 'filled' : ''}`}></span>
+    const renderStars = (rating) => {
+        const fullStars = Math.floor(rating);
+        const remainder = rating - fullStars;
+        const hasHalfStar = remainder >= 0.3 && remainder < 0.8;
+        const stars = [];
+
+        for (let i = 1; i <= fullStars; i++) {
+            stars.push(
+                <span key={i} className="star filled"></span>
             );
         }
-        return hearts;
+
+        if (hasHalfStar) {
+            stars.push(
+                <span key="half" className="star half-filled"></span>
+            );
+        }
+
+        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+        for (let i = 0; i < emptyStars; i++) {
+            stars.push(
+                <span key={`empty${i}`} className="star"></span>
+            );
+        }
+
+        return stars;
     };
+
+
+
 
     if (!experience) {
         return <div>Loading...</div>;
@@ -94,19 +115,21 @@ const ExperienceDetailsPage = () => {
 
     return (
         <div className="experience-detail">
-            <img src={experience.pictureUrl} alt={experience.name} className="experience-image" />
+            <h1>{experience.name}</h1>
             <div className="experience-info">
-                <h1>{experience.name}</h1>
-                <p><strong>Location:</strong> {experience.location}</p>
-                <p><strong>Rating:</strong> {renderHearts(experience.rating)}</p>
-                <p><strong>Vibes:</strong></p>
-                <div className="vibes-container">
-                    {vibeNames.map((vibe, index) => (
-                        <span key={index} className="vibe">{vibe}</span>
-                    ))}
+                <img src={experience.pictureUrl} alt={experience.name} className="experience-image" />
+                <div>
+                    <p><strong>Location:</strong> {experience.location}</p>
+                    <p><strong>Rating:</strong> {renderStars(experience.rating)}</p>
+                    <p><strong>Vibes:</strong></p>
+                    <div className="vibes-container">
+                        {vibeNames.map((vibe, index) => (
+                            <span key={index} className="vibe">{vibe}</span>
+                        ))}
+                    </div>
+                    <p><strong>Created:</strong> {formatDistanceToNow(new Date(experience.createdAt))} ago</p>
+                    <button className="reviews-button" onClick={() => setShowModal(true)}>View Reviews</button>
                 </div>
-                <p><strong>Created:</strong> {formatDistanceToNow(new Date(experience.createdAt))} ago</p>
-                <button className="reviews-button" onClick={() => setShowModal(true)}>View Reviews</button>
             </div>
             <Modal show={showModal} onClose={() => setShowModal(false)} reviews={experience.reviews} />
         </div>
