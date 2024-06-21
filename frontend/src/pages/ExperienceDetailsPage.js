@@ -23,10 +23,37 @@ const getVibeNames = async (vibeIds) => {
     }
 };
 
+const Modal = ({ show, onClose, reviews }) => {
+    if (!show) {
+        return null;
+    }
+
+    return (
+        <div className="modal-overlay">
+            <div className="modal">
+                <h2>Reviews</h2>
+                <button className="close-button" onClick={onClose}>X</button>
+                <div className="modal-content">
+                    <ul>
+                        {reviews.map((review, index) => (
+                            <li key={index}>
+                                <p><strong>{review.reviewer}</strong>: {review.text} (Rating: {review.rating})</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
+
 const ExperienceDetailsPage = () => {
     const { id } = useParams();
     const [experience, setExperience] = useState(null);
     const [vibeNames, setVibeNames] = useState([]);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const fetchExperience = async () => {
@@ -51,27 +78,37 @@ const ExperienceDetailsPage = () => {
         fetchExperience();
     }, [id]);
 
+    const renderHearts = (rating) => {
+        const hearts = [];
+        for (let i = 1; i <= 5; i++) {
+            hearts.push(
+                <span key={i} className={`heart ${i <= rating ? 'filled' : ''}`}></span>
+            );
+        }
+        return hearts;
+    };
+
     if (!experience) {
         return <div>Loading...</div>;
     }
 
     return (
-        <div className="experience-detail" style={{ width: '1000px', borderRadius: '10px', overflow: 'hidden', position: 'relative' }}>
-            <h1>{experience.name}</h1>
-            <p><strong>Location:</strong> {experience.location}</p>
-            <p><strong>Coordinates:</strong> {experience.geolocation?.coordinates.join(', ')}</p>
-            <p><strong>Picture:</strong></p>
-            {experience.pictureUrl && (
-                <img src={experience.pictureUrl} alt={experience.name} style={{ width: '100%', maxWidth: '600px', height: 'auto' }} />
-            )}
-            <p><strong>Vibes:</strong></p>
-            <ul>
-                {vibeNames.map((vibe, index) => (
-                    <li key={index}>{vibe}</li>
-                ))}
-            </ul>
-            <p><strong>Created:</strong> {formatDistanceToNow(new Date(experience.createdAt))} ago</p>
-            <p><strong>Updated:</strong> {formatDistanceToNow(new Date(experience.updatedAt))} ago</p>
+        <div className="experience-detail">
+            <img src={experience.pictureUrl} alt={experience.name} className="experience-image" />
+            <div className="experience-info">
+                <h1>{experience.name}</h1>
+                <p><strong>Location:</strong> {experience.location}</p>
+                <p><strong>Rating:</strong> {renderHearts(experience.rating)}</p>
+                <p><strong>Vibes:</strong></p>
+                <div className="vibes-container">
+                    {vibeNames.map((vibe, index) => (
+                        <span key={index} className="vibe">{vibe}</span>
+                    ))}
+                </div>
+                <p><strong>Created:</strong> {formatDistanceToNow(new Date(experience.createdAt))} ago</p>
+                <button className="reviews-button" onClick={() => setShowModal(true)}>View Reviews</button>
+            </div>
+            <Modal show={showModal} onClose={() => setShowModal(false)} reviews={experience.reviews} />
         </div>
     );
 };

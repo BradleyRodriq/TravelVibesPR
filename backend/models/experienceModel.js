@@ -32,11 +32,12 @@ const experienceSchema = new Schema({
         required: false
     },
     rating: {
-        type: Number
+        type: Number,
+        required: false
     },
     reviews: [{
-        type: {
-            type: [String],
+        text: {
+            type: String,
             required: false
         },
         reviewer: {
