@@ -30,7 +30,24 @@ const experienceSchema = new Schema({
     pictureUrl: {
         type: String,
         required: false
-    }
+    },
+    rating: {
+        type: Number
+    },
+    reviews: [{
+        type: {
+            type: [String],
+            required: false
+        },
+        reviewer: {
+            type: String,
+            required: false
+        },
+        rating: {
+            type: Number,
+            required: false
+        }
+    }]
 }, { timestamps: true });
 
 // Index for geolocation
