@@ -20,7 +20,7 @@ const experienceSchema = new Schema({
         type: {
             type: String,
             enum: ['Point'],
-            default: 'Point'
+            default: 'Point',
         },
         coordinates: {
             type: [Number],
@@ -30,7 +30,25 @@ const experienceSchema = new Schema({
     pictureUrl: {
         type: String,
         required: false
-    }
+    },
+    rating: {
+        type: Number,
+        required: false
+    },
+    reviews: [{
+        text: {
+            type: String,
+            required: false
+        },
+        reviewer: {
+            type: String,
+            required: false
+        },
+        rating: {
+            type: Number,
+            required: false
+        }
+    }]
 }, { timestamps: true });
 
 // Index for geolocation

@@ -3,7 +3,6 @@ import { useExperienceContext } from '../hooks/useExperienceContext'
 
 // components
 import ExperienceDetails from '../components/experienceDetails'
-import ExperienceForm from '../components/experienceForm'
 
 const Home = () => {
     const {experiences, dispatch} = useExperienceContext()
@@ -27,7 +26,6 @@ const Home = () => {
                     < ExperienceDetails experience={experience} key={experience._id} />
                 ))}
             </div>
-            <ExperienceForm />
         </div>
     )
 

@@ -38,12 +38,19 @@ const fetchAndCreateExperiences = async (req, res) => {
                         const photoReference = details.photos[0].photo_reference;
                         const pictureUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${apiKey}`;
 
+                        const reviews = details.reviews.map(review => ({
+                            text: review.text,
+                            reviewer: review.author_name,
+                            rating: review.rating
+                        }));
+
                         filteredPlaces.push({
                             name: place.name,
                             location: place.vicinity || details.formatted_address,
                             geolocation: place.geometry.location,
                             vibes,
-                            pictureUrl
+                            pictureUrl,
+                            reviews
                         });
                     }
                 }
@@ -121,14 +128,15 @@ const createFetchedExperiences = async (filteredPlaces) => {
         const createdExperiences = [];
         for (const place of filteredPlaces) {
             const vibeIds = await getVibeIds(place.vibes);
-            const { name, location, geolocation, pictureUrl } = place;
+            const { name, location, geolocation, pictureUrl, reviews } = place;
             const { lat, lng } = geolocation;
             const experience = new Experience({
                 name,
                 location,
                 geolocation: { type: 'Point', coordinates: [lng, lat] },
                 vibes: vibeIds,
-                pictureUrl
+                pictureUrl,
+                reviews
             });
             await experience.save();
             createdExperiences.push(experience);
