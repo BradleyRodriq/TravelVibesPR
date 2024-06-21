@@ -50,6 +50,7 @@ const fetchAndCreateExperiences = async (req, res) => {
                             geolocation: place.geometry.location,
                             vibes,
                             pictureUrl,
+                            rating: place.rating,  // include the rating here
                             reviews
                         });
                     }
@@ -128,7 +129,7 @@ const createFetchedExperiences = async (filteredPlaces) => {
         const createdExperiences = [];
         for (const place of filteredPlaces) {
             const vibeIds = await getVibeIds(place.vibes);
-            const { name, location, geolocation, pictureUrl, reviews } = place;
+            const { name, location, geolocation, pictureUrl, rating, reviews } = place;
             const { lat, lng } = geolocation;
             const experience = new Experience({
                 name,
@@ -136,6 +137,7 @@ const createFetchedExperiences = async (filteredPlaces) => {
                 geolocation: { type: 'Point', coordinates: [lng, lat] },
                 vibes: vibeIds,
                 pictureUrl,
+                rating,
                 reviews
             });
             await experience.save();
