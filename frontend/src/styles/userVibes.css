@@ -36,19 +36,20 @@ body {
   padding: 0;
 }
 
-.vibe-item {
+div.vibe-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background: var(--vibe-bg);
+  background: var(--primary);
   border-radius: 10px;
   margin-bottom: 10px;
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-.vibe-item:hover {
+div.vibe-item:hover {
   transform: scale(1.05);
+  background: var(--vibe-bg);
 }
 
 .delete-button {
