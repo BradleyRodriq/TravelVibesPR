@@ -2,6 +2,7 @@ const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const Vibe = require('../models/vibeModel');
+const sendSignupEmail = require('../controllers/nodemailerController');
 
 const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' });
@@ -20,20 +21,22 @@ const loginUser = async(req, res) => {
         res.status(400).json({error: error.message})
     }
 }
-// signup user
-const signupUser = async(req, res) => {
-    const {email, password} = req.body
+const signupUser = async (req, res) => {
+    const { email, password } = req.body;
 
     try {
-        const user = await User.signup(email, password)
+      const user = await User.signup(email, password);
 
-        // create token
-        const token = createToken(user._id)
-        res.status(200).json({email, token})
+      // Send the thank you email
+      await sendSignupEmail(user);
+
+      // Create token
+      const token = createToken(user._id);
+      res.status(200).json({ email, token });
     } catch (error) {
-        res.status(400).json({error: error.message})
+      res.status(400).json({ error: error.message });
     }
-}
+  };
 
 // Add vibes to user
 const addUserVibes = async (req, res) => {
@@ -90,11 +93,6 @@ const deleteUserVibe = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while deleting the vibe.' });
     }
 };
-
-
-
-
-
 
 
 // Delete all vibes from user
