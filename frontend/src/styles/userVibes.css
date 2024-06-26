@@ -4,13 +4,13 @@
 :root {
   --primary: #853195;
   --error: #e7195a;
-  --background: #f0f0f0;
+  --background: #ffe9fd;
   --text-color: #333;
   --vibe-bg: #ce8db5;
 }
 
 body {
-  background: var(--background);
+  background: #ffe9fd;
   margin: 0;
   font-family: 'Poppins', sans-serif;
 }
@@ -18,7 +18,7 @@ body {
 .user-vibes-container {
   max-width: 600px;
   margin: 50px auto;
-  background: #fff;
+  background: #ffe9fd;
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
@@ -49,7 +49,6 @@ body {
 
 .vibe-item:hover {
   transform: scale(1.05);
-  background: #ff6f6f;
 }
 
 .delete-button {

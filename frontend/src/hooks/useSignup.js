@@ -20,6 +20,7 @@ export const useSignup = () => {
         if (!response.ok) {
             setIsLoading(false)
             setError(json.error)
+            return true
         }
         if (response.ok) {
             // save the user to local storage
@@ -30,6 +31,7 @@ export const useSignup = () => {
 
             // update loading state
             setIsLoading(false)
+            return true
         }
     }
     return { signup, isLoading, error }

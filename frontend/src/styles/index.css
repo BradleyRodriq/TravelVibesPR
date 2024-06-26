@@ -133,7 +133,6 @@ form button {
   transition: background 0.3s ease, transform 0.3s ease;
 }
 form button:hover {
-  background: darken(var(--primary), 10%);
   transform: scale(1.05);
 }
 div.error {
@@ -188,7 +187,7 @@ form.signup, form.login {
   border: 2px solid var(--primary);
   margin: 40px auto;
   padding: 20px;
-  background: #fff;
+  background: #ffe9fd;
   border-radius: 4px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
