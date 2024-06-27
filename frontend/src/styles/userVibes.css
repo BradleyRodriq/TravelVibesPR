@@ -33,10 +33,11 @@ body {
 
 .vibes-list {
   list-style: none;
-  padding: 0;
+  padding: 10px;
 }
 
-div.vibe-item {
+
+.vibe-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,14 +48,18 @@ div.vibe-item {
   transition: transform 0.3s ease;
 }
 
-div.vibe-item:hover {
+li.vibe-item:hover {
+  background: var(--vibe-bg);
+}
+.vibe-item:hover {
   transform: scale(1.05);
   background: var(--vibe-bg);
 }
 
-.delete-button {
+button.delete-button {
   background: var(--error);
   color: #fff;
+
   padding: 5px 10px;
   border: none;
   border-radius: 8px;
