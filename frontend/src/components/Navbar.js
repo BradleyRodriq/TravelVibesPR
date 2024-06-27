@@ -1,15 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 const Navbar = () => {
     const { logout } = useLogout();
     const { user } = useAuthContext();
+    const location = useLocation();
 
     const handleClick = () => {
         logout();
     };
+
+    const showMapView = location.pathname === '/' || location.pathname === '/experience/:id"';
 
     return (
         <header>
@@ -36,9 +39,11 @@ const Navbar = () => {
               )}
             </nav>
           </div>
+          { showMapView && (
           <div className="map-view-container">
             <Link className="map-view" to='/ExperienceMap'>Map View</Link>
           </div>
+          )}
         </header>
       );
     };
