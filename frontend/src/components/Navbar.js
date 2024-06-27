@@ -12,7 +12,7 @@ const Navbar = () => {
         logout();
     };
 
-    const showMapView = location.pathname === '/' || location.pathname === '/experience/:id"';
+    const showMapView = location.pathname === '/';
 
     return (
         <header>
