@@ -24,10 +24,6 @@ const ExperienceMap = () => {
     setMarkers((prevMarkers) => [...prevMarkers, marker]);
   };
 
-  // Example to add a marker (can be triggered by an event or useEffect)
-  useEffect(() => {
-    addAdvancedMarker("https://example.com/photo.jpg", "Example Place", 18.2362, -66.4534);
-  }, []);
 
   return (
     <LoadScript googleMapsApiKey="AIzaSyDP8zkTwAzKinxwNbrxis42EyX5dCkece4">

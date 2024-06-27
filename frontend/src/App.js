@@ -9,7 +9,7 @@ import Navbar from './components/Navbar';
 import CreateExperience from './pages/ExperienceManager';
 import ExperienceDetailsPage from './pages/ExperienceDetailsPage';
 import SignupThanks from './pages/SignupThanks';
-import MapPage from './pages/ExperienceMap';
+import MapPage from './pages/Map';
 
 function App() {
   const { user } = useAuthContext();
