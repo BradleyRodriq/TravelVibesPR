@@ -9,7 +9,8 @@ import Navbar from './components/Navbar';
 import CreateExperience from './pages/ExperienceManager';
 import ExperienceDetailsPage from './pages/ExperienceDetailsPage';
 import SignupThanks from './pages/SignupThanks';
-import MapPage from './pages/Map';
+import MapPage from './pages/MapPage';
+import { LoadScript } from '@react-google-maps/api';
 
 function App() {
   const { user } = useAuthContext();
@@ -22,21 +23,23 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <div className="pages">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/select-vibes" element={<UserVibes />} />
-            <Route path="/add-experience" element={<CreateExperience />} />
-            <Route path="/experience/:id" element={<ExperienceDetailsPage />} />
-            <Route path="/signupthanks" element={<SignupThanks/>} />
-            <Route path="/ExperienceMap" element={<MapPage />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
+      <LoadScript googleMapsApiKey="AIzaSyDP8zkTwAzKinxwNbrxis42EyX5dCkece4">
+        <BrowserRouter>
+          <Navbar />
+          <div className="pages">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/select-vibes" element={<UserVibes />} />
+              <Route path="/add-experience" element={<CreateExperience />} />
+              <Route path="/experience/:id" element={<ExperienceDetailsPage />} />
+              <Route path="/signupthanks" element={<SignupThanks/>} />
+              <Route path="/ExperienceMap" element={<MapPage />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </LoadScript>
     </div>
   );
 }

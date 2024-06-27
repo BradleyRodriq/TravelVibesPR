@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ExperienceDetails from '../components/experienceDetails';
 import { AuthContext } from '../context/authContext';
+import { Link } from 'react-router-dom';
 
 const matchVibes = (userVibes, experienceVibes) => {
     return experienceVibes.some(experienceVibe => userVibes.includes(experienceVibe));

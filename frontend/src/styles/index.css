@@ -152,17 +152,75 @@ input.error {
 }
 
 /* navbar */
+header {
+  background: #ffe9fd;
+  transition: background 0.3s ease;
+  position: relative; /* Ensure relative positioning */
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff; /* Adjust as needed */
+  padding: 10px 20px; /* Adjust padding as needed */
+  position: relative; /* Ensure navbar is relatively positioned */
+}
+
+.map-view-container {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1400px; /* Adjust max-width to match your container */
+  padding: 0; /* Padding for container */
+  background-color: #ffe9fd; /* Background color of container */
+}
+
+.map-view {
+  display: inline-block;
+  background-color: #ffe9fd;
+  color: #853195;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.map-view:hover {
+  background-color: #8d758f;
+  color: white;
+  transform: scale(1.05);
+}
+
 nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  position: relative;
 }
+
 nav a {
   margin-left: 10px;
   transition: color 0.3s ease;
 }
+
 nav a:hover {
   color: darken(var(--primary), 20%);
 }
+
 nav button {
   background: #ffe9fd;
   color: var(--primary);
@@ -175,6 +233,7 @@ nav button {
   margin-left: 10px;
   transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
+
 nav button:hover {
   background: var(--primary);
   color: #fff;
