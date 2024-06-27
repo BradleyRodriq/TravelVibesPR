@@ -18,6 +18,7 @@ const Navbar = () => {
                     <h1>TravelVibesPR</h1>
                 </Link>
                 <nav>
+                    <Link className="map-view" to='/ExperienceMap'>Map View</Link>
                     {user && (
                         <div>
                             <span>{user.email}</span>

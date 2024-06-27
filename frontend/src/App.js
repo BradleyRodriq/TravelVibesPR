@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import CreateExperience from './pages/ExperienceManager';
 import ExperienceDetailsPage from './pages/ExperienceDetailsPage';
 import SignupThanks from './pages/SignupThanks';
+import MapPage from './pages/ExperienceMap';
 
 function App() {
   const { user } = useAuthContext();
@@ -32,6 +33,7 @@ function App() {
             <Route path="/add-experience" element={<CreateExperience />} />
             <Route path="/experience/:id" element={<ExperienceDetailsPage />} />
             <Route path="/signupthanks" element={<SignupThanks/>} />
+            <Route path="/ExperienceMap" element={<MapPage />} />
           </Routes>
         </div>
       </BrowserRouter>
