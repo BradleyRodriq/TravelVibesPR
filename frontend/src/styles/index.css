@@ -112,7 +112,7 @@ input {
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
-  width: 80%;
+  width: 100%;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
@@ -122,6 +122,11 @@ input:focus {
   border-color: var(--primary);
   box-shadow: 0 0 5px rgba(133, 49, 149, 0.5);
 }
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
 form button {
   background: var(--primary);
   border: 0;
@@ -251,7 +256,6 @@ form.signup, form.login {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 form.signup:hover, form.login:hover {
-  border-color: darken(var(--primary), 10%);
   box-shadow: 0 0 10px rgba(133, 49, 149, 0.2);
 }
 
