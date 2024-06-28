@@ -1,5 +1,7 @@
 const Experience = require('../models/experienceModel');
 const mongoose = require('mongoose');
+const User = require('../models/userModel');
+const sendExperienceEmail = require('../nodemailer/nodemailerExperience');
 
 // get all experiences
 const getExperiences = async (req, res) => {
@@ -57,6 +59,15 @@ const createExperience = async (req, res) => {
 
     try {
         const experience = await Experience.create({ name, location, vibes, pictureUrl });
+
+         // Find users whose vibes match the experience vibes
+         const matchingUsers = await User.find({ vibes: { $in: vibes } });
+
+         // Send email to each matching user
+         for (const user of matchingUsers) {
+             await sendExperienceEmail(user);
+         }
+
         res.status(200).json(experience);
     } catch (error) {
         res.status(400).json({ error: error.message });
