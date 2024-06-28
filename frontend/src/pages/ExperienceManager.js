@@ -10,9 +10,9 @@ const CreateExperience = () => {
     const [selectedVibes, setSelectedVibes] = useState([]);
     const { user } = useContext(AuthContext); // Access user from the AuthContext
 
+    // Function to fetch available vibes
     const fetchAvailableVibes = async () => {
         try {
-            console.log('Fetching available vibes');
             const response = await fetch('/api/vibes');
             if (!response.ok) {
                 throw new Error('Failed to fetch available vibes');
@@ -30,6 +30,7 @@ const CreateExperience = () => {
         fetchAvailableVibes();
     }, []);
 
+    // Function to handle vibe selection
     const handleVibeSelection = (e) => {
         const vibeId = e.target.value;
         if (e.target.checked) {
@@ -39,11 +40,10 @@ const CreateExperience = () => {
         }
     };
 
+    // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         const token = user.token;
-
-        console.log('Selected Vibes:', selectedVibes);
 
         try {
             const response = await fetch('/api/experiences', {
@@ -55,8 +55,6 @@ const CreateExperience = () => {
                 body: JSON.stringify({ name, location, pictureUrl, vibes: selectedVibes })
             });
 
-            console.log('Response:', pictureUrl);
-
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.error || 'Failed response from server.');
@@ -65,7 +63,7 @@ const CreateExperience = () => {
             const newExperience = await response.json();
             console.log('New Experience:', newExperience);
 
-            // Clear the form
+            // Clear the form fields after successful submission
             setName('');
             setLocation('');
             setPictureUrl('');
@@ -76,9 +74,6 @@ const CreateExperience = () => {
             console.error('Error creating experience:', error);
         }
     };
-
-
-
 
     return (
         <div className="create-experience-container">
@@ -92,6 +87,7 @@ const CreateExperience = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
+                        className="input-field"
                     />
                 </div>
                 <div className="form-group">
@@ -102,6 +98,7 @@ const CreateExperience = () => {
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                         required
+                        className="input-field"
                     />
                 </div>
                 <div className="form-group">
@@ -112,25 +109,28 @@ const CreateExperience = () => {
                         value={pictureUrl}
                         onChange={(e) => setPictureUrl(e.target.value)}
                         required
+                        className="input-field"
                     />
                 </div>
                 <h3>Choose Vibes</h3>
-                <div className="vibes-container">
+                <div className="experience-vibes-container">
                     {availableVibes.map(vibe => (
-                        <div key={vibe._id} className="vibe-item">
+                        <div key={vibe._id} className="experience-vibe-item">
                             <input
                                 type="checkbox"
-                                id={vibe.name}
-                                name={vibe.name}
+                                id={vibe._id}
+                                name={vibe._id}
                                 value={vibe._id}
                                 onChange={handleVibeSelection}
                                 checked={selectedVibes.includes(vibe._id)}
                             />
-                            <label htmlFor={vibe.name}>{vibe.name}</label>
+                            <label htmlFor={vibe._id}>{vibe.name}</label>
                         </div>
                     ))}
                 </div>
-                <button className="submit-button" type="submit">Create Experience</button>
+                <div className="submit-button-container">
+                    <button className="submit-button" type="submit">Create Experience</button>
+                </div>
             </form>
         </div>
     );
