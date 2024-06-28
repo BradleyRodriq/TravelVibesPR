@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Function to send an email
+// Function to send an email to users who signup
 const sendSignupEmail = async (user) => {
   const mailOptions = {
     from: 'TravelVibesPR <travelvibespr@gmail.com>',
@@ -28,4 +28,21 @@ const sendSignupEmail = async (user) => {
   }
 };
 
-module.exports = sendSignupEmail;
+// Function to send an email to users when an experience is added that matches their vibes
+const sendExperienceEmail = async (user) => {
+  const mailOptions = {
+    from: 'TravelVibesPR <travelvibespr@gmail.com>',
+    to: user.email,
+    subject: 'New Vibe Match!',
+    text: 'A new experience has been added that matches your vibes. Check it out on TravelVibesPR!'
+  };
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully');
+  } catch (error) {
+    console.error('Error sending email:', error);
+  }
+};
+
+
+module.exports = sendSignupEmail, sendExperienceEmail;
