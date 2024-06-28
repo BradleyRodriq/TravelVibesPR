@@ -55,6 +55,8 @@ const CreateExperience = () => {
                 body: JSON.stringify({ name, location, pictureUrl, vibes: selectedVibes })
             });
 
+            console.log('Response:', pictureUrl);
+
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.error || 'Failed response from server.');
@@ -74,6 +76,9 @@ const CreateExperience = () => {
             console.error('Error creating experience:', error);
         }
     };
+
+
+
 
     return (
         <div className="create-experience-container">

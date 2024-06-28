@@ -56,7 +56,7 @@ const createExperience = async (req, res) => {
     }
 
     try {
-        const experience = await Experience.create({ name, location, vibes });
+        const experience = await Experience.create({ name, location, vibes, pictureUrl });
         res.status(200).json(experience);
     } catch (error) {
         res.status(400).json({ error: error.message });
