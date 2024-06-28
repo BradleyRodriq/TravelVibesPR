@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/authContext'; // Update the path to your AuthContext
 import '../styles/userVibes.css';
+import { Link } from 'react-router-dom';
 
 const UserVibes = () => {
     const [userVibes, setUserVibes] = useState([]);
@@ -151,7 +152,7 @@ const UserVibes = () => {
             <h3>Current Vibes</h3>
             <ul className="vibes-list">
                 {userVibes.map(vibe => (
-                    <li key={vibe._id} className="vibe-item">
+                    <li key={vibe._id} className="user-vibe-item">
                         {vibe.name}
                         <button className="delete-button" onClick={() => handleDeleteVibe(vibe._id)}>Delete</button>
                     </li>
@@ -173,6 +174,9 @@ const UserVibes = () => {
                     ))}
                 </div>
             </form>
+          <div className="home-button-container">
+            <Link className="home-button" to='/'>Check out matching experiences!</Link>
+          </div>
         </div>
     );
 };

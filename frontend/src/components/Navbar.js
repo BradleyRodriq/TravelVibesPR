@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
 
@@ -7,9 +7,11 @@ const Navbar = () => {
     const { logout } = useLogout();
     const { user } = useAuthContext();
     const location = useLocation();
+    const navigate = useNavigate();
 
     const handleClick = () => {
         logout();
+        navigate('/login');
     };
 
     const showMapView = location.pathname === '/';
