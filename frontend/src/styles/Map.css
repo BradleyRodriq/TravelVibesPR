@@ -1,18 +1,59 @@
-/* Experience Map */
 .map-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px auto;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-  }
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+.marker-preview {
+  position: relative;
+  width: 20px; /* Adjust according to your marker size */
+  height: 20px; /* Adjust according to your marker size */
+}
+
+.marker-image {
+  display: none;
+  position: absolute;
+  top: -45px; /* Adjust positioning relative to the marker */
+  left: -5px; /* Adjust positioning relative to the marker */
+  width: 90px; /* Adjust image size */
+  height: auto;
+  border-radius: 50%;
+  border: 2px solid #fff; /* Adjust styling as needed */
+  z-index: -1; /* Start hidden behind the marker */
+}
+
+.marker-hover-content {
+  display: none;
+  position: absolute;
+  bottom: 15px; /* Adjust positioning relative to the marker */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.marker-preview:hover .marker-image {
+  display: block;
+}
+
+.marker-preview:hover .marker-hover-content {
+  display: block;
+}
+
+.marker-link {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.marker-link:hover {
+  background-color: #45a049;
+}
 
   .map {
     width: 100%;
-    height: 400px;
+    height: 600px;
     border-radius: 10px;
   }
 
@@ -29,3 +70,40 @@ h3 {
     margin: 20px auto;
   }
 
+/* InfoWindow Content Styles */
+.info-window {
+  display: grid;
+  justify-items: center;
+  font-family: Arial, sans-serif;
+  background-color: #ffe9fd;
+
+}
+
+.info-window h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.info-window p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+}
+
+.info-window img {
+  width: 100%;
+  max-width: 100px; /* Adjust image width */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.info-window button {
+  background-color: #6a237a;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 3px;
+}

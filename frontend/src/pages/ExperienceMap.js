@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 import "../styles/Map.css";
 
@@ -15,6 +15,8 @@ const center = {
 
 const ExperienceMap = () => {
   const [markers, setMarkers] = useState([]);
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [activeMarker, setActiveMarker] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +29,7 @@ const ExperienceMap = () => {
           position: { lat: exp.geolocation.coordinates[1], lng: exp.geolocation.coordinates[0] },
           photo: exp.pictureUrl,
           name: exp.name,
+          description: exp.description, // Assuming there is a description field
           id: exp._id,
         }));
 
@@ -39,8 +42,16 @@ const ExperienceMap = () => {
     fetchExperiences();
   }, []);
 
-  const handleMarkerClick = (id) => {
-    navigate(`/experience/${id}`);
+  const handleMarkerClick = (marker) => {
+    setSelectedMarker(marker);
+  };
+
+  const handleMouseOver = (index) => {
+    setActiveMarker(index);
+  };
+
+  const handleMouseOut = () => {
+    setActiveMarker(null);
   };
 
   return (
@@ -51,14 +62,42 @@ const ExperienceMap = () => {
             key={index}
             position={marker.position}
             title={marker.name}
-            onClick={() => handleMarkerClick(marker.id)}
+            onClick={() => handleMarkerClick(marker)}
+            onMouseOver={() => handleMouseOver(index)}
+            onMouseOut={handleMouseOut}
             /*
             icon={{
               url: marker.photo,
-              scaledSize: new window.google.maps.Size(40, 40),
-            }} */ // this would display the custom image
+              scaledSize: new window.google.maps.Size(
+                activeMarker === index ? 50 : 40,
+                activeMarker === index ? 50 : 40
+              ),
+            }}
+            */
           />
         ))}
+
+        {selectedMarker && (
+          <InfoWindow className="info-window-container"
+            position={selectedMarker.position}
+            onCloseClick={() => setSelectedMarker(null)}
+          >
+            <div className="info-window">
+              <h2>{selectedMarker.name}</h2>
+              <p>{selectedMarker.description}</p>
+              <img
+                src={selectedMarker.photo}
+                alt={selectedMarker.name}
+                style={{ width: "100px" }}
+              />
+              <button
+                onClick={() => navigate(`/experience/${selectedMarker.id}`)}
+              >
+                View Details
+              </button>
+            </div>
+          </InfoWindow>
+        )}
       </GoogleMap>
     </div>
   );
