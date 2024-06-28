@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker } from "@react-google-maps/api";
+import { useNavigate } from "react-router-dom";
 import "../styles/Map.css";
 
 const mapContainerStyle = {
@@ -14,20 +15,33 @@ const center = {
 
 const ExperienceMap = () => {
   const [markers, setMarkers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const addAdvancedMarker = async (photo, name, lat, lng) => {
-      const marker = {
-        position: { lat, lng },
-        photo: photo,
-        name: name,
-      };
+    const fetchExperiences = async () => {
+      try {
+        const response = await fetch("/api/experiences"); // Adjust the endpoint as needed
+        const data = await response.json();
 
-      setMarkers((prevMarkers) => [...prevMarkers, marker]);
+        const experiences = data.map((exp) => ({
+          position: { lat: exp.geolocation.coordinates[1], lng: exp.geolocation.coordinates[0] },
+          photo: exp.pictureUrl,
+          name: exp.name,
+          id: exp._id,
+        }));
+
+        setMarkers(experiences);
+      } catch (error) {
+        console.error("Error fetching experiences:", error);
+      }
     };
 
-    addAdvancedMarker("https://example.com/photo.jpg", "Example Place", 18.2362, -66.4534);
+    fetchExperiences();
   }, []);
+
+  const handleMarkerClick = (id) => {
+    navigate(`/experience/${id}`);
+  };
 
   return (
     <div className="map-container">
@@ -37,6 +51,12 @@ const ExperienceMap = () => {
             key={index}
             position={marker.position}
             title={marker.name}
+            onClick={() => handleMarkerClick(marker.id)}
+            /*
+            icon={{
+              url: marker.photo,
+              scaledSize: new window.google.maps.Size(40, 40),
+            }} */ // this would display the custom image
           />
         ))}
       </GoogleMap>

@@ -2,6 +2,7 @@
     "dependencies": {
         "date-fns": "^3.6.0",
         "jsonwebtoken": "^9.0.2",
-        "node": "^20.14.0"
+        "node": "^20.14.0",
+        "react-router-dom": "^6.24.0"
     }
 }
