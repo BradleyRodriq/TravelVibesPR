@@ -16,9 +16,8 @@ body {
 }
 
 .user-vibes-container {
-
   position: relative;
-  max-width: 600px;
+  justify-content: center;
   margin: 50px auto;
   background: #ffe9fd;
   padding: 30px;
@@ -33,6 +32,9 @@ body {
 }
 
 .vibes-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
   list-style: none;
   padding: 10px;
 }
@@ -97,13 +99,19 @@ button.delete-button {
   flex-direction: column;
 }
 
-.vibes-container {
-  display: flex;
+div.vibes-container {
+  justify-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
 }
 
+div.vibe-item {
+  justify-content: center;
+  max-width: fit-content;
+}
 .vibe-item input {
   margin-right: 10px;
 }
