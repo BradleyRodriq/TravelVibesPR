@@ -13,7 +13,8 @@ const Home = () => {
     const [experiencesPerPage] = useState(12); // Number of experiences per page
     const { user, loading } = useContext(AuthContext);
 
-    const fetchExperiences = async () => {
+
+const fetchExperiences = async () => {
         try {
             let url = '/api/experiences';
             let userVibes = [];
@@ -50,7 +51,6 @@ const Home = () => {
             setExperiences([]);
         }
     };
-
 
     const handleDelete = async () => {
         setReload(prevState => !prevState);

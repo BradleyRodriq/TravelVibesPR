@@ -19,28 +19,34 @@ const ExperienceMap = () => {
   const [activeMarker, setActiveMarker] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchExperiences = async () => {
-      try {
-        const response = await fetch("/api/experiences"); // Adjust the endpoint as needed
-        const data = await response.json();
+const fetchExperiences = async () => {
+  try {
+    const userVibes = JSON.parse(localStorage.getItem('userVibes')) || [];
 
-        const experiences = data.map((exp) => ({
-          position: { lat: exp.geolocation.coordinates[1], lng: exp.geolocation.coordinates[0] },
-          photo: exp.pictureUrl,
-          name: exp.name,
-          description: exp.description, // Assuming there is a description field
-          id: exp._id,
-        }));
+    const response = await fetch("/api/experiences"); // Adjust the endpoint as needed
+    const data = await response.json();
 
-        setMarkers(experiences);
-      } catch (error) {
-        console.error("Error fetching experiences:", error);
-      }
-    };
+    const experiences = data.filter(exp => {
+      // Assuming each experience has a `vibes` array
+      return exp.vibes.some(vibe => userVibes.includes(vibe));
+    }).map((exp) => ({
+      position: { lat: exp.geolocation.coordinates[1], lng: exp.geolocation.coordinates[0] },
+      photo: exp.pictureUrl,
+      name: exp.name,
+      description: exp.description, // Assuming there is a description field
+      id: exp._id,
+    }));
 
-    fetchExperiences();
-  }, []);
+    setMarkers(experiences);
+  } catch (error) {
+    console.error("Error fetching experiences:", error);
+  }
+};
+
+useEffect(() => {
+  fetchExperiences();
+}, []);
+
 
   const handleMarkerClick = (marker) => {
     setSelectedMarker(marker);
