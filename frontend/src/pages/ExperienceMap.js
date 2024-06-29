@@ -19,29 +19,42 @@ const ExperienceMap = () => {
   const [activeMarker, setActiveMarker] = useState(null);
   const navigate = useNavigate();
 
-const fetchExperiences = async () => {
-  try {
-    const userVibes = JSON.parse(localStorage.getItem('userVibes')) || [];
+  const fetchExperiences = async () => {
+    try {
+      const userVibes = JSON.parse(localStorage.getItem('userVibes')) || [];
 
-    const response = await fetch("/api/experiences"); // Adjust the endpoint as needed
-    const data = await response.json();
+      const response = await fetch("/api/experiences"); // Adjust the endpoint as needed
+      const data = await response.json();
 
-    const experiences = data.filter(exp => {
-      // Assuming each experience has a `vibes` array
-      return exp.vibes.some(vibe => userVibes.includes(vibe));
-    }).map((exp) => ({
-      position: { lat: exp.geolocation.coordinates[1], lng: exp.geolocation.coordinates[0] },
-      photo: exp.pictureUrl,
-      name: exp.name,
-      description: exp.description, // Assuming there is a description field
-      id: exp._id,
-    }));
+      let experiences;
+      if (userVibes.length === 0) {
+        // Load all experiences if userVibes is empty
+        experiences = data.map((exp) => ({
+          position: { lat: exp.geolocation.coordinates[1], lng: exp.geolocation.coordinates[0] },
+          photo: exp.pictureUrl,
+          name: exp.name,
+          description: exp.description, // Assuming there is a description field
+          id: exp._id,
+        }));
+      } else {
+        // Filter experiences based on userVibes
+        experiences = data.filter(exp => {
+          // Assuming each experience has a `vibes` array
+          return exp.vibes.some(vibe => userVibes.includes(vibe));
+        }).map((exp) => ({
+          position: { lat: exp.geolocation.coordinates[1], lng: exp.geolocation.coordinates[0] },
+          photo: exp.pictureUrl,
+          name: exp.name,
+          description: exp.description, // Assuming there is a description field
+          id: exp._id,
+        }));
+      }
 
-    setMarkers(experiences);
-  } catch (error) {
-    console.error("Error fetching experiences:", error);
-  }
-};
+      setMarkers(experiences);
+    } catch (error) {
+      console.error("Error fetching experiences:", error);
+    }
+  };
 
 useEffect(() => {
   fetchExperiences();
