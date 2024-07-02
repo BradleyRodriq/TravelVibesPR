@@ -52,13 +52,6 @@ const UserVibes = () => {
         }
     };
 
-    // Fetch user vibes when the user changes
-    useEffect(() => {
-        if (user) {
-            fetchUserVibes();
-        }
-    }, [user]);
-
     // Fetch all available vibes when the component mounts
     useEffect(() => {
         fetchAvailableVibes();

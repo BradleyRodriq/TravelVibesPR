@@ -28,7 +28,6 @@ const ExperienceMap = () => {
 
       let experiences;
       if (userVibes.length === 0) {
-        // Load all experiences if userVibes is empty
         experiences = data.map((exp) => ({
           position: { lat: exp.geolocation.coordinates[1], lng: exp.geolocation.coordinates[0] },
           photo: exp.pictureUrl,
@@ -84,20 +83,16 @@ useEffect(() => {
             onClick={() => handleMarkerClick(marker)}
             onMouseOver={() => handleMouseOver(index)}
             onMouseOut={handleMouseOut}
-            /*
             icon={{
-              url: marker.photo,
               scaledSize: new window.google.maps.Size(
                 activeMarker === index ? 50 : 40,
                 activeMarker === index ? 50 : 40
               ),
             }}
-            */
           />
         ))}
-
         {selectedMarker && (
-          <InfoWindow className="info-window-container"
+          <InfoWindow className="info-window"
             position={selectedMarker.position}
             onCloseClick={() => setSelectedMarker(null)}
           >
@@ -107,7 +102,7 @@ useEffect(() => {
               <img
                 src={selectedMarker.photo}
                 alt={selectedMarker.name}
-                style={{ width: "100px" }}
+                style={{ width: "75px" }}
               />
               <button
                 onClick={() => navigate(`/experience/${selectedMarker.id}`)}

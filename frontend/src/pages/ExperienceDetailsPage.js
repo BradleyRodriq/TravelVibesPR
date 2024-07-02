@@ -37,6 +37,7 @@ const Modal = ({ show, onClose, reviews }) => {
                     <ul>
                         {reviews.map((review, index) => (
                             <li key={index}>
+
                                 <p><strong>{review.reviewer}</strong>: {review.text} (Rating: {review.rating})</p>
                             </li>
                         ))}
