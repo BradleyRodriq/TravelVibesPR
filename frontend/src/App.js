@@ -22,11 +22,11 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div>
       <LoadScript googleMapsApiKey="AIzaSyDP8zkTwAzKinxwNbrxis42EyX5dCkece4">
         <BrowserRouter>
           <Navbar />
-          <div className="pages">
+          <div>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />

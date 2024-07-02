@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import '../styles/ExperienceDetailsPage.css'; // Import the CSS file
 
 const getVibeNames = async (vibeIds) => {
     try {
@@ -115,21 +114,21 @@ const ExperienceDetailsPage = () => {
     }
 
     return (
-        <div className="experience-detail">
+        <div>
             <h1>{experience.name}</h1>
-            <div className="experience-info">
-                <img src={experience.pictureUrl} alt={experience.name} className="experience-image" />
+            <div>
+                <img src={experience.pictureUrl} alt={experience.name}/>
                 <div>
                     <p><strong>Location:</strong> {experience.location}</p>
                     <p><strong>Rating:</strong> {renderStars(experience.rating)}</p>
                     <p><strong>Vibes:</strong></p>
-                    <div className="vibes-container">
+                    <div>
                         {vibeNames.map((vibe, index) => (
                             <span key={index} className="vibe">{vibe}</span>
                         ))}
                     </div>
                     <p><strong>Created:</strong> {formatDistanceToNow(new Date(experience.createdAt))} ago</p>
-                    <button className="reviews-button" onClick={() => setShowModal(true)}>View Reviews</button>
+                    <button onClick={() => setShowModal(true)}>View Reviews</button>
                 </div>
             </div>
             <Modal show={showModal} onClose={() => setShowModal(false)} reviews={experience.reviews} />

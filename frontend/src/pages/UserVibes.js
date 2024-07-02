@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/authContext'; // Update the path to your AuthContext
-import '../styles/userVibes.css';
 import { Link } from 'react-router-dom';
 
 const UserVibes = () => {
@@ -141,9 +140,9 @@ const UserVibes = () => {
     };
 
     return (
-        <div className="user-vibes-container">
+        <div>
             <h3>Current Vibes</h3>
-            <ul className="vibes-list">
+            <ul>
                 {userVibes.map(vibe => (
                     <li key={vibe._id} className="user-vibe-item">
                         {vibe.name}
@@ -152,11 +151,11 @@ const UserVibes = () => {
                 ))}
             </ul>
 
-            <form className="vibes-form" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <h3>Choose Vibes</h3>
-                <div className="vibes-container">
+                <div>
                     {availableVibes.map(vibe => (
-                        <div key={vibe._id} className="vibe-item">
+                        <div key={vibe._id}>
                             <button
                                 className={`vibe-button ${selectedVibesToAdd.includes(vibe._id) ? 'selected' : ''}`}
                                 onClick={() => handleVibeSelection(vibe._id)}
@@ -167,8 +166,8 @@ const UserVibes = () => {
                     ))}
                 </div>
             </form>
-          <div className="home-button-container">
-            <Link className="home-button" to='/'>Check out matching experiences!</Link>
+          <div>
+            <Link to='/'>Check out matching experiences!</Link>
           </div>
         </div>
     );

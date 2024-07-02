@@ -13,8 +13,7 @@ const Home = () => {
     const [experiencesPerPage] = useState(12); // Number of experiences per page
     const { user, loading } = useContext(AuthContext);
 
-
-const fetchExperiences = async () => {
+    const fetchExperiences = async () => {
         try {
             let url = '/api/experiences';
             let userVibes = [];
@@ -81,7 +80,7 @@ const fetchExperiences = async () => {
     }
 
     return (
-        <div>
+        <div className="home-container">
             <div className="pagination">
                 {Array.from({ length: Math.ceil(experiences.length / experiencesPerPage) }, (_, index) => (
                     <button
@@ -93,13 +92,14 @@ const fetchExperiences = async () => {
                     </button>
                 ))}
             </div>
-            <div className="experiences">
+            <div className="experiences-grid">
                 {currentExperiences && currentExperiences.map((experience) => (
                     <ExperienceDetails
                         experience={experience}
                         vibes={experience.vibes}
                         key={experience._id}
                         onDelete={handleDelete}
+                        className="experience-details"
                     />
                 ))}
             </div>
@@ -114,7 +114,6 @@ const fetchExperiences = async () => {
                     </button>
                 ))}
             </div>
-
         </div>
     );
 };

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
-import "../styles/Map.css";
 
 const mapContainerStyle = {
   width: "100%",
@@ -73,7 +72,7 @@ useEffect(() => {
   };
 
   return (
-    <div className="map-container">
+    <div>
       <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={10} className="map">
         {markers.map((marker, index) => (
           <Marker
@@ -92,17 +91,16 @@ useEffect(() => {
           />
         ))}
         {selectedMarker && (
-          <InfoWindow className="info-window"
+          <InfoWindow
             position={selectedMarker.position}
             onCloseClick={() => setSelectedMarker(null)}
           >
-            <div className="info-window">
+            <div>
               <h2>{selectedMarker.name}</h2>
               <p>{selectedMarker.description}</p>
               <img
                 src={selectedMarker.photo}
                 alt={selectedMarker.name}
-                style={{ width: "75px" }}
               />
               <button
                 onClick={() => navigate(`/experience/${selectedMarker.id}`)}

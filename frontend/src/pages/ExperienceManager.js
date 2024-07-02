@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/authContext';
-import '../styles/experienceManager.css';
 
 const CreateExperience = () => {
     const [name, setName] = useState('');
@@ -76,10 +75,10 @@ const CreateExperience = () => {
     };
 
     return (
-        <div className="create-experience-container">
+        <div>
             <h3>Create Experience</h3>
-            <form className="create-experience-form" onSubmit={handleSubmit}>
-                <div className="form-group">
+            <form onSubmit={handleSubmit}>
+                <div>
                     <label htmlFor="name">Name:</label>
                     <input
                         type="text"
@@ -90,7 +89,7 @@ const CreateExperience = () => {
                         className="input-field"
                     />
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="location">Location:</label>
                     <input
                         type="text"
@@ -101,7 +100,7 @@ const CreateExperience = () => {
                         className="input-field"
                     />
                 </div>
-                <div className="form-group">
+                <div>
                     <label htmlFor="pictureUrl">Picture URL:</label>
                     <input
                         type="text"
@@ -113,9 +112,9 @@ const CreateExperience = () => {
                     />
                 </div>
                 <h3>Choose Vibes</h3>
-                <div className="experience-vibes-container">
+                <div>
                     {availableVibes.map(vibe => (
-                        <div key={vibe._id} className="experience-vibe-item">
+                        <div key={vibe._id}>
                             <input
                                 type="checkbox"
                                 id={vibe._id}
@@ -128,8 +127,8 @@ const CreateExperience = () => {
                         </div>
                     ))}
                 </div>
-                <div className="submit-button-container">
-                    <button className="submit-button" type="submit">Create Experience</button>
+                <div>
+                    <button type="submit">Create Experience</button>
                 </div>
             </form>
         </div>
