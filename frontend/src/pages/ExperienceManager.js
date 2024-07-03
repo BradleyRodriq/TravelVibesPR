@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/authContext';
+import '../styles/ExperienceManager.css';
 
 const CreateExperience = () => {
     const [name, setName] = useState('');
@@ -75,7 +76,7 @@ const CreateExperience = () => {
     };
 
     return (
-        <div>
+        <div className="create-experience-container">
             <h3>Create Experience</h3>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -112,7 +113,7 @@ const CreateExperience = () => {
                     />
                 </div>
                 <h3>Choose Vibes</h3>
-                <div>
+                <div className="vibes-container">
                     {availableVibes.map(vibe => (
                         <div key={vibe._id}>
                             <input
@@ -128,7 +129,7 @@ const CreateExperience = () => {
                     ))}
                 </div>
                 <div>
-                    <button type="submit">Create Experience</button>
+                    <button type="submit" className="submit-button">Create Experience</button> {/* Apply submit button class */}
                 </div>
             </form>
         </div>

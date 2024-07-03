@@ -1,0 +1,50 @@
+/* Reset default margins and paddings */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light background color */
+}
+
+/* Container for the thank you message */
+.signup-thanks-container {
+    max-width: 600px; /* Limit width for content */
+    margin: 50px auto; /* Center align horizontally */
+    padding: 20px;
+    background-color: #fff; /* White background */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    text-align: center; /* Center align text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+/* Title styling */
+.signup-thanks-container h2 {
+    margin-top: 0; /* Remove default margin */
+    font-size: 2rem; /* Larger font size */
+    color: #333; /* Dark text color */
+}
+
+/* Paragraph styling */
+.signup-thanks-container p {
+    font-size: 1.2rem; /* Font size */
+    color: #555; /* Darker text color */
+    margin-bottom: 20px; /* Space below paragraph */
+}
+
+/* Link styling */
+.signup-thanks-container a {
+    display: block; /* Block level display */
+    margin: 10px auto; /* Center align horizontally */
+    padding: 10px 20px; /* Padding for links */
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    text-decoration: none; /* Remove underline */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+/* Link hover effect */
+.signup-thanks-container a:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/authContext'; // Update the path to your AuthContext
 import { Link } from 'react-router-dom';
+import '../styles/UserVibes.css';
 
 const UserVibes = () => {
     const [userVibes, setUserVibes] = useState([]);
@@ -140,7 +141,7 @@ const UserVibes = () => {
     };
 
     return (
-        <div>
+        <div className="user-vibes-container">
             <h3>Current Vibes</h3>
             <ul>
                 {userVibes.map(vibe => (
@@ -153,24 +154,25 @@ const UserVibes = () => {
 
             <form onSubmit={handleSubmit}>
                 <h3>Choose Vibes</h3>
-                <div>
+                <div className="available-vibes-container">
                     {availableVibes.map(vibe => (
-                        <div key={vibe._id}>
-                            <button
-                                className={`vibe-button ${selectedVibesToAdd.includes(vibe._id) ? 'selected' : ''}`}
-                                onClick={() => handleVibeSelection(vibe._id)}
-                            >
-                                {vibe.name}
-                            </button>
-                        </div>
+                        <button
+                            key={vibe._id}
+                            className={`vibe-button ${selectedVibesToAdd.includes(vibe._id) ? 'selected' : ''}`}
+                            onClick={() => handleVibeSelection(vibe._id)}
+                        >
+                            {vibe.name}
+                        </button>
                     ))}
                 </div>
             </form>
-          <div>
-            <Link to='/'>Check out matching experiences!</Link>
-          </div>
+
+            <div>
+                <Link to="/">Check out matching experiences!</Link>
+            </div>
         </div>
     );
 };
+
 
 export default UserVibes;

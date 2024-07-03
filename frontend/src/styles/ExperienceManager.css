@@ -1,0 +1,86 @@
+/* Reset default margins and paddings */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Main container for create experience form */
+.create-experience-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Input field styling */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Vibes container */
+.vibes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 12px;
+}
+
+/* Checkbox and label styling */
+.vibes-container div {
+    margin-bottom: 8px;
+}
+
+/* Submit button styling */
+.submit-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Heading styling */
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+/* Label styling */
+label {
+    font-weight: bold;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    margin-top: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .create-experience-container {
+        padding: 10px;
+    }
+    .input-field {
+        font-size: 12px;
+    }
+}
