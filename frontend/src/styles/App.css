@@ -1,0 +1,98 @@
+/* Reset default margins and paddings */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Main container for the entire application */
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure full height of viewport */
+}
+
+/* Styling for the header/navigation */
+.Navbar {
+    background-color: #333; /* Dark background color */
+    color: #fff; /* White text color */
+    padding: 1rem; /* Padding around the navbar */
+    display: flex;
+    justify-content: space-between; /* Space evenly between items */
+    align-items: center; /* Center items vertically */
+}
+
+/* Links in the navigation */
+.Navbar a {
+    color: #fff; /* White text color */
+    text-decoration: none; /* Remove underline */
+    margin-left: 1rem; /* Space between links */
+    font-weight: bold; /* Bold text */
+}
+
+/* Container for the main content area */
+.MainContent {
+    padding: 2rem; /* Padding around the content */
+    flex: 1; /* Grow to fill remaining space */
+}
+
+/* Styles for specific routes/pages */
+/* Home page */
+.Home {
+    font-size: 1.5rem; /* Larger font size */
+}
+
+/* Login and Signup pages */
+.Login, .Signup {
+    max-width: 400px; /* Limit width */
+    margin: 0 auto; /* Center horizontally */
+    padding: 1rem; /* Padding around form */
+    background-color: #f4f4f4; /* Light background color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+/* User Vibes and Create Experience pages */
+.UserVibes, .CreateExperience {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+}
+
+/* Experience details page */
+.ExperienceDetailsPage {
+    padding: 2rem; /* Padding around details */
+    background-color: #f9f9f9; /* Lighter background color */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Signup Thanks page */
+.SignupThanks {
+    text-align: center; /* Center text */
+    font-size: 1.2rem; /* Slightly larger font */
+    padding: 2rem; /* Padding around */
+}
+
+/* Map page */
+.MapPage {
+    height: 400px; /* Fixed height */
+    margin-top: 1rem; /* Space from top */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .App {
+        padding: 0.5rem; /* Smaller padding on smaller screens */
+    }
+    .Navbar {
+        flex-direction: column; /* Stack navigation vertically */
+    }
+    .Navbar a {
+        margin: 0.5rem 0; /* Space between links */
+    }
+    .MainContent {
+        padding: 1rem; /* Smaller padding around content */
+    }
+}

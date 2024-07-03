@@ -1,0 +1,67 @@
+/* Reset default margins and paddings */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Main container for the experience list */
+.experience-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+/* Pagination container */
+.pagination {
+    margin-bottom: 1rem; /* Space between pagination and experience details */
+}
+
+/* Pagination button */
+.pagination__button {
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    border: none; /* No border */
+    padding: 0.5rem 1rem; /* Padding inside the button */
+    margin-right: 0.5rem; /* Space between buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Active pagination button */
+.pagination__button.active {
+    background-color: #0056b3; /* Darker blue background color */
+}
+
+/* Experience details container */
+.experience-details-list {
+    width: 80%; /* Adjust width as needed */
+    margin-top: 1rem; /* Space above experience details */
+}
+
+/* Individual experience details */
+.experience-details {
+    border: 1px solid #ccc; /* Light border */
+    padding: 1rem; /* Padding inside each experience */
+    margin-bottom: 1rem; /* Space between experiences */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .experience-list {
+        margin-top: 1rem; /* Adjust margin on smaller screens */
+    }
+    .experience-details-list {
+        width: 100%; /* Full width on smaller screens */
+    }
+    .pagination {
+        flex-direction: column; /* Stack pagination buttons vertically */
+        align-items: center; /* Center pagination buttons */
+    }
+    .pagination__button {
+        margin-bottom: 0.5rem; /* Space between vertically stacked buttons */
+    }
+}

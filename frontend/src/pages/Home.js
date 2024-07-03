@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ExperienceDetails from '../components/experienceDetails';
 import { AuthContext } from '../context/authContext';
+import "../styles/Home.css";
 
 const matchVibes = (userVibes, experienceVibes) => {
     return experienceVibes.some(experienceVibe => userVibes.includes(experienceVibe));
@@ -80,19 +81,21 @@ const Home = () => {
     }
 
     return (
-        <div className="home-container">
+        <div className="experience-list">
+            {/* Pagination buttons */}
             <div className="pagination">
                 {Array.from({ length: Math.ceil(experiences.length / experiencesPerPage) }, (_, index) => (
                     <button
                         key={index + 1}
                         onClick={() => paginate(index + 1)}
-                        className={currentPage === index + 1 ? "active" : ""}
+                        className={currentPage === index + 1 ? "pagination__button active" : "pagination__button"}
                     >
                         {index + 1}
                     </button>
                 ))}
             </div>
-            <div className="experiences-grid">
+            {/* List of experience details */}
+            <div className="experience-details-list">
                 {currentExperiences && currentExperiences.map((experience) => (
                     <ExperienceDetails
                         experience={experience}
@@ -103,12 +106,13 @@ const Home = () => {
                     />
                 ))}
             </div>
+            {/* Pagination buttons (repeated for bottom navigation) */}
             <div className="pagination">
                 {Array.from({ length: Math.ceil(experiences.length / experiencesPerPage) }, (_, index) => (
                     <button
                         key={index + 1}
                         onClick={() => paginate(index + 1)}
-                        className={currentPage === index + 1 ? "active" : ""}
+                        className={currentPage === index + 1 ? "pagination__button active" : "pagination__button"}
                     >
                         {index + 1}
                     </button>
@@ -117,5 +121,4 @@ const Home = () => {
         </div>
     );
 };
-
 export default Home;

@@ -144,9 +144,9 @@ const UserVibes = () => {
             <h3>Current Vibes</h3>
             <ul>
                 {userVibes.map(vibe => (
-                    <li key={vibe._id} className="user-vibe-item">
+                    <li key={vibe._id}>
                         {vibe.name}
-                        <button className="delete-button" onClick={() => handleDeleteVibe(vibe._id)}>Delete</button>
+                        <button onClick={() => handleDeleteVibe(vibe._id)}>Delete</button>
                     </li>
                 ))}
             </ul>

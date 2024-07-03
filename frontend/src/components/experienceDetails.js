@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useExperienceContext } from "../hooks/useExperienceContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import '../styles/ExperienceDetails.css';
 
 // function to change a vibe from an object to its name value from the vibes collection
 const getVibeNames = async (vibeIds) => {
@@ -75,15 +76,15 @@ const ExperienceDetails = ({ experience, vibes, onDelete }) => {
     const municipality = municipalities.find(municipality => experience.location.includes(municipality));
 
     return (
-        <Link to={`/experience/${experience._id}`}>
-            <div>
+        <Link to={`/experience/${experience._id}`} className="experience-link">
+            <div className="experience-item">
                 <h4>{experience.name}</h4>
-                <img src={experience.pictureUrl} alt={experience.name}/>
-                <div>
+                <img src={experience.pictureUrl} alt={experience.name} className="experience-image" />
+                <div className="experience-details">
                     <div><strong>Location: </strong>{municipality || experience.location}</div>
                     <div>
                         <strong>Vibes: </strong>
-                        <div>{vibeNames.join(' | ')}</div>
+                        <div className="vibes">{vibeNames.join(' | ')}</div>
                     </div>
                 </div>
             </div>

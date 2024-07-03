@@ -1,0 +1,84 @@
+/* Navbar container */
+.navbar {
+    background-color: #ffffff;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for logo and navigation */
+.navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo link */
+.navbar__logo {
+    text-decoration: none;
+    color: #333333;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Navigation links */
+.navbar__nav {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for user section when logged in */
+.navbar__user {
+    display: flex;
+    align-items: center;
+}
+
+.navbar__user-email {
+    margin-right: 1rem;
+    font-weight: bold;
+}
+
+.navbar__logout-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.navbar__logout-btn:hover {
+    background-color: #df3a2d;
+}
+
+/* Styling for guest section when not logged in */
+.navbar__guest {
+    display: flex;
+}
+
+.navbar__link {
+    text-decoration: none;
+    color: #333333;
+    margin-right: 1rem;
+    font-weight: bold;
+}
+
+.navbar__link:hover {
+    text-decoration: underline;
+}
+
+/* Styling for map view section */
+.navbar__map-view {
+    margin-top: 1rem;
+}
+
+.navbar__map-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.navbar__map-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
