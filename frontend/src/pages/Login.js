@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { useNavigate } from "react-router-dom";
+import "../styles/Login.css";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -18,7 +19,7 @@ const Login = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="form-container" onSubmit={handleSubmit}>
             <h3>Log In</h3>
 
             <label>Email:</label>
@@ -35,7 +36,7 @@ const Login = () => {
             />
             <div>
                 <button disabled={isLoading}>Log In</button>
-                {error && <div>{error}</div>}
+                {error && <div className="error-message">{error}</div>}
             </div>
         </form>
     );

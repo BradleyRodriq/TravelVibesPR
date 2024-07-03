@@ -18,7 +18,7 @@ const Signup = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="form-container" onSubmit={handleSubmit}>
             <h3>Sign up</h3>
 
             <label>Email:</label>
