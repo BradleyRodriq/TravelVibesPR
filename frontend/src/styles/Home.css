@@ -15,38 +15,40 @@ body, html {
 
 /* Pagination container */
 .pagination {
-    margin-bottom: 1rem; /* Space between pagination and experience details */
+    margin-bottom: 10px; /* Space between pagination and experience details */
 }
 
 /* Pagination button */
 .pagination__button {
-    background-color: #007bff; /* Blue background color */
+    background-color: #696969; /* Blue background color */
     color: #fff; /* White text color */
     border: none; /* No border */
     padding: 0.5rem 1rem; /* Padding inside the button */
     margin-right: 0.5rem; /* Space between buttons */
     cursor: pointer; /* Pointer cursor on hover */
     border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease-in-out; /* Smooth background color transition */
+}
+
+.pagination__button:hover {
+    background-color: var(--navbar-bg); /* Darker blue background color on hover */
 }
 
 /* Active pagination button */
 .pagination__button.active {
-    background-color: #0056b3; /* Darker blue background color */
+    background-color: var(--primary-color-hov); /* Darker blue background color */
 }
 
 /* Experience details container */
 .experience-details-list {
     width: 80%; /* Adjust width as needed */
-    margin-top: 1rem; /* Space above experience details */
 }
 
 /* Individual experience details */
 .experience-details {
-    border: 1px solid #ccc; /* Light border */
-    padding: 1rem; /* Padding inside each experience */
+    padding: 4px; /* Padding inside each experience */
     margin-bottom: 1rem; /* Space between experiences */
     border-radius: 4px; /* Rounded corners */
-    background-color: #f9f9f9; /* Light background color */
 }
 
 /* Responsive Design */

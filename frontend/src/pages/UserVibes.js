@@ -168,7 +168,7 @@ const UserVibes = () => {
             </form>
 
             <div>
-                <Link to="/">Check out matching experiences!</Link>
+                <Link to="/">Click here to check out your matching experiences!</Link>
             </div>
         </div>
     );

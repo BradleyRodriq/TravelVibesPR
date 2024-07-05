@@ -8,25 +8,27 @@ body, html {
 
 /* Main container for the UserVibes component */
 .user-vibes-container {
+    border: 2px solid var(--navbar-bg);
     max-width: 800px; /* Increased width for content */
     margin: 50px auto; /* Center align horizontally */
     padding: 20px;
-    background-color: #fff; /* White background */
-    border: 1px solid #ccc; /* Light border */
     border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
-    overflow: hidden; /* Hide overflow */
-    transition: box-shadow 0.3s ease; /* Smooth box-shadow transition */
     text-align: center; /* Center align text */
+    backdrop-filter: blur(2px); /* Apply blur effect */
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.user-vibes-container:hover {
+    box-shadow: 0 0 20px var(--primary-color); /* Larger shadow on hover */
 }
 
 /* Title styling */
 .user-vibes-container h3 {
     margin-top: 0; /* Remove default margin */
-    font-size: 2rem; /* Larger font size */
-    color: #333; /* Dark text color */
+    font-size: 1.5rem; /* Larger font size */
+    color: var(--primary-color); /* Dark text color */
     padding-bottom: 10px; /* Padding below title */
-    border-bottom: 1px solid #ccc; /* Bottom border */
+    border-bottom: 2px solid var(--navbar-bg); /* Bottom border */
 }
 
 /* List of current user vibes */
@@ -35,35 +37,39 @@ body, html {
     padding: 0; /* Remove default padding */
     margin-top: 20px; /* Space above the list */
     text-align: left; /* Left align text */
+    display: grid; /* Use CSS grid */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 4px; /* Auto-fill columns */
+
 }
 
 /* Styling for each user vibe item */
 .user-vibes-container li {
+    color: white; /* White text color */
     display: flex; /* Use flexbox */
     align-items: center; /* Align items vertically */
     justify-content: space-between; /* Space evenly */
     padding: 10px; /* Padding around each item */
     margin-bottom: 10px; /* Space below each item */
-    background-color: #f9f9f9; /* Light background color */
+    background-color: var(--navbar-bg); /* Light background color */
     border: 1px solid #ccc; /* Light border */
     border-radius: 4px; /* Rounded corners */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
 }
 
 /* Button within each user vibe item */
 .user-vibes-container li button {
     padding: 5px 10px; /* Padding inside button */
-    background-color: #dc3545; /* Red background color */
+    background-color: var(--inactive-delete); /* Red background color */
     color: #fff; /* White text color */
     border: none; /* Remove border */
     border-radius: 4px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor */
-    transition: background-color 0.3s ease; /* Smooth color transition */
+    transition: background-color 0.3s ease, transform 0.3s ease-in-out; /* Smooth color transition */
 }
 
 /* Button hover effect */
 .user-vibes-container li button:hover {
-    background-color: #c82333; /* Darker red on hover */
+    background-color: var(--active-delete); /* Darker red on hover */
 }
 
 /* Form container for choosing vibes */
@@ -78,40 +84,45 @@ body, html {
     gap: 10px; /* Gap between grid items */
     margin-top: 10px; /* Space above available vibes */
     justify-items: center; /* Center align grid items horizontally */
+    padding-bottom: 10px; /* Space below available vibes */
+    border-bottom: 2px solid var(--navbar-bg); /* Bottom border */
 }
 
 /* Button for each available vibe */
 .user-vibes-container .vibe-button {
     padding: 10px 20px; /* Padding inside button */
-    background-color: #007bff; /* Blue background color */
-    color: #fff; /* White text color */
-    border: none; /* Remove border */
+    background-color: var(--primary-color-hov); /* Blue background color */
+    border: 1px solid var(--navbar-bg); /* Remove border */
     border-radius: 4px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor */
-    transition: background-color 0.3s ease; /* Smooth color transition */
-}
-
-/* Selected vibe button */
-.user-vibes-container .vibe-button.selected {
-    background-color: #0056b3; /* Darker blue color */
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */
 }
 
 /* Button hover effect */
-.user-vibes-container .vibe-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+.user-vibes-container:hover .vibe-button:hover {
+    box-shadow: 0px 0px 8px var(--primary-color); /* Larger shadow on hover */
+
 }
 
+.user-vibes-container div {
+    margin-top: 20px; /* Space above the div */;
+}
 /* Link styling */
 .user-vibes-container a {
-    display: block; /* Block level display */
-    margin-top: 20px; /* Space above link */
+    background-color: var(--navbar-bg); /* Light background color */
+    width: fit-content; /* Fit content width */
     text-decoration: none; /* Remove underline */
-    color: #007bff; /* Blue text color */
+    color: var(--white); /* Blue text color */
     transition: color 0.3s ease; /* Smooth color transition */
-    text-align: center; /* Center align text */
+    padding: 5px 10px; /* Padding inside link */
+    border-radius: 4px; /* Rounded corners */
+    border: 1px solid var(--primary-color-hov); /* Light border */
+    transition: box-shadow 0.3s ease-in-out, color 0.3s ease-in-out; /* Smooth transition */
 }
 
 /* Link hover effect */
 .user-vibes-container a:hover {
-    color: #0056b3; /* Darker blue on hover */
+    color: var(--navbar-bg); /* Darker blue on hover */
+    box-shadow: 0px 0px 10px var(--primary-color);
+    background-color: var(--primary-color); /* Larger shadow on hover */
 }

@@ -16,30 +16,36 @@ body, html {
 /* Link styling for experience item */
 .experience-link {
     text-decoration: none; /* Remove underline */
-    color: #333; /* Dark text color */
+    color: var(--primary-color); /* Dark text color */
     transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
 /* Link hover effect */
 .experience-link:hover {
-    color: #007bff; /* Blue color on hover */
+    color: var(--primary-color-hov); /* Blue color on hover */
 }
 
 /* Main container for each experience item */
 .experience-item {
     width: 200px; /* Fixed width for each item */
-    background-color: #f9f9f9; /* Light background color */
-    border: 1px solid #ccc; /* Light border */
+    border: 2px solid var(--navbar-bg); /* Light border */
     border-radius: 4px; /* Rounded corners */
     padding: 10px; /* Padding around the item */
     margin: 10px; /* Margin between items */
-    box-sizing: border-box; /* Include padding in width calculation */
+    transition: transform .2s ease-in-out; /* Smooth scale transition on hover */
+    backdrop-filter: blur(2px); /* Apply blur effect */
+}
+
+/* Hover effect on experience item */
+.experience-item:hover {
+    transform: scale(1.03); /* Scale up on hover */
+    box-shadow: 0px 0px 10px var(--primary-color); /* Larger shadow on hover */
 }
 
 /* Experience name styling */
 .experience-item h4 {
     margin: 0; /* Remove default margin */
-    font-size: 0.9rem; /* Font size */
+    font-size: 16px; /* Font size */
 }
 
 /* Image styling */
@@ -52,19 +58,20 @@ body, html {
 
 /* Location and vibes container */
 .experience-item .experience-details {
-    margin-top: 0.5rem; /* Space above details */
+    margin-top: 0.5rem; /* Space above details */;
 }
 
 /* Strong (bold) text styling */
 .experience-item .experience-details strong {
     font-weight: bold; /* Bold text */
+    margin: 2px 0; /* Space above and below text */
 }
 
 /* Vibes styling */
 .experience-item .experience-details .vibes {
-    margin-top: 0.5rem; /* Space above vibes */
+    margin: 0.5rem; /* Space above vibes */
     font-style: italic; /* Italic text */
-    color: #555; /* Darker text color */
+    color: var(--primary-color-hov); /* darker primary */
 }
 
 /* Pagination container */

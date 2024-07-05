@@ -1,8 +1,13 @@
 /* Reset default margins and paddings */
 body, html {
+    background-color: #3e4458;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    background-image: url('../../pictures/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 /* Main container for the entire application */

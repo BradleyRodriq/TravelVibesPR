@@ -128,7 +128,7 @@ const CreateExperience = () => {
                         </div>
                     ))}
                 </div>
-                <div>
+                <div className='submit-button-container'>
                     <button type="submit" className="submit-button">Create Experience</button> {/* Apply submit button class */}
                 </div>
             </form>
