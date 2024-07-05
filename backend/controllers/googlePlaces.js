@@ -5,7 +5,7 @@ const axios = require('axios');
 const fetchAndCreateExperiences = async (req, res) => {
     const apiKey = process.env.GOOGLE_PLACES_API_KEY;
     const location = '18.2208,-66.5901'; // Latitude and longitude for PR
-    const radius = 1000000; // 1000 km
+    const radius = 56000; // 56km radius
     const types = ['tourist_attraction']; // Only tourist attractions
 
     const API_ENDPOINT = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
