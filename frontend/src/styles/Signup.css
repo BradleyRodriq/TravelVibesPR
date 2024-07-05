@@ -65,8 +65,11 @@ body, html {
 }
 
 /* Error message */
-.form-container .error {
-    color: red;
+.form-container .error-message {
+    color: var(--active-delete);
     margin-top: 8px;
     text-align: center;
+    border: 1px solid var(--active-delete);
+    border-radius: 4px;
+    background-color: var(--navbar-bg);
 }
