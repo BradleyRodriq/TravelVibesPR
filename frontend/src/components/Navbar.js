@@ -20,7 +20,7 @@ const Navbar = () => {
     return (
       <header className="navbar">
           <div className="navbar__container">
-              <Link to='/' className="navbar__logo">
+              <Link to='/home' className="navbar__logo">
                   <h1>TravelVibesPR</h1>
               </Link>
               <nav className="navbar__nav">

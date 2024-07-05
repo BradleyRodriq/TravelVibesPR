@@ -22,6 +22,7 @@ function App() {
     setRedirectedToLogin(true);
     return <Navigate to="/login" />;
   }
+  
 
   return (
     <div>
@@ -30,8 +31,8 @@ function App() {
           <Navbar className="App"/>
           <div>
             <Routes>
-              <Route path="/landing" element={<Landing />} />
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Landing />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/select-vibes" element={<UserVibes />} />
