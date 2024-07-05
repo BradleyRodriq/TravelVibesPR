@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/authContext'; // Update the path to your AuthContext
-import '../styles/userVibes.css';
 import { Link } from 'react-router-dom';
+import '../styles/UserVibes.css';
 
 const UserVibes = () => {
     const [userVibes, setUserVibes] = useState([]);
@@ -51,13 +51,6 @@ const UserVibes = () => {
             setAvailableVibes([]); // Set availableVibes to empty array on error
         }
     };
-
-    // Fetch user vibes when the user changes
-    useEffect(() => {
-        if (user) {
-            fetchUserVibes();
-        }
-    }, [user]);
 
     // Fetch all available vibes when the component mounts
     useEffect(() => {
@@ -150,35 +143,36 @@ const UserVibes = () => {
     return (
         <div className="user-vibes-container">
             <h3>Current Vibes</h3>
-            <ul className="vibes-list">
+            <ul>
                 {userVibes.map(vibe => (
-                    <li key={vibe._id} className="user-vibe-item">
+                    <li key={vibe._id}>
                         {vibe.name}
-                        <button className="delete-button" onClick={() => handleDeleteVibe(vibe._id)}>Delete</button>
+                        <button onClick={() => handleDeleteVibe(vibe._id)}>Delete</button>
                     </li>
                 ))}
             </ul>
 
-            <form className="vibes-form" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <h3>Choose Vibes</h3>
-                <div className="vibes-container">
+                <div className="available-vibes-container">
                     {availableVibes.map(vibe => (
-                        <div key={vibe._id} className="vibe-item">
-                            <button
-                                className={`vibe-button ${selectedVibesToAdd.includes(vibe._id) ? 'selected' : ''}`}
-                                onClick={() => handleVibeSelection(vibe._id)}
-                            >
-                                {vibe.name}
-                            </button>
-                        </div>
+                        <button
+                            key={vibe._id}
+                            className={`vibe-button ${selectedVibesToAdd.includes(vibe._id) ? 'selected' : ''}`}
+                            onClick={() => handleVibeSelection(vibe._id)}
+                        >
+                            {vibe.name}
+                        </button>
                     ))}
                 </div>
             </form>
-          <div className="home-button-container">
-            <Link className="home-button" to='/'>Check out matching experiences!</Link>
-          </div>
+
+            <div>
+                <Link to="/">Click here to check out your matching experiences!</Link>
+            </div>
         </div>
     );
 };
+
 
 export default UserVibes;

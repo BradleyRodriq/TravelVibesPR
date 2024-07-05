@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useExperienceContext } from "../hooks/useExperienceContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import '../styles/ExperienceDetails.css';
 
 // function to change a vibe from an object to its name value from the vibes collection
 const getVibeNames = async (vibeIds) => {
@@ -76,15 +76,15 @@ const ExperienceDetails = ({ experience, vibes, onDelete }) => {
     const municipality = municipalities.find(municipality => experience.location.includes(municipality));
 
     return (
-        <Link to={`/experience/${experience._id}`} className="experience-link" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className="experience-details" style={{ width: '300px', borderRadius: '10px', overflow: 'hidden', position: 'relative' }}>
-                <h4 style={{ padding: '10px', margin: '0' }}>{experience.name}</h4>
-                <img src={experience.pictureUrl} alt={experience.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
-                <div style={{ padding: '10px' }}>
+        <Link to={`/experience/${experience._id}`} className="experience-link">
+            <div className="experience-item">
+                <h4>{experience.name}</h4>
+                <img src={experience.pictureUrl} alt={experience.name} className="experience-image" />
+                <div className="experience-details">
                     <div><strong>Location: </strong>{municipality || experience.location}</div>
                     <div>
                         <strong>Vibes: </strong>
-                        <div>{vibeNames.join(' | ')}</div>
+                        <div className="vibes">{vibeNames.join(' | ')}</div>
                     </div>
                 </div>
             </div>

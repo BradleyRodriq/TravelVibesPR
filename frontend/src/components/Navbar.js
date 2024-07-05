@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
+import '../styles/Navbar.css';
 
 const Navbar = () => {
     const { logout } = useLogout();
@@ -17,37 +18,35 @@ const Navbar = () => {
     const showMapView = location.pathname === '/';
 
     return (
-        <header>
-          <div className="container">
-            <Link to='/'>
-              <h1>TravelVibesPR</h1>
-            </Link>
-            <nav>
-              {user && (
-                <div>
-                  <span>{user.email}</span>
-                  <button onClick={handleClick}>
-                    Log out
-                  </button>
-                  <Link to='/select-vibes'>Select Vibes</Link>
-                  <Link to='/add-experience'>Add Experience</Link>
-                </div>
-              )}
-              {!user && (
-                <div>
-                  <Link to='/login'>Log In</Link>
-                  <Link to='/signup'>Sign Up</Link>
-                </div>
-              )}
-            </nav>
+      <header className="navbar">
+          <div className="navbar__container">
+              <Link to='/' className="navbar__logo">
+                  <h1>TravelVibesPR</h1>
+              </Link>
+              <nav className="navbar__nav">
+                  {user && (
+                      <div className="navbar__user">
+                          <span className="navbar__user-email">{user.email}</span>
+                          <button className="navbar__logout-btn" onClick={handleClick}>Log out</button>
+                          <Link to='/select-vibes' className="navbar__link">Select Vibes</Link>
+                          <Link to='/add-experience' className="navbar__link">Add Experience</Link>
+                      </div>
+                  )}
+                  {!user && (
+                      <div className="navbar__guest">
+                          <Link to='/login' className="navbar__link">Log In</Link>
+                          <Link to='/signup' className="navbar__link">Sign Up</Link>
+                      </div>
+                  )}
+              </nav>
           </div>
-          { showMapView && (
-          <div className="map-view-container">
-            <Link className="map-view" to='/ExperienceMap'>Map View</Link>
-          </div>
+          {showMapView && (
+              <div className='navbar__map-view'>
+                  <Link to='/ExperienceMap' className="navbar__map-link">Map View</Link>
+              </div>
           )}
-        </header>
-      );
-    };
+      </header>
+  );
+};
 
 export default Navbar;

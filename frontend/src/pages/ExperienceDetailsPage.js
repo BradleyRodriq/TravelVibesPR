@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import '../styles/ExperienceDetailsPage.css'; // Import the CSS file
+import '../styles/ExperienceDetailsPage.css';
 
 const getVibeNames = async (vibeIds) => {
     try {
@@ -37,6 +37,7 @@ const Modal = ({ show, onClose, reviews }) => {
                     <ul>
                         {reviews.map((review, index) => (
                             <li key={index}>
+
                                 <p><strong>{review.reviewer}</strong>: {review.text} (Rating: {review.rating})</p>
                             </li>
                         ))}
@@ -114,9 +115,9 @@ const ExperienceDetailsPage = () => {
     }
 
     return (
-        <div className="experience-detail">
-            <h1>{experience.name}</h1>
+        <div className="experience-detail-container">
             <div className="experience-info">
+            <h1>{experience.name}</h1>
                 <img src={experience.pictureUrl} alt={experience.name} className="experience-image" />
                 <div>
                     <p><strong>Location:</strong> {experience.location}</p>
@@ -128,7 +129,9 @@ const ExperienceDetailsPage = () => {
                         ))}
                     </div>
                     <p><strong>Created:</strong> {formatDistanceToNow(new Date(experience.createdAt))} ago</p>
-                    <button className="reviews-button" onClick={() => setShowModal(true)}>View Reviews</button>
+                    <div className="reviews-button-container">
+                        <button className="reviews-button" onClick={() => setShowModal(true)}>View Reviews</button>
+                    </div>
                 </div>
             </div>
             <Modal show={showModal} onClose={() => setShowModal(false)} reviews={experience.reviews} />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ExperienceDetails from '../components/experienceDetails';
 import { AuthContext } from '../context/authContext';
+import "../styles/Home.css";
 
 const matchVibes = (userVibes, experienceVibes) => {
     return experienceVibes.some(experienceVibe => userVibes.includes(experienceVibe));
@@ -10,7 +11,7 @@ const Home = () => {
     const [reload, setReload] = useState(false);
     const [experiences, setExperiences] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [experiencesPerPage] = useState(12); // Number of experiences per page
+    const [experiencesPerPage] = useState(10); // Number of experiences per page
     const { user, loading } = useContext(AuthContext);
 
     const fetchExperiences = async () => {
@@ -51,7 +52,6 @@ const Home = () => {
         }
     };
 
-
     const handleDelete = async () => {
         setReload(prevState => !prevState);
     };
@@ -81,42 +81,44 @@ const Home = () => {
     }
 
     return (
-        <div>
+        <div className="experience-list">
+            {/* Pagination buttons */}
             <div className="pagination">
                 {Array.from({ length: Math.ceil(experiences.length / experiencesPerPage) }, (_, index) => (
                     <button
                         key={index + 1}
                         onClick={() => paginate(index + 1)}
-                        className={currentPage === index + 1 ? "active" : ""}
+                        className={currentPage === index + 1 ? "pagination__button active" : "pagination__button"}
                     >
                         {index + 1}
                     </button>
                 ))}
             </div>
-            <div className="experiences">
+            {/* List of experience details */}
+            <div className="experience-details-list">
                 {currentExperiences && currentExperiences.map((experience) => (
                     <ExperienceDetails
                         experience={experience}
                         vibes={experience.vibes}
                         key={experience._id}
                         onDelete={handleDelete}
+                        className="experience-details"
                     />
                 ))}
             </div>
+            {/* Pagination buttons (repeated for bottom navigation) */}
             <div className="pagination">
                 {Array.from({ length: Math.ceil(experiences.length / experiencesPerPage) }, (_, index) => (
                     <button
                         key={index + 1}
                         onClick={() => paginate(index + 1)}
-                        className={currentPage === index + 1 ? "active" : ""}
+                        className={currentPage === index + 1 ? "pagination__button active" : "pagination__button"}
                     >
                         {index + 1}
                     </button>
                 ))}
             </div>
-
         </div>
     );
 };
-
 export default Home;

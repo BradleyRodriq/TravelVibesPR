@@ -1,31 +1,61 @@
+/* Container Styles */
 .experience-detail-container {
-    display: flex;
-    justify-content: flex-start; /* Stick to the left */
-    align-items: center;
-    height: 100vh; /* Full viewport height */
-    background-color: #ffe9fd; /* Light grey background */
-    padding: 20px; /* Add padding */
+    margin: 10px;
+    padding: 10px; /* Add padding */
+    border-radius: 4px; /* Rounded corners */
 }
 
-.experience-detail {
+/* Experience Detail Styles */
+.experience-info {
     width: 80%;
     max-width: 400px;
-    background: #ffe9fd;
     border-radius: 10px;
     overflow: hidden;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    animation: fadeIn 0.5s ease-in-out;
+    animation: slideIn 0.5s ease-in-out;
+    backdrop-filter: blur(3px);
+    border: 2px solid var(--navbar-bg);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.experience-detail img {
+.experience-info:hover {
+    box-shadow: 0 0px 10px var(--primary-color);
+}
+
+.experience-image {
     width: 100%;
     height: auto;
-    border-radius: 10px;
-    animation: slideIn 0.5s ease-in-out;
+    box-shadow: 0px 0px 10px var(--primary-color);
+    border-radius: 50% 10% 50% 10% / 10% 50% 10% 50%;
 }
 
+.experience-info h1 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    position: center;
+}
+
+.experience-info p {
+    color: var(--primary-color-hov);
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.experience-info ul {
+    color: (var(--primary-color-hov));
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.experience-info ul {
+    color: var(--primary-color-hov);
+    padding-left: 20px;
+}
+
+/* Animation Styles */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -46,22 +76,7 @@
     }
 }
 
-.experience-detail h1 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    position: center;
-}
-
-.experience-detail p,
-.experience-detail ul {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-}
-
-.experience-detail ul {
-    padding-left: 20px;
-}
-
+/* Star Rating Styles */
 .star {
     display: inline-block;
     width: 24px;
@@ -78,28 +93,33 @@
     clip-path: inset(0 50% 0 0); /* Clip the left half of the star */
 }
 
+/* Vibes Styles */
 .vibes-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
 }
 
 .vibe {
-    background-color: #f0f0f0;
+    background-color: var(--navbar-bg);
     border-radius: 20px;
+    border: 1px solid var(--primary-color);
     padding: 5px 10px;
     font-size: 14px;
-    transition: background-color 0.3s, transform 0.3s;
+    color: var(--white);
 }
 
-.vibe:hover {
-    background-color: #d0d0d0;
-    transform: scale(1.1);
+/* Reviews Button Styles */
+.reviews-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .reviews-button {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--navbar-bg);
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -109,17 +129,17 @@
 }
 
 .reviews-button:hover {
-    background-color: #45a049;
     transform: scale(1.05);
 }
 
+/* Modal Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -127,7 +147,8 @@
 
 .modal {
     position: relative;
-    background: #ffe9fd;
+    background: var(--navbar-bg);
+    color: var(--white);
     padding: 20px;
     border-radius: 10px;
     width: 80%;
@@ -142,17 +163,16 @@
 }
 
 .modal-content li {
-    list-style-type: none;
     margin-bottom: 10px;
 }
 
-/* New styles for the delete button */
+/* Close Button Styles */
 .close-button {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #f00;
-    color: white;
+    background-color: var(--inactive-delete);
+    color: var(--white);
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
@@ -161,6 +181,5 @@
 }
 
 .close-button:hover {
-    background-color: #d00;
-    transform: scale(1.1);
+    background-color: var(--active-delete);
 }

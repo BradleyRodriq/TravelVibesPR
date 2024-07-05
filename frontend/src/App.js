@@ -11,6 +11,7 @@ import ExperienceDetailsPage from './pages/ExperienceDetailsPage';
 import SignupThanks from './pages/SignupThanks';
 import MapPage from './pages/MapPage';
 import { LoadScript } from '@react-google-maps/api';
+import './styles/App.css';
 
 function App() {
   const { user } = useAuthContext();
@@ -22,11 +23,11 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div>
       <LoadScript googleMapsApiKey="AIzaSyDP8zkTwAzKinxwNbrxis42EyX5dCkece4">
         <BrowserRouter>
-          <Navbar />
-          <div className="pages">
+          <Navbar className="App"/>
+          <div>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
