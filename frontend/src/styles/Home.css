@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
 /* Reset default margins and paddings */
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Poppins";
 }
 
 /* Main container for the experience list */
@@ -20,18 +22,15 @@ body, html {
 
 /* Pagination button */
 .pagination__button {
-    background-color: #696969; /* Blue background color */
-    color: #fff; /* White text color */
+    background-color: var(--white); /* White background color */
+    backdrop-filter: blur(2px); /* Apply blur effect */
+    color: var(--navbar-bg); /* White text color */
     border: none; /* No border */
     padding: 0.5rem 1rem; /* Padding inside the button */
     margin-right: 0.5rem; /* Space between buttons */
     cursor: pointer; /* Pointer cursor on hover */
     border-radius: 4px; /* Rounded corners */
-    transition: background-color 0.3s ease-in-out; /* Smooth background color transition */
-}
-
-.pagination__button:hover {
-    background-color: var(--navbar-bg); /* Darker blue background color on hover */
+    transition: transform 0.3s ease-in-out; /* Smooth background color transition */
 }
 
 /* Active pagination button */
