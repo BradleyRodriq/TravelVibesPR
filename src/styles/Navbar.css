@@ -1,0 +1,128 @@
+:root {
+    --primary-color: #d1a7e4;
+    --primary-color-hov: #bb94d6;
+    --navbar-bg: #2d3345;
+    --white: #ccc;
+    --inactive-delete: #835656;
+    --active-delete: #ad1919;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2d3345;
+    background: rgb(237, 237, 237, .1);
+    backdrop-filter: blur(6px);
+    margin: 6px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px var(--primary-color);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.navbar:hover {
+    box-shadow: 0px 0px 40px var(--primary-color);
+}
+
+/* Container for logo and navigation */
+.navbar__container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-height: 65px;
+}
+
+/* Logo link */
+.navbar__logo {
+    text-decoration: none;
+    color: var(--primary-color-hov);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: auto;
+    transition: color 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.navbar__logo:hover {
+    color: var(--primary-color);
+    filter: drop-shadow(0px 0px 10px var(--primary-color));
+}
+
+/* Navigation links */
+.navbar__nav {
+    display: flex;
+    align-items: center;
+    color: var(--white);
+}
+
+/* Styling for user section when logged in */
+.navbar__user {
+    display: flex;
+    align-items: center;
+    color: var(--white);
+}
+
+.navbar__user-email {
+    margin-right: 1rem;
+    font-weight: bold;
+}
+
+.navbar__logout-btn {
+    background-color: var(--inactive-delete);
+    color: var(--white);
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.navbar__logout-btn:hover {
+    background-color: var(--active-delete);
+    transform: scale(1.02);
+}
+
+/* Styling for guest section when not logged in */
+.navbar__guest {
+    display: flex;
+    align-items: center;
+}
+
+.navbar__link {
+    text-decoration: none;
+    color: var(--white);
+    margin-right: 1rem;
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    border-radius: 4px;
+}
+
+.navbar__link:hover {
+    transform: scale(1.05);
+    color: var(--primary-color);
+    filter: drop-shadow(0px 0px 10px var(--primary-color));
+}
+
+/* Styling for map view section */
+.navbar__map-view {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.navbar__map-link {
+    position: static;
+    text-decoration: none;
+    color: var(--white);
+    font-weight: bold;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.navbar__map-link:hover {
+    color: var(--primary-color);
+    transform: scale(1.05);
+    filter: drop-shadow(0px 0px 10px var(--primary-color));
+}

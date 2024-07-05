@@ -1,0 +1,117 @@
+/* Reset default margins and paddings */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins";
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Main container for create experience form */
+.create-experience-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid var(--navbar-bg);
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--navbar-bg);
+    backdrop-filter: blur(2px); /* Apply blur effect */
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */
+    animation: slideIn 0.5s ease-in-out; /* Slide in animation */
+}
+
+.create-experience-container:hover {
+    box-shadow: 0 0 20px var(--primary-color); /* Larger shadow on hover */
+}
+
+/* Input field styling */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid var(--white);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+label {
+    color: var(--primary-color-hov);
+    font-weight: bold;
+}
+
+/* Vibes container */
+.vibes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+/* Checkbox and label styling */
+.vibes-container div {
+    margin-bottom: 8px;
+}
+
+/* submit button container */
+.submit-button-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 12px;
+    border-top: 2px solid var(--navbar-bg);
+}
+/* Submit button styling */
+.submit-button {
+    position: center;
+    background-color: var(--navbar-bg);
+    color: var(--white);
+    border: 2px solid var(--primary-color-hov);
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.submit-button:hover {
+    color: var(--navbar-bg);
+    background-color: var(--primary-color-hov);
+    box-shadow: 0 0 10px var(--primary-color-hov);
+}
+
+/* Heading styling */
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+/* Label styling */
+label {
+    font-weight: bold;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    margin-top: 8px;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .create-experience-container {
+        padding: 10px;
+    }
+    .input-field {
+        font-size: 12px;
+    }
+}
