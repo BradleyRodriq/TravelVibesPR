@@ -8,6 +8,17 @@ body, html {
     background-color: #f0f0f0; /* Light background color */
 }
 
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 /* Main container for the UserVibes component */
 .user-vibes-container {
     border: 2px solid var(--navbar-bg);
@@ -18,6 +29,7 @@ body, html {
     text-align: center; /* Center align text */
     backdrop-filter: blur(2px); /* Apply blur effect */
     transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */
+    animation: slideIn 0.5s ease-in-out; /* Slide in animation */
 }
 
 .user-vibes-container:hover {

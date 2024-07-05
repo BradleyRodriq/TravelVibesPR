@@ -6,6 +6,17 @@ body, html {
     background-color: #f0f0f0; /* Light background color */
 }
 
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 /* Container for the thank you message */
 .signup-thanks-container {
     max-width: 600px; /* Limit width for content */
@@ -16,6 +27,7 @@ body, html {
     border-radius: 8px; /* Rounded corners */
     text-align: center; /* Center align text */
     transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */
+    animation: slideIn 0.5s ease-in-out; /* Slide in animation */
 }
 
 .signup-thanks-container:hover {

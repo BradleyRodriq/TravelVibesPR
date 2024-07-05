@@ -5,6 +5,17 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 /* Form container */
 .form-container {
     width: 300px; /* Set a fixed width for the form */
@@ -13,6 +24,7 @@ body, html {
     border: 2px solid var(--navbar-bg);
     border-radius: 8px;
     backdrop-filter: blur(2px); /* Apply blur effect */
+    animation: slideIn 0.5s ease-in-out; /* Slide in animation */
 }
 
 /* Form title */

@@ -5,6 +5,17 @@ body, html {
     font-family: "Poppins";
 }
 
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 /* Main container for create experience form */
 .create-experience-container {
     max-width: 600px;
@@ -15,6 +26,7 @@ body, html {
     box-shadow: 0 0 10px var(--navbar-bg);
     backdrop-filter: blur(2px); /* Apply blur effect */
     transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */
+    animation: slideIn 0.5s ease-in-out; /* Slide in animation */
 }
 
 .create-experience-container:hover {

@@ -12,6 +12,8 @@
     justify-content: space-between;
     align-items: center;
     background-color: #2d3345;
+    background: rgb(237, 237, 237, .1);
+    backdrop-filter: blur(6px);
     margin: 6px;
     padding: 10px;
     border-radius: 10px;
