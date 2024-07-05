@@ -11,6 +11,7 @@ import ExperienceDetailsPage from './pages/ExperienceDetailsPage';
 import SignupThanks from './pages/SignupThanks';
 import MapPage from './pages/MapPage';
 import { LoadScript } from '@react-google-maps/api';
+import Landing from './pages/Landing';
 import './styles/App.css';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Navbar className="App"/>
           <div>
             <Routes>
+              <Route path="/landing" element={<Landing />} />
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
