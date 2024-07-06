@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
+import "../styles/Map.css";
 
 const mapContainerStyle = {
   width: "100%",
