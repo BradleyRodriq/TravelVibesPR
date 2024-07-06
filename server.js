@@ -1,10 +1,10 @@
 require('dotenv').config()
 
 const express = require('express')
-const experiencesRoute = require('../routes/experienceRoutes')
+const experiencesRoute = require('./routes/experienceRoutes')
 const mongoose = require('mongoose')
-const userRoute = require('../routes/userRoutes')
-const vibesRoute = require ('../routes/vibeRoutes')
+const userRoute = require('./routes/userRoutes')
+const vibesRoute = require ('./routes/vibeRoutes')
 
 // express app create
 const app = express()

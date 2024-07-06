@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuthContext } from './src/hooks/useAuthContext';
-import Home from './src/pages/Home';
-import Login from './src/pages/Login';
-import Signup from './src/pages/Signup';
-import UserVibes from './src/pages/UserVibes';
-import Navbar from './src/components/Navbar';
-import CreateExperience from './src/pages/ExperienceManager';
-import ExperienceDetailsPage from './src/pages/ExperienceDetailsPage';
-import SignupThanks from './src/pages/SignupThanks';
-import MapPage from './src/pages/MapPage';
+import { useAuthContext } from './hooks/useAuthContext';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import UserVibes from './pages/UserVibes';
+import Navbar from './components/Navbar';
+import CreateExperience from './pages/ExperienceManager';
+import ExperienceDetailsPage from './pages/ExperienceDetailsPage';
+import SignupThanks from './pages/SignupThanks';
+import MapPage from './pages/MapPage';
 import { LoadScript } from '@react-google-maps/api';
-import Landing from './src/pages/Landing';
+import Landing from './pages/Landing';
 import './styles/App.css';
 
 function App() {

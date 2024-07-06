@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useExperienceContext } from "../../hooks/useExperienceContext";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useExperienceContext } from "../hooks/useExperienceContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 import '../styles/ExperienceDetails.css';
 
 // function to change a vibe from an object to its name value from the vibes collection
