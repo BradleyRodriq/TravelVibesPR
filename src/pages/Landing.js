@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/Landing.css';
 import BradleyImage from '../pictures/bradley.jpg';
 import LeandroImage from '../pictures/leandro.jpg';
-/*import SebastianImage from '../pictures/sebastian.jpg'*/
+import SebastianImage from '../pictures/sebastian.jpg'
 import VibesImage from '../pictures/vibes.png';
 import MapImage from '../pictures/Map-view.png';
 import ExperienceImage from '../pictures/experiences.png';
@@ -28,6 +28,7 @@ function Landing() {
                             <p>Backend Dev</p>
                         </div>
                         <div className="team-member">
+                            <img src={SebastianImage} alt="Sebastian Quiñones" />
                             <h3>Sebastian Quiñones</h3>
                             <p>Frontend Dev</p>
                         </div>
