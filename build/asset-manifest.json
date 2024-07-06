@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/TravelVibesPR/static/css/main.352e281f.css",
-    "main.js": "/TravelVibesPR/static/js/main.c6dba2a6.js",
+    "main.js": "/TravelVibesPR/static/js/main.6d306203.js",
     "static/media/background.jpg": "/TravelVibesPR/static/media/background.642fc748fbd54ae86d8c.jpg",
     "index.html": "/TravelVibesPR/index.html",
     "main.352e281f.css.map": "/TravelVibesPR/static/css/main.352e281f.css.map",
-    "main.c6dba2a6.js.map": "/TravelVibesPR/static/js/main.c6dba2a6.js.map"
+    "main.6d306203.js.map": "/TravelVibesPR/static/js/main.6d306203.js.map"
   },
   "entrypoints": [
     "static/css/main.352e281f.css",
-    "static/js/main.c6dba2a6.js"
+    "static/js/main.6d306203.js"
   ]
 }

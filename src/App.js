@@ -31,7 +31,7 @@ function App() {
           <Navbar className="App"/>
           <div>
             <Routes>
-              <Route path="/TravelVibesPR" element={<Landing />} />
+              <Route path="/TravelVibesPR/" element={<Landing />} />
               <Route path="/home" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
