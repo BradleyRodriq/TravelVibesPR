@@ -1,7 +1,7 @@
 {
     "name": "travelvibespr",
     "version": "0.1.0",
-    "homepage": "https://bradleyrodriq.github.io/",
+    "homepage": "https://bradleyrodriq.github.io/TravelVibesPR",
     "proxy": "http://localhost:4000",
     "dependencies": {
         "@react-google-maps/api": "^2.19.3",
