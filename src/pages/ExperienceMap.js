@@ -72,8 +72,13 @@ useEffect(() => {
   };
 
   return (
-    <div>
-      <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={10} className="map">
+    <div className="map-container">
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        center={center}
+        zoom={10}
+        className="map"
+      >
         {markers.map((marker, index) => (
           <Marker
             key={index}
@@ -88,28 +93,35 @@ useEffect(() => {
                 activeMarker === index ? 50 : 40
               ),
             }}
+            className={`marker ${activeMarker === index ? 'active' : ''}`}
           />
         ))}
+        <div className="info">
         {selectedMarker && (
-          <InfoWindow
+          <InfoWindow className="info-window"
             position={selectedMarker.position}
             onCloseClick={() => setSelectedMarker(null)}
+
           >
-            <div>
-              <h2>{selectedMarker.name}</h2>
-              <p>{selectedMarker.description}</p>
+            <div className="info-window-content">
+              <h2 className="info-window-title">{selectedMarker.name}</h2>
+              <p className="info-window-description">{selectedMarker.description}</p>
               <img
                 src={selectedMarker.photo}
                 alt={selectedMarker.name}
+                className="info-window-image"
               />
               <button
                 onClick={() => navigate(`/experience/${selectedMarker.id}`)}
+                className="info-window-button"
               >
                 View Details
               </button>
             </div>
           </InfoWindow>
+
         )}
+                  </div>
       </GoogleMap>
     </div>
   );
