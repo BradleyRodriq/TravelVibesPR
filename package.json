@@ -1,5 +1,7 @@
 {
-    "homepage": "https://bradleyrodriq.github.io/TravelVibesPR",
+    "name": "travelvibespr",
+    "version": "0.1.0",
+    "homepage": "https://bradleyrodriq.github.io/",
     "proxy": "http://localhost:4000",
     "dependencies": {
         "@react-google-maps/api": "^2.19.3",
@@ -11,12 +13,12 @@
         "mongoose": "^8.4.1",
         "node": "^20.14.0",
         "nodemailer": "^6.9.14",
-        "nodemon": "^3.1.0",
         "react-router-dom": "^6.24.0",
         "react-scripts": "^5.0.1",
         "validator": "^13.12.0"
     },
     "scripts": {
+        "full": "concurrently \"nodemon server.js\" \"react-scripts start\"",
         "dev": "nodemon server.js",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build",
@@ -56,6 +58,8 @@
         ]
     },
     "devDependencies": {
-        "gh-pages": "^6.1.1"
+        "concurrently": "^8.2.2",
+        "gh-pages": "^6.1.1",
+        "nodemon": "^3.1.4"
     }
 }
