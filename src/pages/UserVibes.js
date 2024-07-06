@@ -1,22 +1,21 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { AuthContext } from '../context/authContext'; // Update the path to your AuthContext
 import { Link } from 'react-router-dom';
 import '../styles/UserVibes.css';
 
 const UserVibes = () => {
     const [userVibes, setUserVibes] = useState([]);
-    const [availableVibes, setAvailableVibes] = useState([]);
+    const [availableVibes, setAvailableVibes] = useState({});
     const [selectedVibesToAdd, setSelectedVibesToAdd] = useState([]);
+    const [loading, setLoading] = useState(true);
     const { user } = useContext(AuthContext); // Access user from the AuthContext
 
-    const fetchUserVibes = async () => {
-        if (!user) {
-            return; // Return early if user is null
-        }
+    const fetchUserVibes = useCallback(async () => {
+        if (!user) return; // Return early if user is null
 
         try {
             console.log('Fetching user vibes');
-            const response = await fetch(`/api/user/vibes`, { // Ensure the endpoint matches your backend route
+            const response = await fetch(`/api/user/vibes`, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
@@ -35,9 +34,9 @@ const UserVibes = () => {
             console.error('Error fetching user vibes:', error);
             setUserVibes([]); // Set userVibes to empty array on error
         }
-    };
+    }, [user]);
 
-    const fetchAvailableVibes = async () => {
+    const fetchAvailableVibes = useCallback(async () => {
         try {
             console.log('Fetching available vibes');
             const response = await fetch('/api/vibes');
@@ -45,37 +44,39 @@ const UserVibes = () => {
                 throw new Error('Failed to fetch available vibes');
             }
             const data = await response.json();
-            setAvailableVibes(data); // Assuming the response contains an array of vibes
+            // Convert the array of vibes into a dictionary for quick lookup
+            const vibesDict = data.reduce((acc, vibe) => {
+                acc[vibe._id] = vibe.name;
+                return acc;
+            }, {});
+            setAvailableVibes(vibesDict);
         } catch (error) {
             console.error('Error fetching available vibes:', error);
-            setAvailableVibes([]); // Set availableVibes to empty array on error
+            setAvailableVibes({}); // Set availableVibes to empty dictionary on error
         }
-    };
-
-    // Fetch all available vibes when the component mounts
-    useEffect(() => {
-        fetchAvailableVibes();
     }, []);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            if (user) {
+                await Promise.all([fetchUserVibes(), fetchAvailableVibes()]);
+            }
+            setLoading(false);
+        };
+        fetchData();
+    }, [user, fetchUserVibes, fetchAvailableVibes]);
+
     const handleVibeSelection = (vibeId) => {
-        // Check if the vibe is already in localStorage userVibes
         const storedVibes = JSON.parse(localStorage.getItem('userVibes')) || [];
-        if (storedVibes.includes(vibeId)) {
-            return; // Return early if the vibe is already in userVibes
+        if (storedVibes.includes(vibeId) || selectedVibesToAdd.includes(vibeId)) {
+            return;
         }
-
-        // If not in userVibes, check if the vibe is already selected
-        if (selectedVibesToAdd.includes(vibeId)) {
-            return; // Return early if the vibe is already selected
-        }
-
-        // Add the vibe to selectedVibesToAdd
         setSelectedVibesToAdd([...selectedVibesToAdd, vibeId]);
     };
 
-
     const handleDeleteVibe = async (vibeId) => {
-        const token = user.token; // Access the token from the user object
+        const token = user.token;
 
         try {
             const response = await fetch(`/api/user/deleteVibe/${vibeId}`, {
@@ -108,7 +109,6 @@ const UserVibes = () => {
         console.log('Selected Vibes:', selectedVibesToAdd);
 
         try {
-            // Assuming selectedVibesToAdd contains vibe IDs
             const response = await fetch('/api/user/addVibes', {
                 method: 'PUT',
                 headers: {
@@ -140,13 +140,17 @@ const UserVibes = () => {
         }
     };
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className="user-vibes-container">
             <h3>Current Vibes</h3>
             <ul>
                 {userVibes.map(vibe => (
                     <li key={vibe._id}>
-                        {vibe.name}
+                        {availableVibes[vibe._id] || 'Unknown Vibe'}
                         <button onClick={() => handleDeleteVibe(vibe._id)}>Delete</button>
                     </li>
                 ))}
@@ -155,13 +159,13 @@ const UserVibes = () => {
             <form onSubmit={handleSubmit}>
                 <h3>Choose Vibes</h3>
                 <div className="available-vibes-container">
-                    {availableVibes.map(vibe => (
+                    {Object.entries(availableVibes).map(([vibeId, vibeName]) => (
                         <button
-                            key={vibe._id}
-                            className={`vibe-button ${selectedVibesToAdd.includes(vibe._id) ? 'selected' : ''}`}
-                            onClick={() => handleVibeSelection(vibe._id)}
+                            key={vibeId}
+                            className={`vibe-button ${selectedVibesToAdd.includes(vibeId) ? 'selected' : ''}`}
+                            onClick={() => handleVibeSelection(vibeId)}
                         >
-                            {vibe.name}
+                            {vibeName}
                         </button>
                     ))}
                 </div>
@@ -173,6 +177,5 @@ const UserVibes = () => {
         </div>
     );
 };
-
 
 export default UserVibes;
