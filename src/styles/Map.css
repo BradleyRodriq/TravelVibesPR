@@ -31,10 +31,9 @@ body, html {
 }
 
 /* Heading styling */
-h3 {
-    font-size: 1.5rem;
+.map-header {
     margin-bottom: 20px;
-    color: var(--primary-color); /* Use your own color here */
+    color: var(--white);
     display: center;
 }
 
@@ -62,12 +61,14 @@ h3 {
 }
 
 .map-container {
+  border-radius: 12px;
     position: relative;
     width: 100%;
     height: 100%;
   }
 
   .map {
+    border-radius: 12px;
     width: 100%;
     height: 100%;
   }

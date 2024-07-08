@@ -73,7 +73,7 @@ useEffect(() => {
   };
 
   return (
-    <div className="map-container">
+    <div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}

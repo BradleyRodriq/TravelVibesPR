@@ -1,11 +1,11 @@
 import React from 'react';
-import ExperienceMap from './ExperienceMap'; // Ensure this path is correct
+import ExperienceMap from './ExperienceMap';
 import '../styles/Map.css';
 
 const MapPage = () => {
   return (
-    <div>
-      <h3>Experience Map</h3>
+    <div >
+      <h1 className='map-header'>Experience Map</h1>
       <ExperienceMap />
     </div>
   );
