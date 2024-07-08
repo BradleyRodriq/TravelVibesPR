@@ -122,7 +122,7 @@ useEffect(() => {
           </InfoWindow>
 
         )}
-                  </div>
+        </div>
       </GoogleMap>
     </div>
   );

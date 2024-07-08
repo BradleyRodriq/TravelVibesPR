@@ -31,9 +31,9 @@ body, html {
 }
 
 /* Heading styling */
-.map-header {
+#map-header.map-header {
     margin-bottom: 20px;
-    color: var(--white);
+    color: var(--primary-color);
     display: center;
 }
 
