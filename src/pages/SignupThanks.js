@@ -7,7 +7,7 @@ const SignupThanks = () => {
         <div className="signup-thanks-container">
             <h2>Thank You for Signing Up!</h2>
             <p>Your account has been created successfully.</p>
-            <Link to="/" className="btn-link">Go to Homepage</Link>
+            <Link to="/home" className="btn-link">Go to Homepage</Link>
             <Link to="/select-vibes" className="btn-link">Add your vibes!</Link>
         </div>
     );
