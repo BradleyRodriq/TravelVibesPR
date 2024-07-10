@@ -18,6 +18,7 @@ body, html {
 
 /* Main container for create experience form */
 .create-experience-container {
+    color: var(--primary-color);
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;

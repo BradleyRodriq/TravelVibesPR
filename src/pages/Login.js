@@ -14,7 +14,7 @@ const Login = () => {
 
         const success = await login(email, password);
         if (success) {
-            navigate('/Home');
+            navigate('/home');
         }
     };
 

@@ -30,12 +30,16 @@ body, html {
     margin-right: 0.5rem; /* Space between buttons */
     cursor: pointer; /* Pointer cursor on hover */
     border-radius: 4px; /* Rounded corners */
-    transition: transform 0.3s ease-in-out; /* Smooth background color transition */
+    transition: transform 0.3s ease-in-out, box-shadow 0.1s ease-in-out; /* Smooth background color transition */
 }
 
 /* Active pagination button */
 .pagination__button.active {
     background-color: var(--primary-color-hov); /* Darker blue background color */
+}
+
+.pagination__button:hover {
+    box-shadow: 0 0 10px var(--primary-color); /* Larger shadow on hover */
 }
 
 /* Experience details container */
