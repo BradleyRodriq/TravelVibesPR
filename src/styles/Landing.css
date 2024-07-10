@@ -42,7 +42,7 @@
     text-align: center;
     text-decoration: overline;
 }
-h2 {
+.features-head {
     color: var(--primary-color);
     font-size: 2rem;
     margin: 2rem 0;

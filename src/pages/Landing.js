@@ -38,24 +38,24 @@ function Landing() {
                     <h1 className="features-header">Features</h1>
                 </div>
                 <div className="feature">
-                <h2>Vibe Matching</h2>
+                <h2 className='feature-head'>Vibe Matching</h2>
                 <p>Match up your vibes with our growing experiences database!</p>
                     <img src={VibesImage} alt="Vibes" />
 
                 </div>
                 <div className="feature">
-                    <h2>Map View</h2>
+                    <h2 className='feature-head'>Map View</h2>
                     <p>View our experiences as pins in our seamless map experience!</p>
                     <img src={MapImage} alt="Map View" />
 
                 </div>
                 <div className="feature">
-                    <h2>Experience Creation</h2>
+                    <h2 className='feature-head'>Experience Creation</h2>
                     <p>Share your experiences with the world!</p>
                     <img src={ExperienceImage} alt="Experiences" />
                 </div>
                 <div className="feature">
-                    <h2>Automatic Notifications</h2>
+                    <h2 className='feature-head'>Automatic Notifications</h2>
                     <p>Receive an email when an experience added matches your vibes!</p>
                 </div>
                 <div className="Website-link">
