@@ -73,12 +73,10 @@ useEffect(() => {
   };
 
   return (
-    <div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
         zoom={10}
-        className="map"
       >
         {markers.map((marker, index) => (
           <Marker
@@ -93,7 +91,7 @@ useEffect(() => {
         ))}
         <div className="info">
         {selectedMarker && (
-          <InfoWindow className="info-window"
+          <InfoWindow className="infoWindow"
             position={selectedMarker.position}
             onCloseClick={() => setSelectedMarker(null)}
 
@@ -118,7 +116,6 @@ useEffect(() => {
         )}
         </div>
       </GoogleMap>
-    </div>
   );
 };
 
