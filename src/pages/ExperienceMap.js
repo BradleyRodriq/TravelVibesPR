@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
-import "../styles/Map.css";
+import "../styles/ExperienceMap.css";
 
 const mapContainerStyle = {
   width: "100%",
@@ -88,12 +88,6 @@ useEffect(() => {
             onClick={() => handleMarkerClick(marker)}
             onMouseOver={() => handleMouseOver(index)}
             onMouseOut={handleMouseOut}
-            icon={{
-              scaledSize: new window.google.maps.Size(
-                activeMarker === index ? 50 : 40,
-                activeMarker === index ? 50 : 40
-              ),
-            }}
             className={`marker ${activeMarker === index ? 'active' : ''}`}
           />
         ))}

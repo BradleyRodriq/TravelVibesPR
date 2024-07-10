@@ -59,7 +59,7 @@ function Landing() {
                     <p>Receive an email when an experience added matches your vibes!</p>
                 </div>
                 <div className="Website-link">
-                    <a href="/home" className="home-button">Visit TravelVibesPR!</a>
+                    <a href="/home" className="home-button">Click Here to Visit TravelVibesPR!</a>
                 </div>
                 <footer className="footer">
                     <p>&copy; 2024 TravelVibesPR. All rights reserved.</p>

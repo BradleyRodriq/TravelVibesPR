@@ -15,7 +15,8 @@
         "nodemailer": "^6.9.14",
         "react-router-dom": "^6.24.0",
         "react-scripts": "^5.0.1",
-        "validator": "^13.12.0"
+        "validator": "^13.12.0",
+        "babel-preset-react-app": "^10.0.0"
     },
     "scripts": {
         "full": "concurrently \"nodemon server.js\" \"react-scripts start\"",

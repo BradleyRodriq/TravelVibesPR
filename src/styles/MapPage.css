@@ -1,0 +1,9 @@
+.map-header {
+    display: flex;
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin: 2rem 0;
+    justify-content: center;
+}
+
+
