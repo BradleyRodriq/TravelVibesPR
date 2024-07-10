@@ -4,8 +4,8 @@ const axios = require('axios');
 
 const fetchAndCreateExperiences = async (req, res) => {
     const apiKey = process.env.GOOGLE_PLACES_API_KEY;
-    const location = '18.2208,-66.5901'; // Latitude and longitude for PR
-    const radius = 56000; // 56km radius
+    const location = '18.12,-67.09'; // Latitude and longitude for PR
+    const radius = 30000; // 56km radius
     const types = ['tourist_attraction']; // Only tourist attractions
 
     const API_ENDPOINT = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
@@ -44,15 +44,19 @@ const fetchAndCreateExperiences = async (req, res) => {
                             rating: review.rating
                         }));
 
-                        filteredPlaces.push({
-                            name: place.name,
-                            location: place.vicinity || details.formatted_address,
-                            geolocation: place.geometry.location,
-                            vibes,
-                            pictureUrl,
-                            rating: place.rating,  // include the rating here
-                            reviews
-                        });
+                        // Check if a place with the same name already exists in the database
+                        const existingExperience = await Experience.findOne({ name: place.name });
+                        if (!existingExperience) {
+                            filteredPlaces.push({
+                                name: place.name,
+                                location: place.vicinity || details.formatted_address,
+                                geolocation: place.geometry.location,
+                                vibes,
+                                pictureUrl,
+                                rating: place.rating,
+                                reviews
+                            });
+                        }
                     }
                 }
             }
