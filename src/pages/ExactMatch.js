@@ -4,10 +4,11 @@ import { AuthContext } from '../context/authContext';
 import "../styles/Home.css";
 
 const matchVibes = (userVibes, experienceVibes) => {
-    return experienceVibes.some(experienceVibe => userVibes.includes(experienceVibe));
+    // Check if all userVibes are included in experienceVibes
+    return userVibes.every(userVibe => experienceVibes.includes(userVibe));
 };
 
-const exactMatch = () => {
+const ExactMatch = () => {
     const [reload, setReload] = useState(false);
     const [experiences, setExperiences] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -60,13 +61,7 @@ const exactMatch = () => {
         if (!loading) {
             fetchExperiences();
         }
-    }, [user, loading]);
-
-    useEffect(() => {
-        if (!loading) {
-            fetchExperiences();
-        }
-    }, [reload, loading]);
+    }, [user, loading, reload]);
 
     // Get current experiences for the current page
     const indexOfLastExperience = currentPage * experiencesPerPage;
@@ -121,4 +116,5 @@ const exactMatch = () => {
         </div>
     );
 };
-export default exactMatch;
+
+export default ExactMatch;
