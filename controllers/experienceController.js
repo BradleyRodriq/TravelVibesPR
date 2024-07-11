@@ -6,7 +6,7 @@ const sendExperienceEmail = require('../nodemailer/nodemailerExperience');
 // get all experiences
 const getExperiences = async (req, res) => {
     try {
-        const experiences = await Experience.find().sort({ createdAt: -1 });
+        const experiences = await Experience.find();
         res.status(200).json(experiences);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -174,6 +174,11 @@ const deleteAllExperienceVibes = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+
+
+
+
 
 module.exports = {
     addExperienceVibes,

@@ -15,7 +15,10 @@ const Navbar = () => {
         navigate('/login');
     };
 
-    const showMapView = location.pathname === '/home';
+    const showMapView = location.pathname === '/home' || location.pathname === '/exact-match';
+    const showExactMatch = location.pathname === '/home' || location.pathname === '/ExperienceMap';
+    const showHome = location.pathname === '/exact-match' || location.pathname === '/ExperienceMap';
+    const showRandom = location.pathname === '/exact-match' || location.pathname === '/ExperienceMap' || location.pathname === '/home' || location.pathname === '/random';
 
     return (
       <header className="navbar">
@@ -40,11 +43,28 @@ const Navbar = () => {
                   )}
               </nav>
           </div>
+          <div className="link_container">
           {showMapView && (
               <div className='navbar__map-view'>
-                  <Link to='/ExperienceMap' className="navbar__map-link">Map View</Link>
+                  <Link to='/ExperienceMap' className="navbar__map-link">Map Experience!</Link>
               </div>
           )}
+          {showExactMatch && (
+            <div className='navbar__exact-match'>
+                <Link to='/exact-match' className="navbar__exact-match-link">Exact Matching!</Link>
+            </div>
+          )}
+          {showHome && (
+            <div className='navbar__home'>
+                <Link to='/home' className="navbar__home-link">All Matches!</Link>
+            </div>
+          )}
+          {showRandom && (
+          <div className='navbar__random'>
+                <Link to='/random' className="navbar__random-link">I'm Feeling Lucky!</Link>
+            </div>
+            )}
+          </div>
       </header>
   );
 };

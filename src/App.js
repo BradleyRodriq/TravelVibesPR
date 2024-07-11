@@ -12,6 +12,8 @@ import SignupThanks from './pages/SignupThanks';
 import MapPage from './pages/MapPage';
 import { LoadScript } from '@react-google-maps/api';
 import Landing from './pages/Landing';
+import Random from './pages/Random';
+import ExactMatch from './pages/ExactMatch';
 import './styles/App.css';
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
               <Route path="/experience/:id" element={<ExperienceDetailsPage />} />
               <Route path="/signupthanks" element={<SignupThanks/>} />
               <Route path="/ExperienceMap" element={<MapPage />} />
+              <Route path="/exact-match" element={<ExactMatch />} />
+              <Route path="/random" element={<Random />} />
             </Routes>
           </div>
         </BrowserRouter>
