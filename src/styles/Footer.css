@@ -1,0 +1,27 @@
+.footer-container {
+    align-items: center;
+    background-color: #2d3345;
+    background: rgba(237, 237, 237, 0.1);
+    backdrop-filter: blur(6px);
+    margin: 6px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    top: 0;
+    width: 100%;
+}
+
+.footer-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 65px;
+}
+
+.footer-p {
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+}

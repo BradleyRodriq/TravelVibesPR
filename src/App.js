@@ -16,6 +16,7 @@ import Random from './pages/Random';
 import ExactMatch from './pages/ExactMatch';
 import ExperienceCreated from './pages/ExperienceCreated';
 import './styles/App.css';
+import Footer from './components/Footer';
 
 function App() {
   const { user } = useAuthContext();
@@ -31,7 +32,7 @@ function App() {
     <div>
       <LoadScript googleMapsApiKey="AIzaSyDP8zkTwAzKinxwNbrxis42EyX5dCkece4">
         <BrowserRouter>
-          <Navbar className="App"/>
+          <Navbar/>
           <div>
             <Routes>
               <Route path="/TravelVibesPR/" element={<Landing />} />
@@ -50,6 +51,9 @@ function App() {
           </div>
         </BrowserRouter>
       </LoadScript>
+      <div className="footer">
+        <Footer/>
+      </div>
     </div>
   );
 }
