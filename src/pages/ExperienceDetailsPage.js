@@ -82,7 +82,7 @@ const ExperienceDetailsPage = () => {
     const renderStars = (rating) => {
         const fullStars = Math.floor(rating);
         const remainder = rating - fullStars;
-        const hasHalfStar = remainder >= 0.3 && remainder < 0.8;
+        const hasHalfStar = remainder >= 0.3 && remainder < 0.7;
         const stars = [];
 
         for (let i = 1; i <= fullStars; i++) {
@@ -97,7 +97,9 @@ const ExperienceDetailsPage = () => {
             );
         }
 
-        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+        // Ensure there are no more than 5 stars
+        const totalStars = fullStars + (hasHalfStar ? 1 : 0);
+        const emptyStars = 5 - totalStars;
         for (let i = 0; i < emptyStars; i++) {
             stars.push(
                 <span key={`empty${i}`} className="star"></span>

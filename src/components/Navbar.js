@@ -18,7 +18,7 @@ const Navbar = () => {
     const showMapView = location.pathname === '/home' || location.pathname === '/exact-match' || location.pathname === '/Home' || location.pathname === '/select-vibes';
     const showExactMatch = location.pathname === '/home' || location.pathname === '/ExperienceMap' || location.pathname === '/Home' || location.pathname === '/select-vibes' || location.pathname.startsWith ('/experience') || location.pathname === '/random';
     const showHome = location.pathname === '/exact-match' || location.pathname === '/ExperienceMap' || location.pathname === '/Home' || location.pathname.startsWith ('/experience') || location.pathname === '/random';
-    const showRandom = location.pathname === '/exact-match' || location.pathname === '/ExperienceMap' || location.pathname === '/home' || location.pathname.startsWith ('/experience') || location.pathname === '/Home' || location.pathname === '/random';
+    const showRandom = location.pathname === '/exact-match' || location.pathname === '/ExperienceMap' || location.pathname === '/home' || location.pathname.startsWith ('/experience') || location.pathname === '/Home' || location.pathname === '/random' || location.pathname === '/select-vibes';
 
     return (
       <header className="navbar">
