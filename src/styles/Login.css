@@ -1,5 +1,6 @@
 /* Reset default margins and paddings */
 body, html {
+    height: 100%; /* Make sure the app fills the entire screen */
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;

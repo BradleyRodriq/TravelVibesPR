@@ -15,10 +15,10 @@ const Navbar = () => {
         navigate('/login');
     };
 
-    const showMapView = location.pathname === '/home' || location.pathname === '/exact-match';
-    const showExactMatch = location.pathname === '/home' || location.pathname === '/ExperienceMap';
-    const showHome = location.pathname === '/exact-match' || location.pathname === '/ExperienceMap';
-    const showRandom = location.pathname === '/exact-match' || location.pathname === '/ExperienceMap' || location.pathname === '/home' || location.pathname.startsWith ('/experience');
+    const showMapView = location.pathname === '/home' || location.pathname === '/exact-match' || location.pathname === '/Home' || location.pathname === '/select-vibes';
+    const showExactMatch = location.pathname === '/home' || location.pathname === '/ExperienceMap' || location.pathname === '/Home' || location.pathname === '/select-vibes' || location.pathname.startsWith ('/experience') || location.pathname === '/random';
+    const showHome = location.pathname === '/exact-match' || location.pathname === '/ExperienceMap' || location.pathname === '/Home' || location.pathname.startsWith ('/experience') || location.pathname === '/random';
+    const showRandom = location.pathname === '/exact-match' || location.pathname === '/ExperienceMap' || location.pathname === '/home' || location.pathname.startsWith ('/experience') || location.pathname === '/Home' || location.pathname === '/random';
 
     return (
       <header className="navbar">

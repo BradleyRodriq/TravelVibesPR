@@ -14,7 +14,7 @@ body, html {
 }
 
 /* Main container for the entire application */
-.App {
+.App-container {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Make sure the app fills the entire screen */
@@ -40,7 +40,7 @@ body, html {
 
 /* Container for the main content area */
 .MainContent {
-    min-height: 100vh; /* Make sure the content fills the screen */
+    min-height: 100%; /* Make sure the content fills the screen */
     padding: 2rem; /* Padding around the content */
     flex: 1; /* Grow to fill remaining space */
 }
@@ -65,14 +65,12 @@ body, html {
 
 /* User Vibes and Create Experience pages */
 .UserVibes, .CreateExperience {
-    min-height: 100vh; /* Make sure the content fills the screen */
     display: flex;
     flex-direction: column; /* Stack items vertically */
 }
 
 /* Experience details page */
 .ExperienceDetailsPage {
-    min-height: 100vh; /* Make sure the content fills the screen */
     padding: 2rem; /* Padding around details */
     background-color: #f9f9f9; /* Lighter background color */
     border: 1px solid #ccc; /* Light border */
@@ -81,8 +79,6 @@ body, html {
 
 /* Signup Thanks page */
 .SignupThanks {
-    display: flex;
-    min-height: 100vh; /* Make sure the content fills the screen */
     text-align: center; /* Center text */
     font-size: 1.2rem; /* Slightly larger font */
     padding: 2rem; /* Padding around */
@@ -94,14 +90,6 @@ body, html {
     margin-top: 1rem; /* Space from top */
     border: 1px solid #ccc; /* Light border */
     border-radius: 4px; /* Rounded corners */
-}
-.footer {
-    margin: 0;
-    display: flex;
-    bottom: 0;
-    border: none;
-    justify-content: center;
-    align-self: flex-end;
 }
 /* Responsive Design */
 @media (max-width: 768px) {

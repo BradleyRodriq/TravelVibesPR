@@ -1,14 +1,19 @@
-.footer-container {
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     align-items: center;
     background-color: #2d3345;
     background: rgba(237, 237, 237, 0.1);
     backdrop-filter: blur(6px);
-    margin: 6px;
     padding: 10px;
     border-radius: 10px;
     border: none;
-    top: 0;
-    width: 100%;
+    width: calc(100% - 12px); /* Account for margin */
+    margin: 6px;
+    display: flex;
+    justify-content: center;
 }
 
 .footer-div {
