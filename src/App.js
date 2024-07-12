@@ -14,6 +14,7 @@ import { LoadScript } from '@react-google-maps/api';
 import Landing from './pages/Landing';
 import Random from './pages/Random';
 import ExactMatch from './pages/ExactMatch';
+import ExperienceCreated from './pages/ExperienceCreated';
 import './styles/App.css';
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
               <Route path="/ExperienceMap" element={<MapPage />} />
               <Route path="/exact-match" element={<ExactMatch />} />
               <Route path="/random" element={<Random />} />
+              <Route path="/experiencecreated" element={<ExperienceCreated/>} />
             </Routes>
           </div>
         </BrowserRouter>
