@@ -18,7 +18,7 @@ const Navbar = () => {
     const showMapView = location.pathname === '/home' || location.pathname === '/exact-match';
     const showExactMatch = location.pathname === '/home' || location.pathname === '/ExperienceMap';
     const showHome = location.pathname === '/exact-match' || location.pathname === '/ExperienceMap';
-    const showRandom = location.pathname === '/exact-match' || location.pathname === '/ExperienceMap' || location.pathname === '/home' || location.pathname === '/random';
+    const showRandom = location.pathname === '/exact-match' || location.pathname === '/ExperienceMap' || location.pathname === '/home' || location.pathname.startsWith ('/experience');
 
     return (
       <header className="navbar">
