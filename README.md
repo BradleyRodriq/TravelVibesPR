@@ -24,6 +24,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgements
 Inspiration: My experience in the tourism industry and the desire to offer more affordable, local experiences in Puerto Rico.
+## TravelVibesPR is live
+To check out TravelVibesPR, use this url http://18.188.147.99:5000/
 
 ## Contact
 For any inquiries or feedback, please reach out at bradley.rodriguez2@yahoo.com.
+
