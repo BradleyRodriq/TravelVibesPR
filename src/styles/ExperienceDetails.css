@@ -40,6 +40,7 @@ body, html {
 
 /* Main container for each experience item */
 .experience-item {
+    height: 320px; /* Fixed height for each item */
     width: 200px; /* Fixed width for each item */
     border: 2px solid var(--navbar-bg); /* Light border */
     border-radius: 4px; /* Rounded corners */
@@ -65,9 +66,9 @@ body, html {
 /* Image styling */
 .experience-item .experience-image {
     width: 100%; /* Full width */
-    height: auto; /* Maintain aspect ratio */
+    height: 100px; /* Fixed height */
     margin-top: 0.5rem; /* Space above image */
-    border-radius: 4px; /* Rounded corners */
+    border-radius: 25%; /* Rounded corners */
 }
 
 /* Location and vibes container */

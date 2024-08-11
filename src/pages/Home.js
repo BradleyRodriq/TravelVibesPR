@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ExperienceDetails from '../components/experienceDetails';
 import { AuthContext } from '../context/authContext';
 import "../styles/Home.css";
+import "../styles/Navbar.css";
 
 const matchVibes = (userVibes, experienceVibes) => {
     return experienceVibes.some(experienceVibe => userVibes.includes(experienceVibe));
@@ -81,7 +83,20 @@ const Home = () => {
     }
 
     return (
+        <div className="home">
+            <div className="filter_container">
+                <Link to='/select-vibes' className="navbar_link">Select Vibes</Link>
+                <Link to='/add-experience' className="navbar_link">Add Experience</Link>
+            </div>
+          <div className="filter_container">
+                <Link to='/ExperienceMap' className="navbar_link">Map Experience!</Link>
+                <Link to='/exact-match' className="navbar_link">Exact Matching!</Link>
+                <Link to='/home' className="navbar_link">All Matches!</Link>
+                <Link to='/random' className="navbar_link">I'm Feeling Lucky!</Link>
+          </div>
         <div className="experience-list">
+
+
             {/* Pagination buttons */}
             <div className="pagination">
                 {Array.from({ length: Math.ceil(experiences.length / experiencesPerPage) }, (_, index) => (
@@ -118,6 +133,7 @@ const Home = () => {
                     </button>
                 ))}
             </div>
+        </div>
         </div>
     );
 };
