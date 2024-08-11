@@ -40,7 +40,7 @@ body, html {
 
 /* Main container for each experience item */
 .experience-item {
-    height: 320px; /* Fixed height for each item */
+    height: 400px; /* Fixed height for each item */
     width: 200px; /* Fixed width for each item */
     border: 2px solid var(--navbar-bg); /* Light border */
     border-radius: 4px; /* Rounded corners */

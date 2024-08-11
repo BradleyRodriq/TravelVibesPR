@@ -84,15 +84,28 @@ const Home = () => {
 
     return (
         <div className="home">
+            {user && (
             <div className="filter_container">
                 <Link to='/select-vibes' className="navbar_link">Select Vibes</Link>
                 <Link to='/add-experience' className="navbar_link">Add Experience</Link>
             </div>
+            )}
           <div className="filter_container">
-                <Link to='/ExperienceMap' className="navbar_link">Map Experience!</Link>
-                <Link to='/exact-match' className="navbar_link">Exact Matching!</Link>
-                <Link to='/home' className="navbar_link">All Matches!</Link>
-                <Link to='/random' className="navbar_link">I'm Feeling Lucky!</Link>
+                {!user && (
+                    <div>
+                        <Link to='/home' className="navbar_link">All Experiences!</Link>
+                        <Link to='/ExperienceMap' className="navbar_link">Map Experience!</Link>
+                        <Link to='/random' className="navbar_link">I'm Feeling Lucky!</Link>
+                    </div>
+                )}
+                {user &&(
+                    <div>
+                        <Link to='/ExperienceMap' className="navbar_link">Map Experience!</Link>
+                        <Link to='/home' className="navbar_link">All Matches!</Link>
+                        <Link to='/exact-match' className="navbar_link">Exact Matching!</Link>
+                        <Link to='/random' className="navbar_link">I'm Feeling Lucky!</Link>
+                    </div>
+                )}
           </div>
         <div className="experience-list">
 

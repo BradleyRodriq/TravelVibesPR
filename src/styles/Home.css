@@ -84,7 +84,10 @@ body, html {
     }
     .experience-item {
         box-sizing: border-box;
-        margin: .2rem;
+        margin: 4px;
         margin-bottom: 0;
+    }
+    .experience-item:hover {
+        transform: none;
     }
 }

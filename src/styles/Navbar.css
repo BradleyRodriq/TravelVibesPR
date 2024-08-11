@@ -21,7 +21,6 @@
 
 /* Container for logo and navigation */
 .navbar__container {
-    width: inherit;
     display: flex;
     align-items: center;
     width: inherit;
@@ -102,6 +101,7 @@
 
 /* Styling for map view section */
 .filter_container {
+    text-align: center;
     width: inherit;
     display: flex;
     flex-direction: row;
@@ -117,6 +117,13 @@
     margin-top: 1rem;
     width: fit-content;
     height: fit-content;
+}
+
+.filter_container div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .filter_container:hover {
