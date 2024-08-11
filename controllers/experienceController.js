@@ -65,7 +65,7 @@ const createExperience = async (req, res) => {
 
          // Send email to each matching user
          for (const user of matchingUsers) {
-             await sendExperienceEmail(user);
+             await sendExperienceEmail(user, experience);
          }
 
         res.status(200).json(experience);
