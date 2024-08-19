@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/TravelVibesPR/static/css/main.3ecda7e2.css",
-    "main.js": "/TravelVibesPR/static/js/main.1150884b.js",
+    "main.css": "/TravelVibesPR/static/css/main.8e221d65.css",
+    "main.js": "/TravelVibesPR/static/js/main.0c51ded0.js",
     "static/media/background.jpg": "/TravelVibesPR/static/media/background.642fc748fbd54ae86d8c.jpg",
     "static/media/Map-view.png": "/TravelVibesPR/static/media/Map-view.af4a31b3c9357f636517.png",
     "static/media/bradley.jpg": "/TravelVibesPR/static/media/bradley.7ea850e813ae803110d4.jpg",
@@ -10,11 +10,11 @@
     "static/media/sebastian.jpg": "/TravelVibesPR/static/media/sebastian.ae6d265c0761ae53bbdf.jpg",
     "static/media/leandro.jpg": "/TravelVibesPR/static/media/leandro.f7f12314c48bb7bf06c9.jpg",
     "index.html": "/TravelVibesPR/index.html",
-    "main.3ecda7e2.css.map": "/TravelVibesPR/static/css/main.3ecda7e2.css.map",
-    "main.1150884b.js.map": "/TravelVibesPR/static/js/main.1150884b.js.map"
+    "main.8e221d65.css.map": "/TravelVibesPR/static/css/main.8e221d65.css.map",
+    "main.0c51ded0.js.map": "/TravelVibesPR/static/js/main.0c51ded0.js.map"
   },
   "entrypoints": [
-    "static/css/main.3ecda7e2.css",
-    "static/js/main.1150884b.js"
+    "static/css/main.8e221d65.css",
+    "static/js/main.0c51ded0.js"
   ]
 }
