@@ -25,14 +25,23 @@ const Signup = () => {
             <input
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
-                value={email}
-            />
+                value={email}/>
+                <div className="help">
+                <small className="helper-text">Enter your email address.</small>
+                </div>
+
             <label>Password:</label>
             <input
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
             />
+            <div className="help">
+            <small className="helper-text">Password must be at least 8 characters long, and must contain one of the following: uppercase, lowercase, symbol, and a number. </small>
+            </div>
+            <div className="ref">
+            <a className="ref_link" href="/login">Already have an account? Login here</a>
+            </div>
             <div>
                 <button disabled={isLoading}>Sign Up</button>
                 {error && <div className="error-message">{error}</div>}
@@ -42,3 +51,4 @@ const Signup = () => {
 };
 
 export default Signup;
+

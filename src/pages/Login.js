@@ -28,18 +28,25 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
             />
+
             <label>Password:</label>
             <input
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
             />
+
+            <div className="ref">
+                <a className="ref_link" href="/signup">Don't have an account? Sign up here</a>
+            </div>
+
             <div>
                 <button disabled={isLoading}>Log In</button>
                 {error && <div className="error-message">{error}</div>}
             </div>
         </form>
     );
-};
+}
 
 export default Login;
+

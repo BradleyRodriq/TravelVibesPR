@@ -5,14 +5,13 @@ import { ExperienceContextProvider } from './context/experienceContext';
 import { AuthContextProvider } from './context/authContext';
 import { VibesProvider } from './context/vibeContext';
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
     <ExperienceContextProvider>
     <VibesProvider>
-      <App />
+        <App />
     </VibesProvider>
     </ExperienceContextProvider>
     </AuthContextProvider>

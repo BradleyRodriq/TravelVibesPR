@@ -45,7 +45,9 @@ body, html {
 
 /* Experience details container */
 .experience-details-list {
-    width: 80%; /* Adjust width as needed */
+    display: grid; /* Use CSS grid */
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* Auto-fill columns */
+    justify-items: center; /* Center items horizontally */
 }
 
 /* Individual experience details */
@@ -60,14 +62,32 @@ body, html {
     .experience-list {
         margin-top: 1rem; /* Adjust margin on smaller screens */
     }
-    .experience-details-list {
-        width: 100%; /* Full width on smaller screens */
-    }
     .pagination {
-        flex-direction: column; /* Stack pagination buttons vertically */
-        align-items: center; /* Center pagination buttons */
+        margin: auto; /* Center pagination */
+        width: 80%; /* Adjust width */
+
     }
     .pagination__button {
         margin-bottom: 0.5rem; /* Space between vertically stacked buttons */
+        padding: .2rem .5rem;
+        margin: 0.2rem;
+    }
+    /* Experience details container */
+    .experience-details-list {
+    display: grid; /* Use CSS grid */
+    grid-template-columns: 0fr 0fr; /* Auto-fill columns */
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr; /* Auto-fill columns */
+    justify-items: center; /* Center items horizontally */
+    margin-top: 0px;
+    align-items: start;
+
+    }
+    .experience-item {
+        box-sizing: border-box;
+        margin: 4px;
+        margin-bottom: 0;
+    }
+    .experience-item:hover {
+        transform: none;
     }
 }

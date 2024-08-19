@@ -64,6 +64,17 @@ body, html {
     background-color: #0056b3;
 }
 
+.form-container a {
+    color: var(--white);
+}
+.ref a {
+    text-align: center;
+}
+.ref_link {
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none;
+}
 /* Error message */
 .form-container .error-message {
     color: var(--white);
@@ -73,3 +84,4 @@ body, html {
     border-radius: 4px;
     background-color: var(--inactive-delete);
 }
+
