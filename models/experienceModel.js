@@ -33,7 +33,7 @@ const experienceSchema = new Schema({
     pictureUrl: {
         type: String,
         required: false,
-        default: 'https://media.licdn.com/dms/image/C5112AQG8vVeQlMzOdA/article-cover_image-shrink_720_1280/0/1520219769033?e=1724889600&v=beta&t=S0t9P2hvmkB4AfyKya4QXlexERvJMIdtpuuYIkIu2bo'
+        default: ''
     },
     rating: {
         type: Number,

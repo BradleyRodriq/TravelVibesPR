@@ -1,0 +1,18 @@
+/* ============================================
+   EXPERIENCE CREATED - SUCCESS PAGE
+   ============================================ */
+
+/* Shared styling with SignupThanks.css */
+
+.experience-created-container {
+  max-width: 600px;
+  margin: 5rem auto;
+  padding: var(--space-3xl);
+  background: var(--glass-bg);
+  backdrop-filter: blur(30px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  box-shadow: var(--shadow-2xl);
+  animation: slideUp 0.6s ease-out;
+}

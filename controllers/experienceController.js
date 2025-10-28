@@ -6,7 +6,7 @@ const sendExperienceEmail = require('../nodemailer/nodemailerExperience');
 // get all experiences
 const getExperiences = async (req, res) => {
     try {
-        const experiences = await Experience.find();
+        const experiences = await Experience.find().lean();
         res.status(200).json(experiences);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -22,7 +22,7 @@ const getExperience = async (req, res) => {
     }
 
     try {
-        const experience = await Experience.findById(id);
+        const experience = await Experience.findById(id).lean();
         if (!experience) {
             return res.status(404).json({ error: 'No such experience' });
         }
@@ -60,13 +60,15 @@ const createExperience = async (req, res) => {
     try {
         const experience = await Experience.create({ name, location, vibes, pictureUrl });
 
-         // Find users whose vibes match the experience vibes
-         const matchingUsers = await User.find({ vibes: { $in: vibes } });
+         // Find users whose vibes match the experience vibes (optimized with lean)
+         const matchingUsers = await User.find({ vibes: { $in: vibes } }).lean().select('email');
 
-         // Send email to each matching user
-         for (const user of matchingUsers) {
-             await sendExperienceEmail(user);
-         }
+         // Send email to each matching user (don't await to avoid blocking)
+         matchingUsers.forEach(user => {
+             sendExperienceEmail(user).catch(error => {
+                 console.error('Failed to send email to', user.email, error);
+             });
+         });
 
         res.status(200).json(experience);
     } catch (error) {
@@ -83,11 +85,10 @@ const deleteExperience = async (req, res) => {
     }
 
     try {
-        const experience = await Experience.findOneAndDelete({ _id: id });
+        const experience = await Experience.findByIdAndDelete(id);
         if (!experience) {
             return res.status(404).json({ error: 'No such experience' });
         }
-        const experiences = await Experience.find();
         res.status(200).json(experience);
     } catch (error) {
         res.status(400).json({ error: error.message });

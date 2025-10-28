@@ -1,32 +1,119 @@
+/* ============================================
+   FOOTER - MODERN & PROFESSIONAL
+   ============================================ */
+
 .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    align-items: center;
-    background-color: #2d3345;
-    background: rgba(237, 237, 237, 0.1);
-    backdrop-filter: blur(6px);
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    width: calc(100% - 12px); /* Account for margin */
-    margin: 6px;
-    display: flex;
-    justify-content: center;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(30px);
+  border-top: 1px solid rgba(124, 58, 237, 0.2);
+  padding: var(--space-2xl) var(--space-2xl) var(--space-xl);
+  margin-top: auto;
+  position: relative;
+  overflow: hidden;
 }
 
-.footer-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-height: 65px;
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(124, 58, 237, 0.5),
+    transparent
+  );
 }
 
-.footer-p {
-    color: var(--white);
-    font-size: 1rem;
-    font-weight: bold;
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.footer-copyright {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.footer-tagline {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.heart-icon {
+  width: 18px;
+  height: 18px;
+  color: #ef4444;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer {
+    padding: var(--space-2xl) var(--space-md) var(--space-lg);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
     text-align: center;
+    gap: var(--space-sm);
+  }
+
+  .footer-social {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: var(--space-xl) var(--space-sm) var(--space-md);
+  }
+
+  .heart-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .footer-copyright,
+  .footer-tagline {
+    font-size: 0.8125rem;
+  }
 }

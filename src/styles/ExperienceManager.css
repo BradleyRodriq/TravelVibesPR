@@ -1,118 +1,283 @@
-/* Reset default margins and paddings */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins";
+/* ============================================
+   EXPERIENCE MANAGER - MODERN FORM
+   ============================================ */
+
+.experience-manager-page {
+  min-height: calc(100vh - var(--navbar-height, 80px));
+  background: linear-gradient(135deg, 
+    rgba(15, 23, 42, 0.95) 0%, 
+    rgba(30, 41, 59, 0.95) 100%
+  );
+  padding: var(--space-2xl) var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Main container for create experience form */
 .create-experience-container {
-    color: var(--primary-color);
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 2px solid var(--navbar-bg);
-    border-radius: 8px;
-    box-shadow: 0 0 10px var(--navbar-bg);
-    backdrop-filter: blur(2px); /* Apply blur effect */
-    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */
-    animation: slideIn 0.5s ease-in-out; /* Slide in animation */
+  max-width: 800px;
+  width: 100%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-2xl);
+  padding: var(--space-3xl);
+  animation: slideUp 0.6s ease-out;
 }
 
-.create-experience-container:hover {
-    box-shadow: 0 0 20px var(--primary-color); /* Larger shadow on hover */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Input field styling */
-.input-field {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid var(--white);
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-label {
-    color: var(--primary-color-hov);
-    font-weight: bold;
+/* Form Header */
+.form-header {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+  padding-bottom: var(--space-2xl);
+  border-bottom: 2px solid var(--glass-border);
 }
 
-/* Vibes container */
+.form-header svg {
+  color: var(--primary);
+  margin-bottom: var(--space-md);
+}
+
+.form-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.02em;
+}
+
+.form-header p {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Form Section */
+.form-section {
+  margin-bottom: var(--space-3xl);
+}
+
+.form-group {
+  margin-bottom: var(--space-xl);
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  margin-bottom: var(--space-sm);
+}
+
+.form-group label svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  transition: var(--transition-base);
+  font-family: inherit;
+}
+
+.form-group input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(124, 58, 237, 0.1);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+}
+
+/* Vibes Section */
+.vibes-section {
+  margin-bottom: var(--space-3xl);
+  padding: var(--space-xl);
+  background: rgba(124, 58, 237, 0.05);
+  border: 1px solid var(--primary-alpha);
+  border-radius: var(--radius-xl);
+}
+
+.vibes-section h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.vibes-section h3 svg {
+  color: var(--primary);
+}
+
 .vibes-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin-top: 12px;
-    margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-md);
 }
 
-/* Checkbox and label styling */
-.vibes-container div {
-    margin-bottom: 8px;
+/* Custom Checkbox */
+.vibe-checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-secondary);
+  border: 2px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-base);
 }
 
-/* submit button container */
-.submit-button-container {
-    display: flex;
-    justify-content: center;
-    padding-top: 12px;
-    border-top: 2px solid var(--navbar-bg);
+.vibe-checkbox:hover {
+  border-color: var(--primary);
+  background: var(--primary-alpha);
 }
-/* Submit button styling */
+
+.vibe-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-base);
+  flex-shrink: 0;
+}
+
+.checkmark::after {
+  content: '';
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+.vibe-checkbox input[type="checkbox"]:checked ~ .checkmark {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.vibe-checkbox input[type="checkbox"]:checked ~ .checkmark::after {
+  opacity: 1;
+}
+
+.vibe-checkbox.checked {
+  border-color: var(--primary);
+  background: var(--primary-alpha);
+}
+
+.vibe-name {
+  font-weight: 500;
+  color: var(--text-primary);
+  user-select: none;
+}
+
+/* Submit Button */
 .submit-button {
-    position: center;
-    background-color: var(--navbar-bg);
-    color: var(--white);
-    border: 2px solid var(--primary-color-hov);
-    padding: 12px 20px;
-    text-decoration: none;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  width: 100%;
+  padding: var(--space-lg) var(--space-2xl);
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-family: inherit;
 }
 
 .submit-button:hover {
-    color: var(--navbar-bg);
-    background-color: var(--primary-color-hov);
-    box-shadow: 0 0 10px var(--primary-color-hov);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-purple-lg);
 }
 
-/* Heading styling */
-h3 {
-    font-size: 1.5rem;
-    margin-bottom: 12px;
+.submit-button svg {
+  flex-shrink: 0;
 }
 
-/* Label styling */
-label {
-    font-weight: bold;
-}
-
-/* Error message styling */
-.error {
-    color: red;
-    margin-top: 8px;
-}
-
-
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 768px) {
-    .create-experience-container {
-        padding: 10px;
-    }
-    .input-field {
-        font-size: 12px;
-    }
+  .experience-manager-page {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .create-experience-container {
+    padding: var(--space-xl);
+  }
+
+  .form-header h1 {
+    font-size: 2rem;
+  }
+
+  .form-header p {
+    font-size: 1rem;
+  }
+
+  .vibes-container {
+    grid-template-columns: 1fr;
+  }
+
+  .vibes-section {
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .form-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .form-group label {
+    font-size: 0.875rem;
+  }
+
+  .vibe-checkbox {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .vibe-name {
+    font-size: 0.875rem;
+  }
 }

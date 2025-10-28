@@ -145,34 +145,92 @@ const UserVibes = () => {
     }
 
     return (
-        <div className="user-vibes-container">
-            <h3>Current Vibes</h3>
-            <ul>
-                {userVibes.map(vibe => (
-                    <li key={vibe._id}>
-                        {availableVibes[vibe._id] || 'Unknown Vibe'}
-                        <button onClick={() => handleDeleteVibe(vibe._id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
-
-            <form onSubmit={handleSubmit}>
-                <h3>Choose Vibes</h3>
-                <div className="available-vibes-container">
-                    {Object.entries(availableVibes).map(([vibeId, vibeName]) => (
-                        <button
-                            key={vibeId}
-                            className={`vibe-button ${selectedVibesToAdd.includes(vibeId) ? 'selected' : ''}`}
-                            onClick={() => handleVibeSelection(vibeId)}
-                        >
-                            {vibeName}
-                        </button>
-                    ))}
+        <div className="user-vibes-page">
+            <div className="user-vibes-container">
+                <div className="vibes-header">
+                    <h1>Select Your Vibes</h1>
+                    <p>Personalize your experience recommendations</p>
                 </div>
-            </form>
 
-            <div>
-                <Link to="/home">Check out your matching experiences!</Link>
+                <div className="current-vibes-section">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                            <line x1="7" y1="7" x2="7.01" y2="7"/>
+                        </svg>
+                        Your Vibes ({userVibes.length})
+                    </h3>
+                    {userVibes.length === 0 ? (
+                        <div className="empty-vibes">
+                            <p>No vibes selected yet</p>
+                        </div>
+                    ) : (
+                        <div className="vibes-grid">
+                            {userVibes.map(vibe => (
+                                <div key={vibe._id} className="vibe-card current">
+                                    <span>{availableVibes[vibe._id] || 'Unknown Vibe'}</span>
+                                    <button 
+                                        className="delete-btn"
+                                        onClick={() => handleDeleteVibe(vibe._id)}
+                                        aria-label="Delete vibe"
+                                    >
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <line x1="18" y1="6" x2="6" y2="18"/>
+                                            <line x1="6" y1="6" x2="18" y2="18"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <div className="available-vibes-section">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        Available Vibes
+                    </h3>
+                    <div className="vibes-grid">
+                        {Object.entries(availableVibes).map(([vibeId, vibeName]) => (
+                            <button
+                                key={vibeId}
+                                className={`vibe-card available ${selectedVibesToAdd.includes(vibeId) ? 'selected' : ''}`}
+                                onClick={() => handleVibeSelection(vibeId)}
+                                disabled={userVibes.some(v => v._id === vibeId)}
+                            >
+                                {selectedVibesToAdd.includes(vibeId) && (
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="check-icon">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                )}
+                                <span>{vibeName}</span>
+                            </button>
+                        ))}
+                    </div>
+                    <button 
+                        type="submit" 
+                        onClick={handleSubmit}
+                        className="add-btn"
+                        disabled={selectedVibesToAdd.length === 0}
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Add Selected Vibes
+                    </button>
+                </div>
+
+                <Link to="/home" className="continue-link">
+                    Continue to Experiences
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </Link>
             </div>
         </div>
     );

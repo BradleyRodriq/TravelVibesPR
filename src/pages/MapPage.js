@@ -4,9 +4,14 @@ import '../styles/MapPage.css';
 
 const MapPage = () => {
   return (
-    <div >
-      <h1 className='map-header'>Experience Map</h1>
-      <ExperienceMap />
+    <div className="map-page-container">
+      <div className="map-page-header">
+        <h1>Explore Puerto Rico</h1>
+        <p>Discover amazing experiences across the island</p>
+      </div>
+      <div className="map-page-content">
+        <ExperienceMap />
+      </div>
     </div>
   );
 };

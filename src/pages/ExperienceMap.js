@@ -32,7 +32,7 @@ const ExperienceMap = () => {
           position: { lat: exp.geolocation.coordinates[1], lng: exp.geolocation.coordinates[0] },
           photo: exp.pictureUrl,
           name: exp.name,
-          description: exp.description, // Assuming there is a description field
+          description: exp.location || 'Puerto Rico', // Use location as description
           id: exp._id,
         }));
       } else {
@@ -44,7 +44,7 @@ const ExperienceMap = () => {
           position: { lat: exp.geolocation.coordinates[1], lng: exp.geolocation.coordinates[0] },
           photo: exp.pictureUrl,
           name: exp.name,
-          description: exp.description, // Assuming there is a description field
+          description: exp.location || 'Puerto Rico', // Use location as description
           id: exp._id,
         }));
       }
@@ -73,10 +73,30 @@ useEffect(() => {
   };
 
   return (
+    <div className="map-wrapper">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
         zoom={10}
+        options={{
+          styles: [
+            {
+              featureType: "all",
+              elementType: "geometry",
+              stylers: [{ color: "#1e293b" }]
+            },
+            {
+              featureType: "water",
+              elementType: "geometry",
+              stylers: [{ color: "#0f172a" }]
+            },
+            {
+              featureType: "road",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#94a3b8" }]
+            }
+          ]
+        }}
       >
         {markers.map((marker, index) => (
           <Marker
@@ -86,36 +106,48 @@ useEffect(() => {
             onClick={() => handleMarkerClick(marker)}
             onMouseOver={() => handleMouseOver(index)}
             onMouseOut={handleMouseOut}
-            className={`marker ${activeMarker === index ? 'active' : ''}`}
+            icon={{
+              url: 'data:image/svg+xml;base64,' + btoa(`
+                <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="20" cy="20" r="18" fill="${activeMarker === index ? '#7c3aed' : '#8b5cf6'}"/>
+                  <circle cx="20" cy="20" r="8" fill="white"/>
+                  ${activeMarker === index ? '<circle cx="20" cy="20" r="24" fill="#a78bfa" opacity="0.3"/>' : ''}
+                </svg>
+              `),
+              scaledSize: new window.google.maps.Size(40, 40),
+              anchor: new window.google.maps.Point(20, 40)
+            }}
           />
         ))}
-        <div className="info">
         {selectedMarker && (
-          <InfoWindow className="infoWindow"
+          <InfoWindow
             position={selectedMarker.position}
             onCloseClick={() => setSelectedMarker(null)}
-
           >
-            <div className="info-window-content">
-              <h2 className="info-window-title">{selectedMarker.name}</h2>
-              <p className="info-window-description">{selectedMarker.description}</p>
+            <div className="map-info-window">
+              <div className="map-info-header">
+                <h3>{selectedMarker.name}</h3>
+                <p className="map-info-location">{selectedMarker.description}</p>
+              </div>
               <img
-                src={selectedMarker.photo}
+                src={selectedMarker.photo || 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&h=600&fit=crop'}
                 alt={selectedMarker.name}
-                className="info-window-image"
+                className="map-info-image"
+                onError={(e) => {
+                  e.target.src = 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&h=600&fit=crop';
+                }}
               />
               <button
                 onClick={() => navigate(`/experience/${selectedMarker.id}`)}
-                className="info-window-button"
+                className="map-info-button"
               >
-                View Details
+                View Experience
               </button>
             </div>
           </InfoWindow>
-
         )}
-        </div>
       </GoogleMap>
+    </div>
   );
 };
 

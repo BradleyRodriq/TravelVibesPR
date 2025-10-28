@@ -15,6 +15,9 @@ import Landing from './pages/Landing';
 import Random from './pages/Random';
 import ExactMatch from './pages/ExactMatch';
 import ExperienceCreated from './pages/ExperienceCreated';
+import Settings from './pages/Settings';
+import Footer from './components/Footer';
+import AdBanner from './components/AdBanner';
 import './styles/App.css';
 
 
@@ -30,13 +33,14 @@ function App() {
 
   return (
     <div className="App-container">
-      <LoadScript googleMapsApiKey="AIzaSyDP8zkTwAzKinxwNbrxis42EyX5dCkece4">
+      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
         <BrowserRouter>
           <Navbar/>
+          <AdBanner />
           <div>
             <Routes>
               <Route path="/TravelVibesPR/" element={<Landing />} />
-	      <Route path="/" element={<Home />} />
+	            <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
@@ -48,8 +52,10 @@ function App() {
               <Route path="/exact-match" element={<ExactMatch />} />
               <Route path="/random" element={<Random />} />
               <Route path="/experiencecreated" element={<ExperienceCreated/>} />
+              <Route path="/settings" element={<Settings />} />
             </Routes>
           </div>
+          <Footer />
         </BrowserRouter>
       </LoadScript>
     </div>

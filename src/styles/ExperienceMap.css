@@ -1,45 +1,133 @@
-.info {
-  background-color: var(--navbar-bg);
-  border: 10px solid var(--primary-color);
+/* ============================================
+   EXPERIENCE MAP - MAP STYLING
+   ============================================ */
+
+.map-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
-.infoWindow {
-  background-color: var(--primary-color);
-  size: 10%;
+/* Info Window Styling */
+.map-info-window {
+  background: var(--glass-bg);
+  backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 0;
+  min-width: 300px;
+  max-width: 320px;
+  overflow: hidden;
+  box-shadow: var(--shadow-2xl);
 }
 
-.info-window-content {
+.map-info-header {
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
+  background: linear-gradient(135deg, 
+    rgba(124, 58, 237, 0.1) 0%, 
+    rgba(139, 92, 246, 0.1) 100%
+  );
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.map-info-header h3 {
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 var(--space-xs) 0;
+  line-height: 1.3;
+}
+
+.map-info-location {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin: 0;
   display: flex;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  background-color: var(--navbar-bg);
+  gap: var(--space-xs);
 }
 
-.info-window-title {
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--white);
-  margin-bottom: 0.5rem;
+.map-info-location::before {
+  content: '📍';
+  font-size: 0.75rem;
 }
 
-.info-window-description {
-  font-size: 1rem;
-  margin-bottom: 1rem;
+.map-info-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
 }
 
-.info-window-image {
-  width: 60%;
-  height: auto;
-  margin-bottom: 1rem;
-}
-
-.info-window-button {
-  padding: 0.5rem 1rem;
-  background-color: var(--primary-color);
-  color: var(--navbar-bg);
+.map-info-button {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  color: white;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 0;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: var(--transition-base);
+  font-family: inherit;
+}
+
+.map-info-button:hover {
+  background: linear-gradient(135deg, var(--primary-hover), var(--primary-light));
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+}
+
+.map-info-button:active {
+  transform: translateY(1px);
+}
+
+/* Custom Marker Styles */
+.marker {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.marker:hover {
+  transform: scale(1.15);
+}
+
+.marker.active {
+  transform: scale(1.15);
+  z-index: 1000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .map-info-window {
+    min-width: 280px;
+    max-width: 300px;
+  }
+
+  .map-info-header {
+    padding: var(--space-md);
+  }
+
+  .map-info-header h3 {
+    font-size: 1.125rem;
+  }
+
+  .map-info-image {
+    height: 140px;
+  }
+
+  .map-info-button {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-info-window {
+    min-width: 260px;
+    max-width: 280px;
+  }
+
+  .map-info-image {
+    height: 120px;
+  }
 }

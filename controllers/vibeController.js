@@ -3,7 +3,7 @@ const Vibe = require('../models/vibeModel');
 // GET all vibes
 const getVibes = async (req, res) => {
     try {
-        const vibes = await Vibe.find();
+        const vibes = await Vibe.find().lean();
         res.status(200).json(vibes);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -54,7 +54,7 @@ const deleteVibe = async (req, res) => {
 const batchFetchVibes = async (req, res) => {
     const { vibeIds } = req.body;
     try {
-        const vibes = await Vibe.find({ _id: { $in: vibeIds } });
+        const vibes = await Vibe.find({ _id: { $in: vibeIds } }).lean().select('name');
         const vibeNames = vibes.map(vibe => vibe.name);
         res.json(vibeNames);
     } catch (error) {

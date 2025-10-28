@@ -50,15 +50,17 @@ const addUserVibes = async (req, res) => {
         }
 
         // Check if all provided vibes exist
-        const foundVibes = await Vibe.find({ _id: { $in: vibes } });
+        const foundVibes = await Vibe.find({ _id: { $in: vibes } }).lean();
         if (foundVibes.length !== vibes.length) {
             return res.status(404).json({ error: 'Some vibes were not found.' });
         }
 
-        // Add vibes to the user's vibes array
-        const user = await User.findById(userId);
-        user.vibes = [...new Set([...user.vibes, ...vibes])];
-        await user.save();
+        // Update user's vibes array in a single operation
+        const user = await User.findByIdAndUpdate(
+            userId,
+            { $addToSet: { vibes: { $each: vibes } } },
+            { new: true, select: 'vibes' }
+        );
 
         res.status(200).json({ vibes: user.vibes });
     } catch (error) {
@@ -77,16 +79,12 @@ const deleteUserVibe = async (req, res) => {
             return res.status(400).json({ error: 'Invalid vibeId.' });
         }
 
-        // Check if the provided vibe exists
-        const vibe = await Vibe.findById(vibeId);
-        if (!vibe) {
-            return res.status(404).json({ error: 'Vibe not found.' });
-        }
-
-        // Remove the vibe from the user's vibes array
-        const user = await User.findById(userId);
-        user.vibes = user.vibes.filter(userVibeId => userVibeId.toString() !== vibeId);
-        await user.save();
+        // Remove the vibe from the user's vibes array in a single operation
+        const user = await User.findByIdAndUpdate(
+            userId,
+            { $pull: { vibes: vibeId } },
+            { new: true, select: 'vibes' }
+        );
 
         res.status(200).json({ vibes: user.vibes });
     } catch (error) {
@@ -112,7 +110,7 @@ const deleteAllUserVibes = async (req, res) => {
 // Get all vibes for a user
 const getUserVibes = async (req, res) => {
     try {
-        const user = await User.findById(req.user._id).populate('vibes'); // Populate vibes if necessary
+        const user = await User.findById(req.user._id).populate('vibes').lean();
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }

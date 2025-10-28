@@ -1,0 +1,38 @@
+/* ============================================
+   EXACT MATCH PAGE
+   ============================================ */
+
+/* Shares styling with Home.css */
+
+.exact-match-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-xl);
+}
+
+.exact-match-title {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.exact-match-title h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.exact-match-title p {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .exact-match-container {
+    padding: var(--space-md);
+  }
+
+  .exact-match-title h1 {
+    font-size: 2rem;
+  }
+}
